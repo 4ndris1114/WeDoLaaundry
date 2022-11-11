@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj": {}
+    "C:\\Users\\gabri\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj": {
+    "C:\\Users\\gabri\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj",
-        "packagesPath": "C:\\Users\\ivan1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\Service\\obj\\",
+        "projectPath": "C:\\Users\\gabri\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj",
+        "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gabri\\Source\\Repos\\WeDoLaaundry\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ivan1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
