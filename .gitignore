@@ -5,4 +5,4 @@ bin
 obj
 packages
 .vs/
-Service/obj/
+Service\obj\
