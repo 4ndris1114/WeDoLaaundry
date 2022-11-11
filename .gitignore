@@ -1,3 +1,5 @@
 
 .vs/WeDolaaundry/v17/.suo
 /.vs
+Service/obj/Debug/net6.0/Service.GeneratedMSBuildEditorConfig.editorconfig
+Service/obj/*
