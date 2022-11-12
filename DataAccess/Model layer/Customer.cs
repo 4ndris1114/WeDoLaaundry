@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Data.Model_layer
+{
+
+    public enum CustomerType
+    {
+        NO_SUBSCRIPTION, NORMAL_SUBSCRIPTION, PREMIUM_SUBSCRIPTION
+    }
+
+    public class Customer
+    {
+        public int Id { get; set; }
+        public string FirstName  { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public int PostalCode { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
+        public char[] Password { get; set; }
+        public CustomerType CustomerType { get; set; }
+
+        public Customer(int id, string firstName, string lastName, string phone, string email, 
+            int postalCode, string city, string address, char[] password, CustomerType customerType)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Phone = phone;
+            Email = email;
+            PostalCode = postalCode;
+            City = city;
+            Address = address;
+            Password = password;
+            CustomerType = customerType;
+        }
+
+        public Customer(string firstName, string lastName, string phone, string email,
+            int postalCode, string city, string address, char[] password, CustomerType customerType)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Phone = phone;
+            Email = email;
+            PostalCode = postalCode;
+            City = city;
+            Address = address;
+            Password = password;
+            CustomerType = customerType;
+        }
+
+        public Customer()
+        {
+
+        }
+    }
+}
