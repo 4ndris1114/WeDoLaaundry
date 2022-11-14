@@ -4,5 +4,5 @@ _ReSharper.*
 bin
 obj
 packages
-.vs/
-Service\obj\
+/.vs
+/Service/obj
