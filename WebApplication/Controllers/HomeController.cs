@@ -23,6 +23,19 @@ namespace WebAppProject.Controllers
             return View();
         }
 
+        public IActionResult Profile()
+        {
+            return View();
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult CreateAnAccount()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
