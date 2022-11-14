@@ -6,3 +6,5 @@ obj
 packages
 /.vs
 /Service/obj
+*.cache
+*.editorconfig
