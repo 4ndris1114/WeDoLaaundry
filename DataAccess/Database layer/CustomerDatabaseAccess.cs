@@ -63,9 +63,9 @@ namespace DataAccess
             string city = reader.GetString(reader.GetOrdinal("city"));
             string address = reader.GetString(reader.GetOrdinal("address"));
             char[] password = reader.GetString(reader.GetOrdinal("password_hash")).ToCharArray();
-            //CustomerType customerType = (CustomerType) Enum.Parse(typeof(CustomerType), reader.GetString(reader.GetOrdinal("customerType")).ToUpper(), true);
+            CustomerType customerType = (CustomerType) Enum.Parse(typeof(CustomerType), reader.GetString(reader.GetOrdinal("userType")).ToUpper(), true);
 
-            returnCustomer = new(tempId, firstName, lastName, phone, email, postalCode, city, address, password, CustomerType.NORMAL_SUBSCRIPTION);
+            returnCustomer = new(tempId, firstName, lastName, phone, email, postalCode, city, address, password, customerType);
 
             return returnCustomer;
         }
