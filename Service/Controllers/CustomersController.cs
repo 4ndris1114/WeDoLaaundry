@@ -8,13 +8,13 @@ namespace Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomersController : ControllerBase
     {
 
         private readonly CustomerdataControl _customerdataControl;
         private readonly IConfiguration _configuration;
 
-        public CustomerController(IConfiguration configuration)
+        public CustomersController(IConfiguration configuration)
         {
             _configuration = configuration;
             _customerdataControl = new CustomerdataControl(configuration);

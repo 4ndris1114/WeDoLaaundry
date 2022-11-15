@@ -9,7 +9,9 @@ namespace Data.Model_layer
 
     public enum CustomerType
     {
-        NO_SUBSCRIPTION, NORMAL_SUBSCRIPTION, PREMIUM_SUBSCRIPTION
+        NO_SUBSCRIPTION = 0, 
+        NORMAL_SUBSCRIPTION = 1, 
+        PREMIUM_SUBSCRIPTION = 2
     }
 
     public class Customer
