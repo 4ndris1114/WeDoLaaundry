@@ -4,8 +4,7 @@ _ReSharper.*
 bin
 obj
 packages
-/.vs
-/Service/obj
+\.vs
 *.cache
 *.editorconfig
 Service/obj/Debug/net6.0/Service.GeneratedMSBuildEditorConfig.editorconfig
