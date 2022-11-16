@@ -56,8 +56,6 @@ C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\Data.dll
-C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\Data.pdb
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\obj\Debug\net6.0\Service.csproj.AssemblyReference.cache
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\obj\Debug\net6.0\Service.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\obj\Debug\net6.0\Service.AssemblyInfoInputs.cache
@@ -74,3 +72,7 @@ C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\obj\Debug\
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\obj\Debug\net6.0\Service.pdb
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\obj\Debug\net6.0\Service.genruntimeconfig.cache
 C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\obj\Debug\net6.0\ref\Service.dll
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\DataAccess.dll
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\Model.dll
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\DataAccess.pdb
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\Service\bin\Debug\net6.0\Model.pdb
