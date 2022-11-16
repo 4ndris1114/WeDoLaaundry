@@ -8,3 +8,7 @@ packages
 /Service/obj
 *.cache
 *.editorconfig
+Service/obj/Debug/net6.0/Service.GeneratedMSBuildEditorConfig.editorconfig
+Service/obj/Debug/net6.0/Service.GeneratedMSBuildEditorConfig.editorconfig
+Service/obj/Debug/net6.0/Service.GeneratedMSBuildEditorConfig.editorconfig
+Service/obj/Service.csproj.nuget.dgspec.json
