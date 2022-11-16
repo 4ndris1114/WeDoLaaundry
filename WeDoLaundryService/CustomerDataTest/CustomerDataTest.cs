@@ -34,6 +34,19 @@ namespace CustomerDataTest
         }
 
         [Fact]
+        public void testGetCustomerById()
+        {
+            //Arrange
+
+            //Act
+            Customer foundCustomer = _customerAccess.GetCustomerById(1000);
+            extraOutput.WriteLine("Found customer: " + foundCustomer.Id);
+
+            //Assert
+            Assert.True(foundCustomer != null);
+        }
+
+        [Fact]
         public void testCreateCustomer()
         {
             //Arrange

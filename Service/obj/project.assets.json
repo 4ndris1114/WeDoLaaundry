@@ -882,19 +882,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ivan1\\.nuget\\packages\\": {}
+    "C:\\Users\\Andriis\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj",
+      "projectUniqueName": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\Service\\Service.csproj",
       "projectName": "Service",
-      "projectPath": "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\Service\\Service.csproj",
-      "packagesPath": "C:\\Users\\ivan1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\Service\\obj\\",
+      "projectPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\Service\\Service.csproj",
+      "packagesPath": "C:\\Users\\Andriis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\Service\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ivan1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Andriis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -902,14 +907,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\DataAccess\\Data.csproj": {
-              "projectPath": "C:\\Users\\ivan1\\Source\\Repos\\WeDoLaaundry\\DataAccess\\Data.csproj"
+            "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\DataAccess\\Data.csproj": {
+              "projectPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\DataAccess\\Data.csproj"
             }
           }
         }
@@ -948,7 +954,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,4 +1,4 @@
-﻿using Data.Model_layer;
+﻿
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
@@ -69,7 +69,7 @@ namespace WebAppProject.Models
 
         [StringLength(40, MinimumLength = 2)]
         [DataType(DataType.PhoneNumber)]
-        public CustomerType CustomerType { get; set; }
+        public string CustomerType { get; set; }
 
     }
 }

@@ -10,8 +10,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration" Version="6.0.10" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DataAccess\Data.csproj" />
-  </ItemGroup>
-
 </Project>

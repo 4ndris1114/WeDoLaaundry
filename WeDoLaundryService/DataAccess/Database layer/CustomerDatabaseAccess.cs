@@ -83,15 +83,20 @@ namespace DataAccess
         {
             Customer customer = new();
 
-            string SQL_string = "SELECT * FROM Customer WHERE [id] = @id";
+            string SQL_string = "SELECT * FROM Customer WHERE id = @id";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
-                con.Open();
-                SqlParameter idParam = new("@id", customer.Id);
+                SqlParameter idParam = new("@id", id);
                 command.Parameters.Add(idParam);
+
+
+                con.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                customer = GetCustomerReader(reader);
+                if (reader.Read())
+                {
+                    customer = GetCustomerReader(reader);
+                }
                 con.Close();
             }
 

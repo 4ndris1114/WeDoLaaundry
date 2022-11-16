@@ -29,9 +29,19 @@ namespace Service.BusinessLogicLayer
             return foundCustomers;
         }
 
-        public Customer Get(int id)
+        public Customer? Get(int id)
         {
-            throw new NotImplementedException();
+            Customer? foundCustomer = null;
+            try
+            {
+                foundCustomer = _customerAccess.GetCustomerById(id);
+            }
+            catch
+            {
+
+                foundCustomer = null;
+            }
+            return foundCustomer;
         }
 
         public int Add(Customer customer)

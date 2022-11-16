@@ -20,7 +20,7 @@ namespace Service.Controllers
             _customerdataControl = new CustomerdataControl(configuration);
         }
 
-        [HttpGet]
+        [HttpGet, Route("customers")]
         public ActionResult<List<CustomerDTO>> Get(){
 
             ActionResult<List<CustomerDTO>> returnList;
@@ -46,5 +46,33 @@ namespace Service.Controllers
             }
             return returnList;
         }
+
+        [HttpGet, Route("customers/{id}")]
+        public ActionResult<CustomerDTO> Get(int id) {
+            ActionResult<CustomerDTO> returnCustomerDto;
+
+            Customer? foundCustomer = _customerdataControl.Get(id);
+            CustomerDTO? foundCustomerDto = ModelConversion.CustomerDtoConverter.ToCustomerDto(foundCustomer);
+            //evaluate & return status code
+            if (foundCustomerDto != null)
+            {
+                if (foundCustomer.Id > 0)
+                {
+                    returnCustomerDto = Ok(foundCustomerDto);
+                } else
+                {
+                    returnCustomerDto = new StatusCodeResult(204);
+                }
+            } else {
+                returnCustomerDto = new StatusCodeResult(500);
+            }
+
+            return returnCustomerDto;
+        }
+
+        //[HttpPost]
+        //public ActionResult<CustomerDTO> Post(CustomerDTO customerDTO) {
+        //    ActionResult<int> insertedId;
+        //}
     }
 }

@@ -26,7 +26,7 @@ namespace Service.ModelConversion
 
             if (customer != null)
             {
-                returnCustomerDto = new CustomerDTO(customer.FirstName, customer.LastName, customer.Phone, customer.Email, customer.City, customer.Address, customer.CustomerType);
+                returnCustomerDto = new CustomerDTO(customer.Id, customer.FirstName, customer.LastName, customer.Phone, customer.Email, customer.City, customer.Address, customer.CustomerType);
             }
 
             return returnCustomerDto;
