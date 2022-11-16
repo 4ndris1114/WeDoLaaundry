@@ -1,0 +1,5 @@
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\DataAccess\obj\Debug\net6.0\DataAccess.csproj.AssemblyReference.cache
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\DataAccess\obj\Debug\net6.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfoInputs.cache
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfo.cs
+C:\Users\Andriis\source\repos\WeDoLaaundry\WeDoLaundryService\DataAccess\obj\Debug\net6.0\DataAccess.csproj.CoreCompileInputs.cache
