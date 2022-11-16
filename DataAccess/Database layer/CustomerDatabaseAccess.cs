@@ -22,7 +22,41 @@ namespace DataAccess
 
         public int CreateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            int insertedId = -1;
+
+            string insertString = "INSERT INTO Customer(fname, lname, phone, postalCode, city, address, email, password_hash, userType) " +
+                "OUTPUT INSERTED.ID VALUES(@FirstName, @LastName, @Phone, @PostalCode, @City, @Address, @Email, @PasswordHash, @UserType)";
+
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand cmd = new(insertString, con))
+            {
+                //Set parameters:
+                SqlParameter fNameParam = new("@FirstName", customer.FirstName);
+                cmd.Parameters.Add(fNameParam);
+                SqlParameter lNameParam = new("@LastName", customer.LastName);
+                cmd.Parameters.Add(lNameParam);
+                SqlParameter phoneParam = new("@Phone", customer.Phone);
+                cmd.Parameters.Add(phoneParam);
+                SqlParameter postalCodeParam = new("@PostalCode", customer.PostalCode);
+                cmd.Parameters.Add(postalCodeParam);
+                SqlParameter cityParam = new("@City", customer.City);
+                cmd.Parameters.Add(cityParam);
+                SqlParameter addressParam = new("@Address", customer.Address);
+                cmd.Parameters.Add(addressParam);
+                SqlParameter emailParam = new("@Email", customer.Email);
+                cmd.Parameters.Add(emailParam);
+                SqlParameter passwordHashParam = new("@PasswordHash", customer.Password);
+                cmd.Parameters.Add(passwordHashParam);
+                SqlParameter userTypeParam = new("@UserType", customer.CustomerType);
+                cmd.Parameters.Add(userTypeParam);
+                //open connection
+                con.Open();
+                //execute insertion and read autogen. key (id)
+                insertedId = (int)cmd.ExecuteScalar();
+
+                con.Close();
+            }
+            return insertedId;
         }
 
         public List<Customer>? getAllCustomers()

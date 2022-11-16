@@ -1,6 +1,7 @@
 using Data.Database_layer;
 using Data.Model_layer;
 using DataAccess;
+using System.Runtime.InteropServices;
 using Xunit.Abstractions;
 
 namespace CustomerDataTest
@@ -29,7 +30,25 @@ namespace CustomerDataTest
             extraOutput.WriteLine("Found customers: "+foundCustomers.Count);
 
             //Assert
-            Assert.True(foundCustomers.Count == 2);
+            Assert.True(foundCustomers != null);
+        }
+
+        [Fact]
+        public void testCreateCustomer()
+        {
+            //Arrange
+            int insertId = -1;
+            Customer newCustomer = new Customer("Test", "Test", "12345678", "test@test.test", 1234, "TestCity", 
+                "Test street test", "testpassword".ToCharArray(), CustomerType.NO_SUBSCRIPTION);
+
+            //Act
+            insertId = _customerAccess.CreateCustomer(newCustomer);
+            extraOutput.WriteLine("Generated key (id): " + insertId);
+
+            //Assert
+            Assert.True(insertId != -1);
+
+
         }
     }
 }

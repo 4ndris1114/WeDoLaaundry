@@ -16,7 +16,7 @@ namespace Service.BusinessLogicLayer
 
         public List<Customer>? Get()
         {
-            List<Customer> foundCustomers = null;
+            List<Customer>? foundCustomers = null;
             try
             {
                 foundCustomers = _customerAccess.getAllCustomers();
@@ -32,6 +32,20 @@ namespace Service.BusinessLogicLayer
         public Customer Get(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public int Add(Customer customer)
+        {
+            int insertedId;
+            try
+            {
+                insertedId = _customerAccess.CreateCustomer(customer);
+            }
+            catch
+            {
+                insertedId = -1;
+            }
+            return insertedId;
         }
     }
 }

@@ -25,13 +25,13 @@ namespace WebAppProject.Models
 
         [DisplayName("Phone number")]
         [Required(ErrorMessage = "Phone number is required.")]
-        [RegularExpression("[+][0-9]{1,3}[' '][0-9]{5,15}")] //Regex expression for format to be like: +[country code] [number]
+        [RegularExpression("[+][0-9]{5,20}")] //Regex expression for format to be like: +[country code] [number]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
         [DisplayName("Email address")]
         [Required(ErrorMessage = "Email address is required.")]
-        [RegularExpression("[a-zA-z0-9]+@[a-zA-Z]+.[a-zA-Z]+")]
+        [RegularExpression("[a-z0-9]+[@][a-z]+[.][a-z]+")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
