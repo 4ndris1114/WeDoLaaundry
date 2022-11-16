@@ -81,7 +81,21 @@ namespace DataAccess
 
         public Customer GetCustomerById(int id)
         {
-            throw new NotImplementedException();
+            Customer customer = new();
+
+            string SQL_string = "SELECT * FROM Customer WHERE [id] = @id";
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand command = new(SQL_string, con))
+            {
+                con.Open();
+                SqlParameter idParam = new("@id", customer.Id);
+                command.Parameters.Add(idParam);
+                SqlDataReader reader = command.ExecuteReader();
+                customer = GetCustomerReader(reader);
+                con.Close();
+            }
+
+            return customer;
         }
 
 
