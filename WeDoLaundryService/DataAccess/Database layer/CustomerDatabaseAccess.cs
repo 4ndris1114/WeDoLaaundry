@@ -45,7 +45,7 @@ namespace DataAccess
                 cmd.Parameters.Add(addressParam);
                 SqlParameter emailParam = new("@Email", customer.Email);
                 cmd.Parameters.Add(emailParam);
-                SqlParameter passwordHashParam = new("@PasswordHash", customer.Password);
+                SqlParameter passwordHashParam = new("@PasswordHash", customer.PasswordHash);
                 cmd.Parameters.Add(passwordHashParam);
                 SqlParameter userTypeParam = new("@UserType", customer.CustomerType);
                 cmd.Parameters.Add(userTypeParam);
@@ -115,10 +115,10 @@ namespace DataAccess
             int postalCode = reader.GetInt32(reader.GetOrdinal("postalCode"));
             string city = reader.GetString(reader.GetOrdinal("city"));
             string address = reader.GetString(reader.GetOrdinal("address"));
-            char[] password = reader.GetString(reader.GetOrdinal("password_hash")).ToCharArray();
+            string passwordHash = reader.GetString(reader.GetOrdinal("password_hash"));
             CustomerType customerType = (CustomerType) Enum.Parse(typeof(CustomerType), reader.GetString(reader.GetOrdinal("userType")).ToUpper(), true);
 
-            returnCustomer = new(tempId, firstName, lastName, phone, email, postalCode, city, address, password, customerType);
+            returnCustomer = new(tempId, firstName, lastName, phone, email, postalCode, city, address, passwordHash, customerType);
 
             return returnCustomer;
         }

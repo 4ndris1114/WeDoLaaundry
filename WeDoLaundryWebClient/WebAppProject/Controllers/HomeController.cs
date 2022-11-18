@@ -31,7 +31,7 @@ namespace WebAppProject.Controllers
         {
             return View();
         }
-        public IActionResult CreateAnAccount()
+        public IActionResult Create()
         {
             return View();
         }

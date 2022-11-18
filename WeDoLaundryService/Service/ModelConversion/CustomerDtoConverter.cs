@@ -5,10 +5,10 @@ namespace Service.ModelConversion
 {
     public class CustomerDtoConverter
     {
-        public static List<CustomerDTO> ToDtoCollection(List<Customer> customerList)
+        public static List<CustomerReadDTO> ToDtoCollection(List<Customer> customerList)
         {
-            List<CustomerDTO> customerDtoList = new();
-            CustomerDTO tempDto;
+            List<CustomerReadDTO> customerDtoList = new();
+            CustomerReadDTO tempDto;
             foreach (var customer in customerList)
             {
                 if (customer != null)
@@ -20,16 +20,31 @@ namespace Service.ModelConversion
             return customerDtoList;
         }
         
-        public static CustomerDTO ToCustomerDto(Customer customer)
+        public static CustomerReadDTO ToCustomerDto(Customer customer)
         {
-            CustomerDTO returnCustomerDto = null;
+            CustomerReadDTO returnCustomerDto = null;
 
             if (customer != null)
             {
-                returnCustomerDto = new CustomerDTO(customer.Id, customer.FirstName, customer.LastName, customer.Phone, customer.Email, customer.City, customer.Address, customer.CustomerType);
+                returnCustomerDto = new CustomerReadDTO(customer.Id, customer.FirstName, customer.LastName, customer.Phone, customer.Email, customer.PostalCode, customer.City, customer.Address, customer.CustomerType);
             }
 
             return returnCustomerDto;
         }
+
+        public static Customer ToCustomerFromCustomerCreationDTO(CustomerCreationDTO customerCreationDto)
+        {
+            Customer returnCustomer = null;
+
+            if (customerCreationDto != null)
+            {
+                returnCustomer = new Customer(customerCreationDto.Id, customerCreationDto.FirstName, 
+                    customerCreationDto.LastName, customerCreationDto.Phone,customerCreationDto.Email, customerCreationDto.PostalCode,
+                    customerCreationDto.City, customerCreationDto.Address, customerCreationDto.PasswordHash, customerCreationDto.CustomerType);
+            }
+
+            return returnCustomer;
+        }
+
     }    
 }

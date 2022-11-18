@@ -25,13 +25,13 @@ namespace WebAppProject.Models
 
         [DisplayName("Phone number")]
         [Required(ErrorMessage = "Phone number is required.")]
-        [RegularExpression("[+][0-9]{5,20}")] //Regex expression for format to be like: +[country code] [number]
+        [RegularExpression("[+][0-9]{8,20}")] //Regex expression for format to be like: +[country code] [number]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
         [DisplayName("Email address")]
         [Required(ErrorMessage = "Email address is required.")]
-        [RegularExpression("[a-z0-9]+[@][a-z]+[.][a-z]+")]
+        [RegularExpression("[a-z0-9.]+[@][a-z]+[.][a-z]+")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
@@ -57,19 +57,19 @@ namespace WebAppProject.Models
         [StringLength(100, MinimumLength = 6)]
         [PasswordPropertyText]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
 
         [DisplayName("Confirm password")]
-        [Compare("Password", ErrorMessage = "Passwords aren't matching.")]
+        [Compare("PasswordHash", ErrorMessage = "Passwords aren't matching.")]
         [Required(ErrorMessage = "Password confirmation is required.")]
         [StringLength(100, MinimumLength = 6)]
         [PasswordPropertyText]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-        [StringLength(40, MinimumLength = 2)]
-        [DataType(DataType.PhoneNumber)]
-        public string CustomerType { get; set; }
+        [DisplayName("Customer type")]
+        [DataType(DataType.Text)]
+        public int CustomerType  { get; set; }
 
     }
 }

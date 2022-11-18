@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Text;
+using WebAppProject.BusinessLogicLayer;
 using WebAppProject.Models;
 
 namespace WebAppProject.Controllers
 {
     public class CustomersController : Controller
     {
+        readonly CustomerLogic _customerLogic;
 
-        
+        public CustomersController()
+        {
+            _customerLogic = new();
+        }
 
         // GET: CustomersController
         [HttpGet]
@@ -35,11 +42,23 @@ namespace WebAppProject.Controllers
         // POST: CustomersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Customer customer)
+        public async Task<ActionResult> Create(Customer customer)
         {
-            if (ModelState.IsValid)
-            {
-                
+            if (ModelState.IsValid) {
+                try {
+                    bool wasOk = await _customerLogic.InsertCustomer(customer);
+                    if (wasOk){
+                        ViewBag.message = "Customer registered";
+                        return RedirectToAction("Index");
+                    } else
+                    {
+                        ViewBag.message = "Bad request";
+                    }
+                }
+                catch {
+                    ViewBag.message = "Error while registering customer";
+                    return View();
+                }
             }
             return View();
         }

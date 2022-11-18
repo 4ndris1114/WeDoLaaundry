@@ -2,15 +2,20 @@
 
 namespace Service.DTOs
 {
-    public class CustomerCreationDTO : CustomerDTO
+    public class CustomerCreationDTO : CustomerReadDTO
     {
 
-        public char[] Password { get;  set; }
+        public string PasswordHash { get;  set; }
 
         public CustomerCreationDTO(int id, string firstName, string lastName, string phone, 
-            string email, string city, string address, CustomerType customerType, char[] password) : base(id, firstName, lastName, phone, email, city, address, customerType)
+            string email, int postalCode, string city, string address, CustomerType customerType, string password) : base(id, firstName, lastName, phone, email, postalCode, city, address, customerType)
         {
-            Password = password;
+            PasswordHash = password;
+        }
+
+        public CustomerCreationDTO()
+        {
+
         }
     }
 }

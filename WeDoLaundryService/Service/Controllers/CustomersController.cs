@@ -20,13 +20,13 @@ namespace Service.Controllers
             _customerdataControl = new CustomerdataControl(configuration);
         }
 
-        [HttpGet, Route("customers")]
-        public ActionResult<List<CustomerDTO>> Get(){
+        [HttpGet]
+        public ActionResult<List<CustomerReadDTO>> Get(){
 
-            ActionResult<List<CustomerDTO>> returnList;
+            ActionResult<List<CustomerReadDTO>> returnList;
 
             List<Customer> foundCustomers = _customerdataControl.Get();
-            List<CustomerDTO> foundDtos = null;
+            List<CustomerReadDTO> foundDtos = null;
 
             if (foundCustomers != null)
             {
@@ -47,12 +47,12 @@ namespace Service.Controllers
             return returnList;
         }
 
-        [HttpGet, Route("customers/{id}")]
-        public ActionResult<CustomerDTO> Get(int id) {
-            ActionResult<CustomerDTO> returnCustomerDto;
+        [HttpGet, Route("{id}")]
+        public ActionResult<CustomerReadDTO> Get(int id) {
+            ActionResult<CustomerReadDTO> returnCustomerDto;
 
             Customer? foundCustomer = _customerdataControl.Get(id);
-            CustomerDTO? foundCustomerDto = ModelConversion.CustomerDtoConverter.ToCustomerDto(foundCustomer);
+            CustomerReadDTO? foundCustomerDto = ModelConversion.CustomerDtoConverter.ToCustomerDto(foundCustomer);
             //evaluate & return status code
             if (foundCustomerDto != null)
             {
@@ -70,9 +70,25 @@ namespace Service.Controllers
             return returnCustomerDto;
         }
 
-        //[HttpPost]
-        //public ActionResult<CustomerDTO> Post(CustomerDTO customerDTO) {
-        //    ActionResult<int> insertedId;
-        //}
+        [HttpPost]
+        public ActionResult<int> Post(CustomerCreationDTO customerCreationDTO) {
+
+            ActionResult<int> retVal;
+            int insertedId = -1;
+            
+            if (customerCreationDTO != null)
+            {
+                Customer dbCustomer = ModelConversion.CustomerDtoConverter.ToCustomerFromCustomerCreationDTO(customerCreationDTO);
+                insertedId = _customerdataControl.Add(dbCustomer);
+            }
+            if (insertedId > 0)
+            {
+                retVal = Ok(insertedId);
+            } else {
+                retVal = new StatusCodeResult(500);
+            }
+
+            return retVal;
+        }
     }
 }
