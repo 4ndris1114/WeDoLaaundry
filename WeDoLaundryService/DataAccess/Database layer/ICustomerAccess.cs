@@ -16,5 +16,9 @@ namespace Data.Database_layer
 
         int CreateCustomer(Customer customer);
 
+        bool UpdateCustomer(Customer customer);
+
+        bool DeleteCustomer(int id);
+
     }
 }

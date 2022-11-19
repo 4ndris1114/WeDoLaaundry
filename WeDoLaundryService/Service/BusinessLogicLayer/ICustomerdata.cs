@@ -6,5 +6,7 @@ namespace Service.BusinessLogicLayer
     {
         List<Customer> Get();
         Customer Get(int id);
+        bool Update(Customer customer);
+        bool Delete(int id);
     }
 }

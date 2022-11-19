@@ -103,6 +103,56 @@ namespace DataAccess
             return customer;
         }
 
+        public bool UpdateCustomer(Customer customer)
+        {
+            int numberOfRowsModified = 0;
+
+            string queryString = "UPDATE Customer SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, password_hash=@PasswordHash, userType=@CustomerType WHERE id=@Id";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand(queryString, conn))
+            {
+                if(conn != null)
+                {
+                    command.Parameters.AddWithValue("FirstName", customer.FirstName);
+                    command.Parameters.AddWithValue("LastName", customer.LastName);
+                    command.Parameters.AddWithValue("Phone", customer.Phone);
+                    command.Parameters.AddWithValue("PostalCode", customer.PostalCode);
+                    command.Parameters.AddWithValue("City", customer.City);
+                    command.Parameters.AddWithValue("Address", customer.Address);
+                    command.Parameters.AddWithValue("Email", customer.Email);
+                    command.Parameters.AddWithValue("PasswordHash", customer.PasswordHash);
+                    command.Parameters.AddWithValue("CustomerType", customer.CustomerType);
+                    command.Parameters.AddWithValue("Id", customer.Id);
+
+                    conn.Open();
+                    numberOfRowsModified = command.ExecuteNonQuery();
+
+                }
+            }
+            return (numberOfRowsModified > 0);
+        }
+
+        public bool DeleteCustomer(int id)
+        {
+            int numberOfRowsDeleted = 0;
+
+            string SQL_string = "DELETE FROM Customer WHERE id = @id";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand command = new(SQL_string, conn))
+            {
+                SqlParameter idParam = new("@id", id);
+                command.Parameters.Add(idParam);
+
+                if(conn != null)
+                {
+                    conn.Open();
+                    numberOfRowsDeleted = command.ExecuteNonQuery();
+                }
+            }
+            return (numberOfRowsDeleted > 0);
+        }
 
         private Customer GetCustomerReader(SqlDataReader reader)
         {

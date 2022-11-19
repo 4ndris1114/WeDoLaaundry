@@ -57,5 +57,33 @@ namespace Service.BusinessLogicLayer
             }
             return insertedId;
         }
+
+        public bool Update(Customer customer)
+        {
+            bool wasUpdated;
+            try
+            {
+                wasUpdated = _customerAccess.UpdateCustomer(customer);
+            }
+            catch
+            {
+                wasUpdated = false;
+            }
+            return wasUpdated;
+        }
+
+        public bool Delete(int id)
+        {
+            bool wasDeleted; 
+            try
+            {
+                wasDeleted = _customerAccess.DeleteCustomer(id);
+            }
+            catch 
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
+        }
     }
 }

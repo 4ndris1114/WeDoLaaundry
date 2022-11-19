@@ -90,5 +90,35 @@ namespace Service.Controllers
 
             return retVal;
         }
+
+        [HttpPut, Route("{id}")]
+        public ActionResult Update(CustomerCreationDTO customerDTO) {
+            ActionResult retVal;
+            Customer inCustomer = ModelConversion.CustomerDtoConverter.ToCustomerFromCustomerCreationDTO(customerDTO);
+            bool wasOk = _customerdataControl.Update(inCustomer);
+            if (wasOk)
+            {
+                retVal = Ok();
+            } else
+            {
+                retVal = new StatusCodeResult(500);
+            }
+            return retVal;
+        }
+
+        [HttpDelete, Route("{id}")]
+        public ActionResult Delete(int id) {
+            ActionResult retVal;
+            bool wasOk = _customerdataControl.Delete(id);
+
+            if(wasOk)
+            {
+                retVal = Ok();
+            } else
+            {
+                retVal= new StatusCodeResult(500);
+            }
+            return retVal;
+        }
     }
 }
