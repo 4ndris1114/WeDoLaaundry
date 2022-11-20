@@ -18,6 +18,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  padding-top: 80px;
 }
 * {
     box-sizing: border-box
@@ -70,6 +71,32 @@ button {
 /* Add padding to container elements */
 .container {
     padding: 6px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    scroll-margin-top: 80px;
+    height: 100vh;
+}
+
+#Banner {
+    background-color: yellow;
+}
+#AboutUs {
+    background-color: red;
+}
+#Services {
+    background-color: green;
+}
+#Contact {
+    background-color: blue;
+}
+
+.section p {
+    width: 40%;
+    display: inline-block;
 }
 
 /* Clear floats */
