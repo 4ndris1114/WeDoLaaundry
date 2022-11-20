@@ -2,7 +2,7 @@
 *.user
 _ReSharper.*
 
-
+[Bb]in/
 packages
 \.vs
 *.cache
