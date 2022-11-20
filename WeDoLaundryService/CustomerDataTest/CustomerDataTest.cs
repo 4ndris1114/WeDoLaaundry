@@ -12,7 +12,7 @@ namespace CustomerDataTest
         private readonly ITestOutputHelper extraOutput;
         private readonly ICustomerAccess _customerAccess;
 
-        private readonly string _connectionString = "Server=hildur.ucn.dk,1433;Database=CSC-CSD-S211_10407531;User Id = CSC-CSD-S211_10407531; Password=Password1!";
+        private readonly string _connectionString = "Server=hildur.ucn.dk,1433;Database=CSC-CSD-S211_10407554;User Id = CSC-CSD-S211_10407554; Password=Password1!";
 
         public CustomerDataTest(ITestOutputHelper extraOutput)
         {
@@ -52,7 +52,7 @@ namespace CustomerDataTest
             //Arrange
             int insertId = -1;
             Customer newCustomer = new Customer("Test", "Test", "12345678", "test@test.test", 1234, "TestCity", 
-                "Test street test", "testpassword".ToCharArray(), CustomerType.NO_SUBSCRIPTION);
+                "Test street test", "testpassword", CustomerType.NO_SUBSCRIPTION);
 
             //Act
             insertId = _customerAccess.CreateCustomer(newCustomer);

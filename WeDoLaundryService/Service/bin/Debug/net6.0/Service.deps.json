@@ -176,6 +176,7 @@
       "DataAccess/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "7.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
           "Model": "1.0.0",
           "System.Data.SqlClient": "4.8.5"
         },

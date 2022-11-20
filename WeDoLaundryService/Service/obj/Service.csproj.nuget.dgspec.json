@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Service\\Service.csproj": {}
+    "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Service\\Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Andriis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Andriis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj"
+              "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj"
               }
             }
           }
@@ -48,6 +53,10 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"
@@ -59,7 +68,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -68,21 +78,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj": {
+    "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Model\\obj\\",
+        "projectPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\Andriis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Model\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Andriis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -90,6 +104,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -113,7 +128,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -122,21 +138,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Service\\Service.csproj": {
+    "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Service\\Service.csproj",
+        "projectUniqueName": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Service\\Service.csproj",
-        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Service\\obj\\",
+        "projectPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Service\\Service.csproj",
+        "packagesPath": "C:\\Users\\Andriis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Service\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Andriis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -144,17 +164,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Gabriel\\Desktop\\Code Files\\C#\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj"
+              "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Andriis\\source\\repos\\WeDoLaaundry\\WeDoLaundryService\\Model\\Model.csproj"
               }
             }
           }
@@ -180,7 +201,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -192,7 +214,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
