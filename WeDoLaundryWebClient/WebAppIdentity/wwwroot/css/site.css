@@ -1,5 +1,6 @@
 html {
     font-size: 14px;
+    color: #12130F;
 }
 
 @media (min-width: 768px) {
@@ -15,7 +16,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    padding-top: 80px;
+    padding-top: 56px;
 }
 
 * {
@@ -75,24 +76,27 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    scroll-margin-top: 80px;
+    scroll-margin-top: 56px;
     height: 100vh;
+    padding: 40px;
 }
 
 #Banner {
-    background-color: yellow;
+    background-color: #EAE6E5;
 }
 
 #AboutUs {
-    background-color: red;
+    background-color: #8FCB9B;
 }
 
 #Services {
-    background-color: green;
+    background-color: #5B9279;
+    color: #EAE6E5;
 }
 
 #Contact {
-    background-color: blue;
+    background-color: #12130F;
+    color: #EAE6E5;
 }
 
 .section p {
