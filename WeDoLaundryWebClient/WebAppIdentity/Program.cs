@@ -11,8 +11,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => {
-    options.SignIn.RequireConfirmedAccount = true;
-    options.User.RequireUniqueEmail = true;
+    //options.SignIn.RequireConfirmedAccount = true;
+    //options.User.RequireUniqueEmail = true;
     options.Password.RequiredLength = 8;
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;

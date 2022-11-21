@@ -71,5 +71,6 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         public int CustomerType  { get; set; }
 
+        public string UserId { get; set; }
     }
 }

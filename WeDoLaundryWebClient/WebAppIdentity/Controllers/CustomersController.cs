@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -31,10 +32,12 @@ namespace WebAppIdentity.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         // GET: CustomersController/Create
         public ActionResult Create()
         {
+            System.Security.Claims.ClaimsPrincipal loggedinUser = User;
             return View();
         }
 
