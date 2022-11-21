@@ -24,8 +24,8 @@ namespace DataAccess
         {
             int insertedId = -1;
 
-            string insertString = "INSERT INTO Customer(fname, lname, phone, postalCode, city, address, email, password_hash, userType) " +
-                "OUTPUT INSERTED.ID VALUES(@FirstName, @LastName, @Phone, @PostalCode, @City, @Address, @Email, @PasswordHash, @UserType)";
+            string insertString = "INSERT INTO Customer(fname, lname, phone, postalCode, city, address, email, userType) " +
+                "OUTPUT INSERTED.ID VALUES(@FirstName, @LastName, @Phone, @PostalCode, @City, @Address, @Email, @UserType)";
 
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand cmd = new(insertString, con))
@@ -45,8 +45,6 @@ namespace DataAccess
                 cmd.Parameters.Add(addressParam);
                 SqlParameter emailParam = new("@Email", customer.Email);
                 cmd.Parameters.Add(emailParam);
-                SqlParameter passwordHashParam = new("@PasswordHash", customer.PasswordHash);
-                cmd.Parameters.Add(passwordHashParam);
                 SqlParameter userTypeParam = new("@UserType", customer.CustomerType);
                 cmd.Parameters.Add(userTypeParam);
                 //open connection
@@ -107,7 +105,7 @@ namespace DataAccess
         {
             int numberOfRowsModified = 0;
 
-            string queryString = "UPDATE Customer SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, password_hash=@PasswordHash, userType=@CustomerType WHERE id=@Id";
+            string queryString = "UPDATE Customer SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, userType=@CustomerType WHERE id=@Id";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(queryString, conn))
@@ -121,7 +119,6 @@ namespace DataAccess
                     command.Parameters.AddWithValue("City", customer.City);
                     command.Parameters.AddWithValue("Address", customer.Address);
                     command.Parameters.AddWithValue("Email", customer.Email);
-                    command.Parameters.AddWithValue("PasswordHash", customer.PasswordHash);
                     command.Parameters.AddWithValue("CustomerType", customer.CustomerType);
                     command.Parameters.AddWithValue("Id", customer.Id);
 
@@ -165,10 +162,9 @@ namespace DataAccess
             int postalCode = reader.GetInt32(reader.GetOrdinal("postalCode"));
             string city = reader.GetString(reader.GetOrdinal("city"));
             string address = reader.GetString(reader.GetOrdinal("address"));
-            string passwordHash = reader.GetString(reader.GetOrdinal("password_hash"));
             CustomerType customerType = (CustomerType) Enum.Parse(typeof(CustomerType), reader.GetString(reader.GetOrdinal("userType")).ToUpper(), true);
 
-            returnCustomer = new(tempId, firstName, lastName, phone, email, postalCode, city, address, passwordHash, customerType);
+            returnCustomer = new(tempId, firstName, lastName, phone, email, postalCode, city, address, customerType);
 
             return returnCustomer;
         }

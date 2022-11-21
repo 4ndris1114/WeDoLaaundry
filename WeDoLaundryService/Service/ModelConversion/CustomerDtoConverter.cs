@@ -20,9 +20,9 @@ namespace Service.ModelConversion
             return customerDtoList;
         }
         
-        public static CustomerReadDTO ToCustomerDto(Customer customer)
+        public static CustomerReadDTO? ToCustomerDto(Customer customer)
         {
-            CustomerReadDTO returnCustomerDto = null;
+            CustomerReadDTO? returnCustomerDto = null;
 
             if (customer != null)
             {
@@ -32,15 +32,15 @@ namespace Service.ModelConversion
             return returnCustomerDto;
         }
 
-        public static Customer ToCustomerFromCustomerCreationDTO(CustomerCreationDTO customerCreationDto)
+        public static Customer? ToCustomer(CustomerReadDTO customerReadDto)
         {
-            Customer returnCustomer = null;
+            Customer? returnCustomer = null;
 
-            if (customerCreationDto != null)
+            if (customerReadDto != null)
             {
-                returnCustomer = new Customer(customerCreationDto.Id, customerCreationDto.FirstName, 
-                    customerCreationDto.LastName, customerCreationDto.Phone,customerCreationDto.Email, customerCreationDto.PostalCode,
-                    customerCreationDto.City, customerCreationDto.Address, customerCreationDto.PasswordHash, customerCreationDto.CustomerType);
+                returnCustomer = new Customer(customerReadDto.Id, customerReadDto.FirstName,
+                    customerReadDto.LastName, customerReadDto.Phone, customerReadDto.Email, customerReadDto.PostalCode,
+                    customerReadDto.City, customerReadDto.Address, customerReadDto.CustomerType);
             }
 
             return returnCustomer;

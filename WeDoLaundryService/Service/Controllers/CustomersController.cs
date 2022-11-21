@@ -25,8 +25,8 @@ namespace Service.Controllers
 
             ActionResult<List<CustomerReadDTO>> returnList;
 
-            List<Customer> foundCustomers = _customerdataControl.Get();
-            List<CustomerReadDTO> foundDtos = null;
+            List<Customer>? foundCustomers = _customerdataControl.Get();
+            List<CustomerReadDTO>? foundDtos = null;
 
             if (foundCustomers != null)
             {
@@ -48,7 +48,7 @@ namespace Service.Controllers
         }
 
         [HttpGet, Route("{id}")]
-        public ActionResult<CustomerReadDTO> Get(int id) {
+        public ActionResult<CustomerReadDTO>? Get(int id) {
             ActionResult<CustomerReadDTO> returnCustomerDto;
 
             Customer? foundCustomer = _customerdataControl.Get(id);
@@ -71,14 +71,14 @@ namespace Service.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> Post(CustomerCreationDTO customerCreationDTO) {
+        public ActionResult<int> Post(CustomerReadDTO customerReadDto) {
 
             ActionResult<int> retVal;
             int insertedId = -1;
             
-            if (customerCreationDTO != null)
+            if (customerReadDto != null)
             {
-                Customer dbCustomer = ModelConversion.CustomerDtoConverter.ToCustomerFromCustomerCreationDTO(customerCreationDTO);
+                Customer dbCustomer = ModelConversion.CustomerDtoConverter.ToCustomer(customerReadDto);
                 insertedId = _customerdataControl.Add(dbCustomer);
             }
             if (insertedId > 0)
@@ -92,9 +92,9 @@ namespace Service.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public ActionResult Update(CustomerCreationDTO customerDTO) {
+        public ActionResult Update(CustomerReadDTO customerDTO) {
             ActionResult retVal;
-            Customer inCustomer = ModelConversion.CustomerDtoConverter.ToCustomerFromCustomerCreationDTO(customerDTO);
+            Customer inCustomer = ModelConversion.CustomerDtoConverter.ToCustomer(customerDTO);
             bool wasOk = _customerdataControl.Update(inCustomer);
             if (wasOk)
             {

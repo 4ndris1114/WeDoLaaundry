@@ -24,11 +24,10 @@ namespace Data.Model_layer
         public int PostalCode { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
-        public string PasswordHash { get; set; }
         public CustomerType CustomerType { get; set; }
 
         public Customer(int id, string firstName, string lastName, string phone, string email, 
-            int postalCode, string city, string address, string password, CustomerType customerType)
+            int postalCode, string city, string address, CustomerType customerType)
         {
             Id = id;
             FirstName = firstName;
@@ -38,12 +37,11 @@ namespace Data.Model_layer
             PostalCode = postalCode;
             City = city;
             Address = address;
-            PasswordHash = password;
             CustomerType = customerType;
         }
 
         public Customer(string firstName, string lastName, string phone, string email,
-            int postalCode, string city, string address, string password, CustomerType customerType)
+            int postalCode, string city, string address, CustomerType customerType)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -52,7 +50,6 @@ namespace Data.Model_layer
             PostalCode = postalCode;
             City = city;
             Address = address;
-            PasswordHash = password;
             CustomerType = customerType;
         }
 

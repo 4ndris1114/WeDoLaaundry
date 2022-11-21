@@ -52,7 +52,7 @@ namespace CustomerDataTest
             //Arrange
             int insertId = -1;
             Customer newCustomer = new Customer("Test", "Test", "12345678", "test@test.test", 1234, "TestCity", 
-                "Test street test", "testpassword", CustomerType.NO_SUBSCRIPTION);
+                "Test street test", CustomerType.NO_SUBSCRIPTION);
 
             //Act
             insertId = _customerAccess.CreateCustomer(newCustomer);

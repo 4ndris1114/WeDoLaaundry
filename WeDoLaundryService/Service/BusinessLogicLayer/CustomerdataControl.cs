@@ -31,7 +31,7 @@ namespace Service.BusinessLogicLayer
 
         public Customer? Get(int id)
         {
-            Customer? foundCustomer = null;
+            Customer? foundCustomer;
             try
             {
                 foundCustomer = _customerAccess.GetCustomerById(id);
