@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using WebAppIdentity.BusinessLogicLayer;
+using WebAppIdentity.Data;
 using WebAppIdentity.Models;
 
 namespace WebAppIdentity.Controllers
 {
     public class CustomersController : Controller
     {
+
         readonly CustomerLogic _customerLogic;
 
         public CustomersController()
@@ -35,9 +38,8 @@ namespace WebAppIdentity.Controllers
         [Authorize]
         [HttpGet]
         // GET: CustomersController/Create
-        public ActionResult Create()
+        public ActionResult Create(string userId)
         {
-            System.Security.Claims.ClaimsPrincipal loggedinUser = User;
             return View();
         }
 
