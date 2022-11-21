@@ -38,7 +38,7 @@ namespace WebAppIdentity.Controllers
         [Authorize]
         [HttpGet]
         // GET: CustomersController/Create
-        public ActionResult Create(string userId)
+        public ActionResult Create()
         {
             return View();
         }

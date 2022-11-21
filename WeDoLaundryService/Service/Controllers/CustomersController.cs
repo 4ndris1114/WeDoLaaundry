@@ -78,7 +78,7 @@ namespace Service.Controllers
             
             if (customerReadDto != null)
             {
-                Customer dbCustomer = ModelConversion.CustomerDtoConverter.ToCustomer(customerReadDto);
+                Customer? dbCustomer = ModelConversion.CustomerDtoConverter.ToCustomer(customerReadDto);
                 insertedId = _customerdataControl.Add(dbCustomer);
             }
             if (insertedId > 0)
@@ -94,7 +94,7 @@ namespace Service.Controllers
         [HttpPut, Route("{id}")]
         public ActionResult Update(CustomerReadDTO customerDTO) {
             ActionResult retVal;
-            Customer inCustomer = ModelConversion.CustomerDtoConverter.ToCustomer(customerDTO);
+            Customer? inCustomer = ModelConversion.CustomerDtoConverter.ToCustomer(customerDTO);
             bool wasOk = _customerdataControl.Update(inCustomer);
             if (wasOk)
             {
