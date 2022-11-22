@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Security.Claims;
@@ -13,7 +14,6 @@ using WebAppIdentity.Models;
 
 namespace WebAppIdentity.Controllers
 {
-    [Authorize]
     public class CustomersController : Controller
     {
 
@@ -49,18 +49,18 @@ namespace WebAppIdentity.Controllers
         // POST: CustomersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([FromBody] Customer customer)
+        public async Task<ActionResult> Create(Customer customer)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
+
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            //customer.UserId = claimsId.Value.ToString();
-            ModelState.SetModelValue("UserId", new ValueProviderResult(claimsId.Value.ToString(), CultureInfo.InvariantCulture));
+
             var claimsEmail = claimsIdentity.FindFirst(ClaimTypes.Email);
-            ModelState.SetModelValue("Email", new ValueProviderResult(claimsEmail.Value.ToString()));
-            //customer.Email = claimsEmail.Value.ToString();
+
 
             if (ModelState.IsValid) {
-
+                customer.Email = claimsEmail.Value;
+                customer.UserId = claimsId.Value;
                 try {
                     bool wasOk = await _customerLogic.InsertCustomer(customer);
                     if (wasOk){

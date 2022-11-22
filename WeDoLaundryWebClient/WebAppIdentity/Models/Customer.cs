@@ -32,8 +32,7 @@ namespace WebAppIdentity.Models
         public string Phone { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        [Required(ErrorMessage = "Email address is required.")]
-        public string Email { get; set; }
+        public string Email { get; set; } = "";
 
         [DisplayName("Postal code")]
         [Required(ErrorMessage = "Postal code is required.")]
@@ -58,6 +57,6 @@ namespace WebAppIdentity.Models
 
         [ForeignKey("FK_CustomerUser")]
         [DataType(DataType.Text)]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = "";
     }
 }
