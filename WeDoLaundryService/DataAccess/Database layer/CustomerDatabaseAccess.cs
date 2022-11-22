@@ -24,8 +24,8 @@ namespace DataAccess
         {
             int insertedId = -1;
 
-            string insertString = "INSERT INTO Customer(fname, lname, phone, postalCode, city, address, email, userType) " +
-                "OUTPUT INSERTED.ID VALUES(@FirstName, @LastName, @Phone, @PostalCode, @City, @Address, @Email, @UserType)";
+            string insertString = "INSERT INTO Customer(fname, lname, phone, postalCode, city, address, email, userId, userType) " +
+                "OUTPUT INSERTED.ID VALUES(@FirstName, @LastName, @Phone, @PostalCode, @City, @Address, @Email, @UserId, @UserType)";
 
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand cmd = new(insertString, con))
@@ -45,6 +45,8 @@ namespace DataAccess
                 cmd.Parameters.Add(addressParam);
                 SqlParameter emailParam = new("@Email", customer.Email);
                 cmd.Parameters.Add(emailParam);
+                SqlParameter userIdParam = new("@UserId", customer.UserId);
+                cmd.Parameters.Add(userIdParam);
                 SqlParameter userTypeParam = new("@UserType", customer.CustomerType);
                 cmd.Parameters.Add(userTypeParam);
                 //open connection
@@ -158,13 +160,14 @@ namespace DataAccess
             string firstName = reader.GetString(reader.GetOrdinal("fname"));
             string lastName = reader.GetString(reader.GetOrdinal("lname"));
             string phone = reader.GetString(reader.GetOrdinal("phone"));
+            string userId = reader.GetString(reader.GetOrdinal("userId"));
             string email = reader.GetString(reader.GetOrdinal("email"));
             int postalCode = reader.GetInt32(reader.GetOrdinal("postalCode"));
             string city = reader.GetString(reader.GetOrdinal("city"));
             string address = reader.GetString(reader.GetOrdinal("address"));
             CustomerType customerType = (CustomerType) Enum.Parse(typeof(CustomerType), reader.GetString(reader.GetOrdinal("userType")).ToUpper(), true);
 
-            returnCustomer = new(tempId, firstName, lastName, phone, email, postalCode, city, address, customerType);
+            returnCustomer = new(tempId, firstName, lastName, phone, email, postalCode, city, address, customerType , userId);
 
             return returnCustomer;
         }

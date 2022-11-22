@@ -26,7 +26,7 @@ namespace Service.ModelConversion
 
             if (customer != null)
             {
-                returnCustomerDto = new CustomerReadDTO(customer.Id, customer.FirstName, customer.LastName, customer.Phone, customer.Email, customer.PostalCode, customer.City, customer.Address, customer.CustomerType);
+                returnCustomerDto = new CustomerReadDTO(customer.Id, customer.FirstName, customer.LastName, customer.Phone, customer.Email, customer.PostalCode, customer.City, customer.Address, (int) customer.CustomerType, customer.UserId);
             }
 
             return returnCustomerDto;
@@ -40,7 +40,7 @@ namespace Service.ModelConversion
             {
                 returnCustomer = new Customer(customerReadDto.Id, customerReadDto.FirstName,
                     customerReadDto.LastName, customerReadDto.Phone, customerReadDto.Email, customerReadDto.PostalCode,
-                    customerReadDto.City, customerReadDto.Address, customerReadDto.CustomerType);
+                    customerReadDto.City, customerReadDto.Address, customerReadDto.CustomerType, customerReadDto.UserId);
             }
 
             return returnCustomer;

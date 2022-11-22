@@ -1,5 +1,6 @@
 ﻿using Data.Model_layer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Service.DTOs
 {
@@ -14,12 +15,13 @@ namespace Service.DTOs
         public string City { get; set; }
         public string Address { get; set; }
         public CustomerType CustomerType { get; set; }
+        public string UserId { get; set; }
 
         public CustomerReadDTO()
         {
         }
 
-        public CustomerReadDTO(int id, string firstName, string lastName, string phone, string email, int postalCode, string city, string address, CustomerType customerType)
+        public CustomerReadDTO(int id, string firstName, string lastName, string phone, string email, int postalCode, string city, string address, int customerType, string userId)
         {
             Id = id;
             FirstName = firstName;
@@ -29,7 +31,8 @@ namespace Service.DTOs
             PostalCode = postalCode;
             City = city;
             Address = address;
-            CustomerType = customerType;
+            CustomerType = (CustomerType) customerType;
+            UserId = userId;
         }
     }
 }

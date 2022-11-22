@@ -25,9 +25,10 @@ namespace Data.Model_layer
         public string City { get; set; }
         public string Address { get; set; }
         public CustomerType CustomerType { get; set; }
+        public string UserId { get; set; }
 
         public Customer(int id, string firstName, string lastName, string phone, string email, 
-            int postalCode, string city, string address, CustomerType customerType)
+            int postalCode, string city, string address, CustomerType customerType, string userId)
         {
             Id = id;
             FirstName = firstName;
@@ -38,10 +39,11 @@ namespace Data.Model_layer
             City = city;
             Address = address;
             CustomerType = customerType;
+            UserId = userId;
         }
 
         public Customer(string firstName, string lastName, string phone, string email,
-            int postalCode, string city, string address, CustomerType customerType)
+            int postalCode, string city, string address, CustomerType customerType, string userId)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -51,6 +53,7 @@ namespace Data.Model_layer
             City = city;
             Address = address;
             CustomerType = customerType;
+            UserId = userId;
         }
 
         public Customer()

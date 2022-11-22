@@ -1,6 +1,8 @@
 ﻿
+using NuGet.Protocol;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
 
 namespace WebAppIdentity.Models
@@ -29,10 +31,8 @@ namespace WebAppIdentity.Models
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
-        [DisplayName("Email address")]
-        [Required(ErrorMessage = "Email address is required.")]
-        [RegularExpression("[a-z0-9.]+[@][a-z]+[.][a-z]+")]
         [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "Email address is required.")]
         public string Email { get; set; }
 
         [DisplayName("Postal code")]
@@ -52,25 +52,12 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         public string Address { get; set; }
 
-        [DisplayName("Password")]
-        [Required(ErrorMessage = "Password is required.")]
-        [StringLength(100, MinimumLength = 6)]
-        [PasswordPropertyText]
-        [DataType(DataType.Password)]
-        public string PasswordHash { get; set; }
-
-        [DisplayName("Confirm password")]
-        [Compare("PasswordHash", ErrorMessage = "Passwords aren't matching.")]
-        [Required(ErrorMessage = "Password confirmation is required.")]
-        [StringLength(100, MinimumLength = 6)]
-        [PasswordPropertyText]
-        [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
-
         [DisplayName("Customer type")]
         [DataType(DataType.Text)]
         public int CustomerType  { get; set; }
 
+        [ForeignKey("FK_CustomerUser")]
+        [DataType(DataType.Text)]
         public string UserId { get; set; }
     }
 }
