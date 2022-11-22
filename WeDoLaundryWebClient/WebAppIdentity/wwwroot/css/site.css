@@ -16,7 +16,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    padding-top: 56px;
+    padding-top: 66px;
 }
 
 * {
@@ -76,32 +76,30 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    scroll-margin-top: 56px;
-    height: 100vh;
+    scroll-margin-top: 66px;
+    height: 60vh;
     padding: 40px;
 }
 
-#Banner {
+#banner {
     background-color: #EAE6E5;
 }
 
-#AboutUs {
+#about-us {
     background-color: #8FCB9B;
 }
 
-#Services {
+#services {
     background-color: #5B9279;
     color: #EAE6E5;
 }
 
-#Contact {
+#contact {
     background-color: #12130F;
     color: #EAE6E5;
-}
-
-.section p {
-    width: 40%;
-    display: inline-block;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* Clear floats */
@@ -116,4 +114,39 @@ button {
     .cancelbtn, .signupbtn {
         width: 100%;
     }
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #8FCB9B;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #5B9279;
+}
+
+.form-container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    height: 80%;
+}
+
+label {
+    color: #12130F;
 }
