@@ -20,6 +20,8 @@ namespace DataAccess
             this._connectionString = connectionString;
         }
 
+
+
         public int CreateCustomer(Customer customer)
         {
             int insertedId = -1;
@@ -103,6 +105,30 @@ namespace DataAccess
             return customer;
         }
 
+        public Customer GetCustomerByUserId(string userId)
+        {
+            Customer customer = new();
+
+            string SQL_string = "SELECT * FROM Customer WHERE userId = @UserId";
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand command = new(SQL_string, con))
+            {
+                SqlParameter idParam = new("@UserId", userId);
+                command.Parameters.Add(idParam);
+
+
+                con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    customer = GetCustomerReader(reader);
+                }
+                con.Close();
+            }
+
+            return customer;
+        }
+
         public bool UpdateCustomer(Customer customer)
         {
             int numberOfRowsModified = 0;
@@ -161,7 +187,7 @@ namespace DataAccess
             string lastName = reader.GetString(reader.GetOrdinal("lname"));
             string phone = reader.GetString(reader.GetOrdinal("phone"));
             string userId = "No account";
-            if (reader.IsDBNull(9))
+            if (!reader.IsDBNull(9))
             {
                 userId = reader.GetString(reader.GetOrdinal("userId"));
             }

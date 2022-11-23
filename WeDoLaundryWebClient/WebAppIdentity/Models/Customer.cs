@@ -32,7 +32,7 @@ namespace WebAppIdentity.Models
         public string Phone { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        [StringLength(256, MinimumLength = 2)]
+        [StringLength(256)]
         public string Email { get; set; } = "";
 
         [DisplayName("Postal code")]
@@ -60,8 +60,7 @@ namespace WebAppIdentity.Models
 
         [ForeignKey("FK_CustomerUser")]
         [DataType(DataType.Text)]
-        [StringLength(450, MinimumLength = 2)]
-        [Required]
+        [StringLength(450)]
         public string UserId { get; set; } = "";
     }
 }

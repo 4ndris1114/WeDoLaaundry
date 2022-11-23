@@ -44,6 +44,21 @@ namespace Service.BusinessLogicLayer
             return foundCustomer;
         }
 
+        public Customer? GetByUserId(string userId)
+        {
+            Customer? foundCustomer;
+            try
+            {
+                foundCustomer = _customerAccess.GetCustomerByUserId(userId);
+            }
+            catch
+            {
+
+                foundCustomer = null;
+            }
+            return foundCustomer;
+        }
+
         public int Add(Customer customer)
         {
             int insertedId;

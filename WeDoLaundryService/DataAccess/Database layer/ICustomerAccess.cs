@@ -12,6 +12,8 @@ namespace Data.Database_layer
 
         Customer GetCustomerById(int id);
 
+        Customer GetCustomerByUserId(string userId);
+
         List<Customer> getAllCustomers();
 
         int CreateCustomer(Customer customer);
