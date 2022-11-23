@@ -15,13 +15,13 @@ namespace WebAppIdentity.Models
 
         [DisplayName("First name")]
         [Required(ErrorMessage = "First name is required.")]
-        [StringLength(40, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 2)]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
         [DisplayName("Last name")]
         [Required(ErrorMessage = "Last name is required.")]
-        [StringLength(40, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 2)]
         [DataType(DataType.Text)]
         public string LastName { get; set; }
 
@@ -32,6 +32,7 @@ namespace WebAppIdentity.Models
         public string Phone { get; set; }
 
         [DataType(DataType.EmailAddress)]
+        [StringLength(256, MinimumLength = 2)]
         public string Email { get; set; } = "";
 
         [DisplayName("Postal code")]
@@ -41,22 +42,26 @@ namespace WebAppIdentity.Models
         public int PostalCode { get; set; }
 
         [DisplayName("City")]
-        [Required(ErrorMessage = "First name is required.")]
-        [StringLength(50, MinimumLength = 2)]
+        [Required(ErrorMessage = "City is required.")]
+        [StringLength(100, MinimumLength = 2)]
         [DataType(DataType.Text)]
         public string City { get; set; }
 
         [DisplayName("Address")]
-        [StringLength(40, MinimumLength = 2)]
+        [Required(ErrorMessage = "City is required.")]
+        [StringLength(100, MinimumLength = 2)]
         [DataType(DataType.Text)]
         public string Address { get; set; }
 
         [DisplayName("Customer type")]
+        [Required(ErrorMessage = "City is required.")]
         [DataType(DataType.Text)]
         public int CustomerType  { get; set; }
 
         [ForeignKey("FK_CustomerUser")]
         [DataType(DataType.Text)]
+        [StringLength(450, MinimumLength = 2)]
+        [Required]
         public string UserId { get; set; } = "";
     }
 }

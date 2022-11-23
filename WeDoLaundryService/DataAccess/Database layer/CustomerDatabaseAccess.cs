@@ -160,7 +160,11 @@ namespace DataAccess
             string firstName = reader.GetString(reader.GetOrdinal("fname"));
             string lastName = reader.GetString(reader.GetOrdinal("lname"));
             string phone = reader.GetString(reader.GetOrdinal("phone"));
-            string userId = reader.GetString(reader.GetOrdinal("userId"));
+            string userId = "No account";
+            if (reader.IsDBNull(9))
+            {
+                userId = reader.GetString(reader.GetOrdinal("userId"));
+            }
             string email = reader.GetString(reader.GetOrdinal("email"));
             int postalCode = reader.GetInt32(reader.GetOrdinal("postalCode"));
             string city = reader.GetString(reader.GetOrdinal("city"));
