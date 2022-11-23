@@ -13,6 +13,20 @@ namespace WebAppIdentity.BusinessLogicLayer
             _customerServiceAccess = new();
         }
 
+        public async Task<Customer> GetCustomerByUserId(string id)
+        {
+            Customer returnCustomer;
+            try
+            {
+                returnCustomer = await _customerServiceAccess.GetCustomerByUserId(id);
+            }
+            catch
+            {
+                returnCustomer = null;
+            }
+            return returnCustomer;
+        }
+
         public async Task<bool> InsertCustomer(Customer customer)
         {
             bool wasInserted;

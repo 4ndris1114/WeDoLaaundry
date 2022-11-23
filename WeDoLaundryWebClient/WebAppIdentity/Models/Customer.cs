@@ -48,13 +48,13 @@ namespace WebAppIdentity.Models
         public string City { get; set; }
 
         [DisplayName("Address")]
-        [Required(ErrorMessage = "City is required.")]
+        [Required(ErrorMessage = "Address is required.")]
         [StringLength(100, MinimumLength = 2)]
         [DataType(DataType.Text)]
         public string Address { get; set; }
 
         [DisplayName("Customer type")]
-        [Required(ErrorMessage = "City is required.")]
+        [Required(ErrorMessage = "Customer type is required.")]
         [DataType(DataType.Text)]
         public int CustomerType  { get; set; }
 
