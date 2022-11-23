@@ -17,22 +17,21 @@ namespace Service.BusinessLogicLayer
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Booking>? Get()
         {
-            throw new NotImplementedException();
+            List<Booking>? foundBookings = null;
+            try
+            {
+                foundBookings = _bookingDbAccess.GetAll();
+            }
+            catch
+            {
+                foundBookings = null;
+            }
+            return foundBookings;
         }
 
         public Booking GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(Booking customer)
         {
             throw new NotImplementedException();
         }

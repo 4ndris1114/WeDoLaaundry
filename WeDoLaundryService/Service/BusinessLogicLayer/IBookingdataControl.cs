@@ -8,7 +8,7 @@ namespace Service.BusinessLogicLayer
         List<Booking>? Get();
         Booking GetById(int id);
         int Add(Booking booking);
-        bool Update(Booking customer);
-        bool Delete(int id);
+        //bool Update(Booking customer);
+        //bool Delete(int id);
     }
 }
