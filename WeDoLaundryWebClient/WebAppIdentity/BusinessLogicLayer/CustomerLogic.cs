@@ -1,6 +1,7 @@
 ﻿using WebAppIdentity.Models;
 using WebAppIdentity.Data.Migrations;
 using WebAppIdentity.ServiceLayer;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace WebAppIdentity.BusinessLogicLayer
 {
@@ -16,7 +17,7 @@ namespace WebAppIdentity.BusinessLogicLayer
 
         public async Task<Customer> GetCustomerByUserId(string id)
         {
-            Customer returnCustomer;
+            Customer? returnCustomer;
             try
             {
                 returnCustomer = await _customerServiceAccess.GetCustomerByUserId(id);
@@ -42,61 +43,49 @@ namespace WebAppIdentity.BusinessLogicLayer
 
             return wasInserted;
         }
-        public Customer? GetCustomerById(int id)
+
+        public async Task<Customer> CreateCustomer(Customer customer)
         {
-            Customer? foundCustomer;
+            Customer? returnCustomer;
             try
             {
-                foundCustomer = _customerServiceAccess.GetCustomerById(id);
+                returnCustomer = await _customerServiceAccess.CreateCustomer(customer);
             }
             catch
             {
-                foundCustomer = null;
+                returnCustomer = null;
             }
-            return foundCustomer;
+            return returnCustomer;
         }
 
-        public int CreateCustomer(Customer customer)
+        public async Task<bool> UpdateCustomer(Customer customer)
         {
-            int wasCreated;
+            bool wasInserted;
             try
             {
-                wasCreated = _customerServiceAccess.CreateCustomer(customer);
+                wasInserted = await _customerServiceAccess.UpdateCustomer(customer);
             }
             catch
             {
-                wasCreated = -1;
+                wasInserted = false;
             }
-            return wasCreated;
+
+            return wasInserted;
         }
 
-
-        public bool UpdateCustomer(Customer customer)
+        public async Task<bool> DeleteCustomer(Customer customer)
         {
-            bool wasUpdated;
+            bool wasInserted;
             try
             {
-                wasUpdated = _customerServiceAccess.UpdateCustomer(customer);
+                wasInserted = await _customerServiceAccess.DeleteCustomer(customer);
             }
             catch
             {
-                wasUpdated= false;
+                wasInserted = false;
             }
-            return wasUpdated;
-        }
 
-        public bool DeleteCustomer(Customer customer)
-        {
-            bool wasDeleted;
-            try
-            {
-                wasDeleted = _customerServiceAccess.DeleteCustomer(customer);
-            }
-            catch
-            {
-                wasDeleted = false;
-            }
-            return wasDeleted;
+            return wasInserted;
         }
 
     }

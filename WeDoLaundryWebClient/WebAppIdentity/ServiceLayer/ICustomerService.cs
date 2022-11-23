@@ -4,9 +4,9 @@ namespace WebAppIdentity.ServiceLayer;
 
 public interface ICustomerService
 {
-   Task<bool> PostCustomer(Customer customer);
-    Customer GetCustomerById(int id);
-    int CreateCustomer(Customer customer);
-    bool UpdateCustomer(Customer customer);
-    bool DeleteCustomer(Customer customer);
+    Task<Customer> GetCustomerByUserId(string id);
+    Task<bool> PostCustomer(Customer customer);
+    Task<Customer>CreateCustomer(Customer customer);
+    Task<bool>UpdateCustomer(Customer customer);
+    Task<bool>DeleteCustomer(Customer customer);
 }

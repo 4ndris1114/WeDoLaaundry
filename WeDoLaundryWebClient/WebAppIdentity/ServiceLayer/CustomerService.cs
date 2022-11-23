@@ -31,7 +31,8 @@ namespace WebAppIdentity.ServiceLayer
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     returnCustomer = JsonConvert.DeserializeObject<Customer>(content);
-                } else
+                }
+                else
                 {
                     returnCustomer = new();
                 }
@@ -56,53 +57,66 @@ namespace WebAppIdentity.ServiceLayer
 
                 HttpResponseMessage response = await _client.PostAsync(uri, content);
 
-                if (response.IsSuccessStatusCode) {
+                if (response.IsSuccessStatusCode)
+                {
                     wasPosted = true;
-                } else
+                }
+                else
                 {
                     wasPosted = false;
                 }
             }
-            catch {
+            catch
+            {
                 wasPosted = false;
             }
 
             return wasPosted;
         }
-            public Customer? GetCustomerById(int id)
-            {
-            Customer? foundCustomer;
-            try
-            {
-                foundCustomer = _customerLogic.GetCustomerById(id);
-            }
-            catch
-            {
-                foundCustomer = null;
-            }
-            return foundCustomer;
-            }
-
-        public int CreateCustomer(Customer customer)
+        public async Task<Customer> CreateCustomer(Customer customer)
         {
-            int wasCreated;
+            Customer? returnCustomer;
+
+            var uri = new Uri(string.Format(restUrl + "userId/" + customer));
+
             try
             {
-                wasCreated = _customerLogic.CreateCustomer(customer);
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    returnCustomer = JsonConvert.DeserializeObject<Customer>(content);
+                }
+                else
+                {
+                    returnCustomer = new();
+                }
             }
             catch
             {
-                wasCreated = -1;
+                returnCustomer = null;
             }
-            return wasCreated;
+            return returnCustomer;
         }
-        
-        public bool UpdateCustomer(Customer customer)
+
+        public async Task<bool> UpdateCustomer(Customer customer)
         {
             bool wasUpdated;
+
+            var uri = new Uri(string.Format(restUrl + "userId/" + customer));
+
             try
             {
-                wasUpdated = _customerLogic.UpdateCustomer(customer);
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    wasUpdated = JsonConvert.DeserializeObject<bool>(content);
+                }
+                else
+                {
+                    wasUpdated = new();
+                }
             }
             catch
             {
@@ -111,12 +125,24 @@ namespace WebAppIdentity.ServiceLayer
             return wasUpdated;
         }
 
-        public bool DeleteCustomer(Customer customer)
+        public async Task<bool> DeleteCustomer(Customer customer)
         {
             bool wasDeleted;
+
+            var uri = new Uri(string.Format(restUrl + "userId/" + customer));
+
             try
             {
-                wasDeleted = _customerLogic.DeleteCustomer(customer);
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    wasDeleted = JsonConvert.DeserializeObject<bool>(content);
+                }
+                else
+                {
+                    wasDeleted = new();
+                }
             }
             catch
             {
@@ -124,7 +150,9 @@ namespace WebAppIdentity.ServiceLayer
             }
             return wasDeleted;
         }
-    }
 
+
+    }
 }
+
 
