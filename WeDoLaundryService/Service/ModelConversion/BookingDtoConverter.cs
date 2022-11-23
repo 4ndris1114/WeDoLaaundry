@@ -1,4 +1,5 @@
-﻿using Model.Model_layer;
+﻿using Data.Model_layer;
+using Model.Model_layer;
 using Service.DTOs;
 
 namespace Service.ModelConversion
@@ -26,7 +27,7 @@ namespace Service.ModelConversion
 
             if(booking != null)
             {
-                returnDto = new BookingReadDTO(booking.Id, booking.Customer, booking.DriverId, booking.PickUpTime, booking.ReturnTime, booking.PickUpAddress, booking.ReturnAddress, booking.BookingStatus, booking.AmountOfBags, booking.InvoiceId);
+                returnDto = new BookingReadDTO(booking.Id, booking.Customer.GetId(), booking.DriverId, booking.PickUpTime, booking.ReturnTime, booking.PickUpAddress, booking.ReturnAddress, (int) booking.BookingStatus, booking.AmountOfBags, booking.InvoiceId);
             }
             return returnDto;
         }
@@ -37,7 +38,7 @@ namespace Service.ModelConversion
 
             if(bookingReadDto != null)
             {
-                returnBooking = new Booking(bookingReadDto.Id, bookingReadDto.Customer, bookingReadDto.DriverId, bookingReadDto.PickUpTime, bookingReadDto.ReturnTime, bookingReadDto.PickUpAddress, bookingReadDto.ReturnAddress, bookingReadDto.BookingStatus, bookingReadDto.AmountOfBags, bookingReadDto.InvoiceId);
+                returnBooking = new Booking(bookingReadDto.Id, new(), bookingReadDto.DriverId, bookingReadDto.PickUpTime, bookingReadDto.ReturnTime, bookingReadDto.PickUpAddress, bookingReadDto.ReturnAddress, bookingReadDto.Status, bookingReadDto.NoOfBags, bookingReadDto.InvoiceId);
             }
             return returnBooking;
         }

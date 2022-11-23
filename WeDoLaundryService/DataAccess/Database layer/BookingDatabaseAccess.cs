@@ -20,6 +20,13 @@ namespace DataAccess.Database_layer
         public BookingDatabaseAccess(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("WeDoLaundry");
+            _customerAccess = new CustomerDatabaseAccess(configuration);
+        }
+
+        public BookingDatabaseAccess(string connectionString)
+        {
+            _connectionString = connectionString;
+            _customerAccess = new CustomerDatabaseAccess(_connectionString);
         }
 
         public int CreateBooking(Booking newBooking)
@@ -30,30 +37,30 @@ namespace DataAccess.Database_layer
                 "OUTPUT INSERTED.ID VALUES(@CustomerId, @DriverId, @PickupTime, @ReturnTime, @PickupAddress, @ReturnAddress, @Status, @AmountOfBags, @InvoiceId)";
 
             using (SqlConnection con = new(_connectionString))
-                using (SqlCommand cmd = con.CreateCommand())
+                using (SqlCommand cmd = new(insertString, con))
             {
                 //Assign parameters
                 SqlParameter customerIdParam = new("@CustomerId", newBooking.Customer.GetId());
                 cmd.Parameters.Add(customerIdParam);
-                SqlParameter driverIdParam = new("{DriverId", newBooking.DriverId);
+                SqlParameter driverIdParam = new("@DriverId", newBooking.DriverId);
                 cmd.Parameters.Add(driverIdParam);
                 SqlParameter pickupTimeParam = new("@PickupTime", newBooking.PickUpTime);
                 cmd.Parameters.Add(pickupTimeParam);
                 SqlParameter returnTimeParam = new("@ReturnTime", newBooking.ReturnTime);
                 cmd.Parameters.Add(returnTimeParam);
                 SqlParameter pickupAddressParam = new("@PickupAddress", newBooking.PickUpAddress);
-                cmd.Parameters.Add(pickupTimeParam);
+                cmd.Parameters.Add(pickupAddressParam);
                 SqlParameter returnAddressParam = new("@ReturnAddress", newBooking.ReturnAddress);
-                cmd.Parameters.Add(returnTimeParam);
+                cmd.Parameters.Add(returnAddressParam);
                 SqlParameter statusParam = new("@Status", newBooking.BookingStatus);
                 cmd.Parameters.Add(statusParam);
-                SqlParameter amountOfBagsParam = new("@AmoungOfBags", newBooking.AmountOfBags);
+                SqlParameter amountOfBagsParam = new("@AmountOfBags", newBooking.AmountOfBags);
                 cmd.Parameters.Add(amountOfBagsParam);
                 SqlParameter invoiceIdParam = new("@InvoiceId", newBooking.InvoiceId);
                 cmd.Parameters.Add(invoiceIdParam);
 
                 con.Open();
-                insertedId = (int)cmd.ExecuteScalar();
+                insertedId = (int) cmd.ExecuteScalar();
 
                 con.Close();
             }
@@ -108,13 +115,13 @@ namespace DataAccess.Database_layer
         {
             Booking returnBooking;
             int tempId = reader.GetInt32(reader.GetOrdinal("id"));
-            Customer customer = null;
-            if (!reader.IsDBNull(2))
+            Customer customer = new();
+            if (!reader.IsDBNull(1))
             {
-                _customerAccess.GetById(reader.GetInt32(reader.GetOrdinal("customerId")));
+                customer = _customerAccess.GetById(reader.GetInt32(reader.GetOrdinal("customerId")));
             }
             int driverId = 0;
-            if (!reader.IsDBNull(3))
+            if (!reader.IsDBNull(2))
             {
                 reader.GetInt32(reader.GetOrdinal("driverId")); //change later to object
             }
@@ -122,10 +129,10 @@ namespace DataAccess.Database_layer
             DateTime returnTime = reader.GetDateTime(reader.GetOrdinal("returnTime"));
             string pickupAddress = reader.GetString(reader.GetOrdinal("pickUpAddress"));
             string returnAddress = reader.GetString(reader.GetOrdinal("returnAddress"));
-            Status status = (Status) Enum.Parse(typeof(Booking), reader.GetString(reader.GetOrdinal("status")).ToUpper(), true);
+            Status status = (Status) Enum.Parse(typeof(Status), reader.GetString(reader.GetOrdinal("status")).ToUpper(), true);
             int amountOfBags = reader.GetInt32(reader.GetOrdinal("noOfBags"));
             int invoiceId = 0;
-            if (!reader.IsDBNull(10))
+            if (!reader.IsDBNull(9))
             {
                 reader.GetInt32(reader.GetOrdinal("invoiceId")); //change later to object
             }

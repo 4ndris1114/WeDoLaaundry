@@ -14,7 +14,16 @@ namespace Service.BusinessLogicLayer
 
         public int Add(Booking booking)
         {
-            throw new NotImplementedException();
+            int insertedId;
+            try
+            {
+                insertedId = _bookingDbAccess.CreateBooking(booking);
+            }
+            catch
+            {
+                insertedId = -1;
+            }
+            return insertedId;
         }
 
         public List<Booking>? Get()
@@ -33,7 +42,16 @@ namespace Service.BusinessLogicLayer
 
         public Booking GetById(int id)
         {
-            throw new NotImplementedException();
+            Booking? foundBooking;
+            try
+            {
+                foundBooking = _bookingDbAccess.Get(id);
+            }
+            catch
+            {
+                foundBooking = null;
+            }
+            return foundBooking;
         }
     }
 }

@@ -14,6 +14,10 @@ namespace Service.BusinessLogicLayer
             _customerAccess = new CustomerDatabaseAccess(config);
         }
 
+        public CustomerdataControl()
+        {
+        }
+
         public List<Customer>? Get()
         {
             List<Customer>? foundCustomers = null;
