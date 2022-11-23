@@ -108,7 +108,6 @@ namespace WebAppIdentity.Controllers
             return View();
         }
 
-        [HttpPost]
         // POST: CustomersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
