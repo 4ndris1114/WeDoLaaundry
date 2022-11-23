@@ -51,7 +51,7 @@ namespace Service.Controllers
         public ActionResult<CustomerReadDTO>? Get(int id) {
             ActionResult<CustomerReadDTO> returnCustomerDto;
 
-            Customer? foundCustomer = _customerdataControl.Get(id);
+            Customer? foundCustomer = _customerdataControl.GetById(id);
             CustomerReadDTO? foundCustomerDto = ModelConversion.CustomerDtoConverter.ToCustomerDto(foundCustomer);
             //evaluate & return status code
             if (foundCustomerDto != null)
@@ -64,6 +64,33 @@ namespace Service.Controllers
                     returnCustomerDto = new StatusCodeResult(204);
                 }
             } else {
+                returnCustomerDto = new StatusCodeResult(500);
+            }
+
+            return returnCustomerDto;
+        }
+
+        [HttpGet, Route("account/{userId}")]
+        public ActionResult<CustomerReadDTO>? GetByUserId(string userId)
+        {
+            ActionResult<CustomerReadDTO> returnCustomerDto;
+
+            Customer? foundCustomer = _customerdataControl.GetByUserId(userId);
+            CustomerReadDTO? foundCustomerDto = ModelConversion.CustomerDtoConverter.ToCustomerDto(foundCustomer);
+            //evaluate & return status code
+            if (foundCustomerDto != null)
+            {
+                if (foundCustomer.Id > 0)
+                {
+                    returnCustomerDto = Ok(foundCustomerDto);
+                }
+                else
+                {
+                    returnCustomerDto = new StatusCodeResult(204);
+                }
+            }
+            else
+            {
                 returnCustomerDto = new StatusCodeResult(500);
             }
 

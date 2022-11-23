@@ -29,12 +29,27 @@ namespace Service.BusinessLogicLayer
             return foundCustomers;
         }
 
-        public Customer? Get(int id)
+        public Customer? GetById(int id)
         {
             Customer? foundCustomer;
             try
             {
-                foundCustomer = _customerAccess.GetCustomerById(id);
+                foundCustomer = _customerAccess.GetById(id);
+            }
+            catch
+            {
+
+                foundCustomer = null;
+            }
+            return foundCustomer;
+        }
+
+        public Customer? GetByUserId(string userId)
+        {
+            Customer? foundCustomer;
+            try
+            {
+                foundCustomer = _customerAccess.GetByUserId(userId);
             }
             catch
             {

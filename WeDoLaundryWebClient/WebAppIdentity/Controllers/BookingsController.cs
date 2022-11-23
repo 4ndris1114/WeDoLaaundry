@@ -1,30 +1,21 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
-using System.Globalization;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using System.Text;
 using WebAppIdentity.BusinessLogicLayer;
-using WebAppIdentity.Data;
 using WebAppIdentity.Models;
 
 namespace WebAppIdentity.Controllers
 {
-    public class CustomersController : Controller
+    public class BookingsController : Controller
     {
-
+        readonly BookingLogic _bookingLogic;
         readonly CustomerLogic _customerLogic;
 
-        public CustomersController()
+        public BookingsController()
         {
+            _bookingLogic = new();
             _customerLogic = new();
         }
 
-        // GET: CustomersController
         [HttpGet]
         public ActionResult Index()
         {
@@ -32,47 +23,37 @@ namespace WebAppIdentity.Controllers
         }
 
         [HttpGet]
-        // GET: CustomersController/Details/5
         public ActionResult Details(int id)
         {
-
             return View();
         }
 
-        [HttpGet]
-        // GET: CustomersController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CustomersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Customer customer)
+        public async Task<ActionResult> Create(Booking booking)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
 
-            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).ToString(); // customer id
 
-            var claimsEmail = claimsIdentity.FindFirst(ClaimTypes.Email);
-
-
-            if (ModelState.IsValid) {
-                customer.Email = claimsEmail.Value;
-                customer.UserId = claimsId.Value;
-                try {
-                    bool wasOk = await _customerLogic.InsertCustomer(customer);
-                    if (wasOk){
-                        ViewBag.message = "Customer registered";
+            if (ModelState.IsValid)
+            {
+                booking.Customer = await _customerLogic.GetCustomerByUserId(claimsId);
+                try
+                {
+                    bool wasOk = await _bookingLogic.InsertBooking(booking);
+                    if (wasOk)
+                    {
+                        ViewBag.message = "Laundry registered";
                         return RedirectToAction("Index");
                     } else
                     {
                         ViewBag.message = "Bad request";
                     }
                 }
-                catch {
-                    ViewBag.message = "Error while registering customer";
+                catch
+                {
+                    ViewBag.message = "Error while booking";
                     return View();
                 }
             }
@@ -80,13 +61,11 @@ namespace WebAppIdentity.Controllers
         }
 
         [HttpGet]
-        // GET: CustomersController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CustomersController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -102,13 +81,11 @@ namespace WebAppIdentity.Controllers
         }
 
         [HttpGet]
-        // GET: CustomersController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CustomersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

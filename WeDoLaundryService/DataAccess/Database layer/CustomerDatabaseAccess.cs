@@ -20,6 +20,8 @@ namespace DataAccess
             this._connectionString = connectionString;
         }
 
+
+
         public int CreateCustomer(Customer customer)
         {
             int insertedId = -1;
@@ -79,7 +81,7 @@ namespace DataAccess
             return returnList;
         }
 
-        public Customer GetCustomerById(int id)
+        public Customer GetById(int id)
         {
             Customer customer = new();
 
@@ -103,26 +105,51 @@ namespace DataAccess
             return customer;
         }
 
+        public Customer GetByUserId(string userId)
+        {
+            Customer customer = new();
+
+            string SQL_string = "SELECT * FROM Customer WHERE userId = @UserId";
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand command = new(SQL_string, con))
+            {
+                SqlParameter idParam = new("@UserId", userId);
+                command.Parameters.Add(idParam);
+
+
+                con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    customer = GetCustomerReader(reader);
+                }
+                con.Close();
+            }
+
+            return customer;
+        }
+
         public bool UpdateCustomer(Customer customer)
         {
             int numberOfRowsModified = 0;
 
-            string queryString = "UPDATE Customer SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, userType=@CustomerType WHERE id=@Id";
+            string queryString = "UPDATE Customer SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, userType=@CustomerType, userId=@UserId WHERE id=@Id";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(queryString, conn))
             {
                 if(conn != null)
                 {
-                    command.Parameters.AddWithValue("FirstName", customer.FirstName);
-                    command.Parameters.AddWithValue("LastName", customer.LastName);
-                    command.Parameters.AddWithValue("Phone", customer.Phone);
-                    command.Parameters.AddWithValue("PostalCode", customer.PostalCode);
-                    command.Parameters.AddWithValue("City", customer.City);
-                    command.Parameters.AddWithValue("Address", customer.Address);
-                    command.Parameters.AddWithValue("Email", customer.Email);
-                    command.Parameters.AddWithValue("CustomerType", customer.CustomerType);
-                    command.Parameters.AddWithValue("Id", customer.Id);
+                    command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+                    command.Parameters.AddWithValue("@LastName", customer.LastName);
+                    command.Parameters.AddWithValue("@Phone", customer.Phone);
+                    command.Parameters.AddWithValue("@PostalCode", customer.PostalCode);
+                    command.Parameters.AddWithValue("@City", customer.City);
+                    command.Parameters.AddWithValue("@Address", customer.Address);
+                    command.Parameters.AddWithValue("@Email", customer.Email);
+                    command.Parameters.AddWithValue("@CustomerType", customer.CustomerType.ToString());
+                    command.Parameters.AddWithValue("@Id", customer.Id);
+                    command.Parameters.AddWithValue("@UserId", customer.UserId);
 
                     conn.Open();
                     numberOfRowsModified = command.ExecuteNonQuery();
@@ -161,7 +188,7 @@ namespace DataAccess
             string lastName = reader.GetString(reader.GetOrdinal("lname"));
             string phone = reader.GetString(reader.GetOrdinal("phone"));
             string userId = "No account";
-            if (reader.IsDBNull(9))
+            if (!reader.IsDBNull(9))
             {
                 userId = reader.GetString(reader.GetOrdinal("userId"));
             }
