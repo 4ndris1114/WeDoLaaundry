@@ -24,6 +24,7 @@ namespace CustomerDataTest
             newCustomer = new Customer("Test", "Test", "12345678", "test@test.test", 1234, "TestCity",
                 "Test street test", CustomerType.NO_SUBSCRIPTION, "05d8be71-4f1f-4fd7-a2d7-95d7ce64c632");
             insertId = _customerAccess.CreateCustomer(newCustomer);
+            newCustomer.Id = insertId;
         }
 
         public void Dispose()
@@ -52,7 +53,7 @@ namespace CustomerDataTest
             //Arrange
 
             //Act
-            Customer foundCustomer = _customerAccess.GetById(1006);
+            Customer foundCustomer = _customerAccess.GetById(newCustomer.Id);
             String customerPhone = foundCustomer.Phone;
             extraOutput.WriteLine("Found customer: " + foundCustomer.Id);
 
@@ -84,14 +85,19 @@ namespace CustomerDataTest
             newCustomer.Phone = newPhone;
 
             //Act
+            int insertedId = _customerAccess.CreateCustomer(newCustomer);
             bool updateReturnedTrue = _customerAccess.UpdateCustomer(updatedCustomer);
             Customer retrievedCustomer = _customerAccess.GetById(insertId);
             String updatedValue = retrievedCustomer.Phone;
             extraOutput.WriteLine("Original value: " + originalValue);
             extraOutput.WriteLine("Retrieved value: " + newPhone);
 
+            //remove customer
+            bool wasDeleted = _customerAccess.DeleteCustomer(insertedId);
+
             //Assert
             Assert.True(updateReturnedTrue);
+            Assert.True(wasDeleted);
             Assert.True(updatedValue == newPhone);
         }
     }
