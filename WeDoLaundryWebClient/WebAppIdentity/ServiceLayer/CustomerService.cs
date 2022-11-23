@@ -22,7 +22,7 @@ namespace WebAppIdentity.ServiceLayer
         {
             Customer returnCustomer;
 
-            var uri = new Uri(string.Format(restUrl + "userId/" + id));
+            var uri = new Uri(string.Format(restUrl + "account/" + id));
 
             try
             {

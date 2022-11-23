@@ -30,13 +30,13 @@ namespace WebAppIdentity.Models
 
         [DisplayName("Collection address")]
         [Required(ErrorMessage = "Collection address is required")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Text)]
         public string PickUpAddress { get; set; }
 
 
         [DisplayName("Delivery address")]
         [Required(ErrorMessage = "Delivery address is required")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Text)]
         public string ReturnAddress { get; set; }
 
         public int BookingStatus { get; set; } = 0;

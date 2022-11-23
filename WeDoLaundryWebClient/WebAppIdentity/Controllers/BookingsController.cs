@@ -28,13 +28,19 @@ namespace WebAppIdentity.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Booking booking)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
 
-            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).ToString(); // customer id
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).ToString();
 
             if (ModelState.IsValid)
             {
