@@ -6,7 +6,8 @@ namespace Service.BusinessLogicLayer
     {
         List<Customer>? Get();
         Customer GetByUserId(string userId);
-        Customer Get(int id);
+        Customer GetById(int id);
+        int Add(Customer name);
         bool Update(Customer customer);
         bool Delete(int id);
     }

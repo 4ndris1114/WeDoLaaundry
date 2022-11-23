@@ -10,9 +10,9 @@ namespace Data.Database_layer
     public interface ICustomerAccess
     {
 
-        Customer GetCustomerById(int id);
+        Customer GetById(int id);
 
-        Customer GetCustomerByUserId(string userId);
+        Customer GetByUserId(string userId);
 
         List<Customer> getAllCustomers();
 

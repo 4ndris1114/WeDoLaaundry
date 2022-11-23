@@ -51,7 +51,7 @@ namespace Service.Controllers
         public ActionResult<CustomerReadDTO>? Get(int id) {
             ActionResult<CustomerReadDTO> returnCustomerDto;
 
-            Customer? foundCustomer = _customerdataControl.Get(id);
+            Customer? foundCustomer = _customerdataControl.GetById(id);
             CustomerReadDTO? foundCustomerDto = ModelConversion.CustomerDtoConverter.ToCustomerDto(foundCustomer);
             //evaluate & return status code
             if (foundCustomerDto != null)

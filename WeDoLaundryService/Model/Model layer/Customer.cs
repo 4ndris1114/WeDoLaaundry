@@ -60,5 +60,10 @@ namespace Data.Model_layer
         {
 
         }
+
+        public int GetId()
+        {
+            return Id;
+        }
     }
 }

@@ -81,7 +81,7 @@ namespace DataAccess
             return returnList;
         }
 
-        public Customer GetCustomerById(int id)
+        public Customer GetById(int id)
         {
             Customer customer = new();
 
@@ -105,7 +105,7 @@ namespace DataAccess
             return customer;
         }
 
-        public Customer GetCustomerByUserId(string userId)
+        public Customer GetByUserId(string userId)
         {
             Customer customer = new();
 
@@ -140,16 +140,16 @@ namespace DataAccess
             {
                 if(conn != null)
                 {
-                    command.Parameters.AddWithValue("FirstName", customer.FirstName);
-                    command.Parameters.AddWithValue("LastName", customer.LastName);
-                    command.Parameters.AddWithValue("Phone", customer.Phone);
-                    command.Parameters.AddWithValue("PostalCode", customer.PostalCode);
-                    command.Parameters.AddWithValue("City", customer.City);
-                    command.Parameters.AddWithValue("Address", customer.Address);
-                    command.Parameters.AddWithValue("Email", customer.Email);
-                    command.Parameters.AddWithValue("CustomerType", customer.CustomerType);
-                    command.Parameters.AddWithValue("Id", customer.Id);
-                    command.Parameters.AddWithValue("UserId", customer.UserId);
+                    command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+                    command.Parameters.AddWithValue("@LastName", customer.LastName);
+                    command.Parameters.AddWithValue("@Phone", customer.Phone);
+                    command.Parameters.AddWithValue("@PostalCode", customer.PostalCode);
+                    command.Parameters.AddWithValue("@City", customer.City);
+                    command.Parameters.AddWithValue("@Address", customer.Address);
+                    command.Parameters.AddWithValue("@Email", customer.Email);
+                    command.Parameters.AddWithValue("@CustomerType", customer.CustomerType.ToString());
+                    command.Parameters.AddWithValue("@Id", customer.Id);
+                    command.Parameters.AddWithValue("@UserId", customer.UserId);
 
                     conn.Open();
                     numberOfRowsModified = command.ExecuteNonQuery();

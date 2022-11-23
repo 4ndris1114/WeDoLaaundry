@@ -52,7 +52,7 @@ namespace CustomerDataTest
             //Arrange
 
             //Act
-            Customer foundCustomer = _customerAccess.GetCustomerById(1006);
+            Customer foundCustomer = _customerAccess.GetById(1006);
             String customerPhone = foundCustomer.Phone;
             extraOutput.WriteLine("Found customer: " + foundCustomer.Id);
 
@@ -78,16 +78,17 @@ namespace CustomerDataTest
         public void testUpdateCustomer()
         {
             //Arrange
-            String newPhone = "1"; // new value to be checked
-            Customer updatedCustomer = new Customer("Test", "Test", newPhone, "test@test.test", 1234, "TestCity",
-                "Test street test", CustomerType.NO_SUBSCRIPTION, "05d8be71-4f1f-4fd7-a2d7-95d7ce64c632");
+            string originalValue = newCustomer.Phone;
+            String newPhone = "234567887"; // new value to be checked
+            Customer updatedCustomer = newCustomer;
+            newCustomer.Phone = newPhone;
 
             //Act
             bool updateReturnedTrue = _customerAccess.UpdateCustomer(updatedCustomer);
-            Customer retrievedCustomer = _customerAccess.GetCustomerById(insertId);
+            Customer retrievedCustomer = _customerAccess.GetById(insertId);
             String updatedValue = retrievedCustomer.Phone;
-            extraOutput.WriteLine("Original value: " + "12345678");
-            extraOutput.WriteLine("Retrieved value: " + updatedValue);
+            extraOutput.WriteLine("Original value: " + originalValue);
+            extraOutput.WriteLine("Retrieved value: " + newPhone);
 
             //Assert
             Assert.True(updateReturnedTrue);
