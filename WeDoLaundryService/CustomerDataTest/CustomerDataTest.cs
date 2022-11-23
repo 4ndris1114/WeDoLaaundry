@@ -80,17 +80,19 @@ namespace CustomerDataTest
         {
             //Arrange
             string originalValue = newCustomer.Phone;
-            String newPhone = "234567887"; // new value to be checked
-            Customer updatedCustomer = newCustomer;
-            newCustomer.Phone = newPhone;
+            string updatedValue = "234567887"; // new value to be checked
+            Customer originalCustomer = newCustomer;
+            newCustomer.Phone = updatedValue;
 
             //Act
-            int insertedId = _customerAccess.CreateCustomer(newCustomer);
-            bool updateReturnedTrue = _customerAccess.UpdateCustomer(updatedCustomer);
+            int insertedId = _customerAccess.CreateCustomer(originalCustomer);
+            bool updateReturnedTrue = _customerAccess.UpdateCustomer(newCustomer);
+
             Customer retrievedCustomer = _customerAccess.GetById(insertId);
-            String updatedValue = retrievedCustomer.Phone;
+            string recievedValue = retrievedCustomer.Phone;
+
             extraOutput.WriteLine("Original value: " + originalValue);
-            extraOutput.WriteLine("Retrieved value: " + newPhone);
+            extraOutput.WriteLine("Retrieved value: " + recievedValue);
 
             //remove customer
             bool wasDeleted = _customerAccess.DeleteCustomer(insertedId);
@@ -98,7 +100,7 @@ namespace CustomerDataTest
             //Assert
             Assert.True(updateReturnedTrue);
             Assert.True(wasDeleted);
-            Assert.True(updatedValue == newPhone);
+            Assert.True(updatedValue == recievedValue);
         }
     }
 }
