@@ -133,7 +133,7 @@ namespace DataAccess
         {
             int numberOfRowsModified = 0;
 
-            string queryString = "UPDATE Customer SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, userType=@CustomerType WHERE id=@Id";
+            string queryString = "UPDATE Customer SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, userType=@CustomerType, userId=@UserId WHERE id=@Id";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(queryString, conn))
@@ -149,6 +149,7 @@ namespace DataAccess
                     command.Parameters.AddWithValue("Email", customer.Email);
                     command.Parameters.AddWithValue("CustomerType", customer.CustomerType);
                     command.Parameters.AddWithValue("Id", customer.Id);
+                    command.Parameters.AddWithValue("UserId", customer.UserId);
 
                     conn.Open();
                     numberOfRowsModified = command.ExecuteNonQuery();
