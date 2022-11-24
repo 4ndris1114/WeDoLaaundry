@@ -38,10 +38,10 @@ namespace WebAppIdentity.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Booking booking)
-        {
+            {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
 
-            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).ToString();
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             if (ModelState.IsValid)
             {

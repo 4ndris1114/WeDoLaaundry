@@ -8,7 +8,7 @@ namespace WebAppIdentity.ServiceLayer
     public class CustomerService : ICustomerService
     {
 
-        static readonly string restUrl = "https://localhost:7091/api/customers";
+        static readonly string restUrl = "https://localhost:7091/api/customers/";
         readonly HttpClient _client;
         readonly HttpClientHandler _clientHandler = new();
 
