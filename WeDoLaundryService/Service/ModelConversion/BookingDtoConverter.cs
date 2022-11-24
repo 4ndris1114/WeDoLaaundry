@@ -38,7 +38,7 @@ namespace Service.ModelConversion
 
             if(bookingReadDto != null)
             {
-                returnBooking = new Booking(bookingReadDto.Id, new(), bookingReadDto.DriverId, bookingReadDto.PickUpTime, bookingReadDto.ReturnTime, bookingReadDto.PickUpAddress, bookingReadDto.ReturnAddress, bookingReadDto.Status, bookingReadDto.NoOfBags, bookingReadDto.InvoiceId);
+                returnBooking = new Booking(bookingReadDto.Id, new(), bookingReadDto.DriverId, bookingReadDto.PickUpTime, bookingReadDto.ReturnTime, bookingReadDto.PickUpAddress, bookingReadDto.ReturnAddress, bookingReadDto.Status, bookingReadDto.AmountOfBags, bookingReadDto.InvoiceId);
             }
             return returnBooking;
         }

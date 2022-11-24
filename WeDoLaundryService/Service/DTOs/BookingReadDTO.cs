@@ -17,7 +17,7 @@ namespace Service.DTOs
         public string PickUpAddress { get; set; }
         public string ReturnAddress { get; set; }
         public Status Status { get; set; }
-        public int NoOfBags { get; set; }
+        public int AmountOfBags { get; set; }
         public int InvoiceId { get; set; }
 
         public BookingReadDTO()
@@ -36,7 +36,7 @@ namespace Service.DTOs
             PickUpAddress = pickUpAddress;
             ReturnAddress = returnAddress;
             Status = (Status) bookingStatus;
-            NoOfBags = amountOfBags;
+            AmountOfBags = amountOfBags;
             InvoiceId = invoiceId;
         }
     }

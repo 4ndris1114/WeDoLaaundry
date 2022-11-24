@@ -10,7 +10,7 @@ namespace WebAppIdentity.Models
     public class Customer
     {
         [Key]
-        public int Id { get; }
+        public int Id { get; set; }
 
 
         [DisplayName("First name")]
