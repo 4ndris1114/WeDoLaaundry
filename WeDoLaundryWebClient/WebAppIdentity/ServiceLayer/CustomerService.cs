@@ -73,31 +73,31 @@ namespace WebAppIdentity.ServiceLayer
 
             return wasPosted;
         }
-        public async Task<Customer> CreateCustomer(Customer customer)
-        {
-            Customer? returnCustomer;
+        //public async Task<Customer> CreateCustomer(Customer customer)
+        //{
+        //    Customer? returnCustomer;
 
-            var uri = new Uri(string.Format(restUrl + "userId/" + customer));
+        //    var uri = new Uri(string.Format(restUrl + "userId/" + customer));
 
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    returnCustomer = JsonConvert.DeserializeObject<Customer>(content);
-                }
-                else
-                {
-                    returnCustomer = new();
-                }
-            }
-            catch
-            {
-                returnCustomer = null;
-            }
-            return returnCustomer;
-        }
+        //    try
+        //    {
+        //        var response = await _client.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            returnCustomer = JsonConvert.DeserializeObject<Customer>(content);
+        //        }
+        //        else
+        //        {
+        //            returnCustomer = new();
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        returnCustomer = null;
+        //    }
+        //    return returnCustomer;
+        //}
 
         public async Task<bool> UpdateCustomer(Customer customer)
         {

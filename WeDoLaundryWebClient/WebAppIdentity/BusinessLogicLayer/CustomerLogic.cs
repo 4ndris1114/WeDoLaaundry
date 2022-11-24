@@ -44,19 +44,19 @@ namespace WebAppIdentity.BusinessLogicLayer
             return wasInserted;
         }
 
-        public async Task<Customer> CreateCustomer(Customer customer)
-        {
-            Customer? returnCustomer;
-            try
-            {
-                returnCustomer = await _customerServiceAccess.CreateCustomer(customer);
-            }
-            catch
-            {
-                returnCustomer = null;
-            }
-            return returnCustomer;
-        }
+        //public async Task<Customer> CreateCustomer(Customer customer)
+        //{
+        //    Customer? returnCustomer;
+        //    try
+        //    {
+        //        returnCustomer = await _customerServiceAccess.CreateCustomer(customer);
+        //    }
+        //    catch
+        //    {
+        //        returnCustomer = null;
+        //    }
+        //    return returnCustomer;
+        //}
 
         public async Task<bool> UpdateCustomer(Customer customer)
         {

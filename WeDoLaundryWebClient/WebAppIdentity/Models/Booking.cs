@@ -12,7 +12,7 @@ namespace WebAppIdentity.Models
         [ForeignKey("Fk_CustomerBooking")]
         [DataType(DataType.Text)]
         [Required]
-        public Customer Customer { get; set; } 
+        public int CustomerId { get; set; } 
 
         [DataType(DataType.Text)]
         [Required]
@@ -39,7 +39,7 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         public string ReturnAddress { get; set; }
 
-        public int BookingStatus { get; set; } = 0;
+        public int Status { get; set; } = 0;
 
         [DisplayName("Amount of bags")]
         [Required(ErrorMessage = "Amount of bags is required")]

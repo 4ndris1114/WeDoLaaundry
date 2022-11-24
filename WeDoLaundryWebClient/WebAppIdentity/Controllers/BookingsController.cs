@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Models;
@@ -44,7 +45,8 @@ namespace WebAppIdentity.Controllers
 
             if (ModelState.IsValid)
             {
-                booking.Customer = await _customerLogic.GetCustomerByUserId(claimsId);
+                Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
+                booking.CustomerId = tempCustomer.Id;
                 try
                 {
                     bool wasOk = await _bookingLogic.InsertBooking(booking);

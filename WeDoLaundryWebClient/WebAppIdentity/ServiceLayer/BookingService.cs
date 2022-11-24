@@ -4,7 +4,7 @@ using WebAppIdentity.Models;
 
 namespace WebAppIdentity.ServiceLayer
 {
-    public class BookingService
+    public class BookingService : IBookingService
     {
         static readonly string restUrl = "https://localhost:7091/api/bookings";
         readonly HttpClient _client;

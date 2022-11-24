@@ -3,7 +3,7 @@ using WebAppIdentity.ServiceLayer;
 
 namespace WebAppIdentity.BusinessLogicLayer
 {
-    public class BookingLogic
+    public class BookingLogic : IBookingLogic
     {
         private readonly BookingService _bookingServiceAccess;
 
