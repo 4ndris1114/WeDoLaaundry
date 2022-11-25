@@ -34,7 +34,7 @@ namespace DataAccess.Database_layer
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
-                SqlParameter dateParam = new("@Date", timeslot.Date);
+                SqlParameter dateParam = new("@Date", new DateTime(timeslot.Date.Year, timeslot.Date.Month, timeslot.Date.Day));
                 command.Parameters.Add(dateParam);
                 SqlParameter slotParam = new("@Slot", timeslot.Slot);
                 command.Parameters.Add(slotParam);
@@ -69,10 +69,34 @@ namespace DataAccess.Database_layer
             return returnList;
         }
 
+        public TimeSlot Get(DateOnly date, String slot)
+        {
+            TimeSlot timeslot = new();
+
+            string SQL_string = "SELECT * from TimeSlots WHERE [date] = @date and slot = @slot";
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand command = new(SQL_string, con))
+            {
+                SqlParameter dateParam = new("@Date", new DateTime(date.Year, date.Month, date.Day));
+                command.Parameters.Add(dateParam);
+                SqlParameter slotParam = new("@slot", slot);
+                command.Parameters.Add(slotParam);
+
+                con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    timeslot = GetTimeslotReader(reader);
+                }
+                con.Close();
+            }
+            return timeslot;
+        }
+
         private TimeSlot GetTimeslotReader(SqlDataReader reader)
         {
             TimeSlot returnTimeslot;
-            DateOnly date = DateOnly.Parse(reader.GetString(reader.GetOrdinal("date")));
+            DateOnly date = DateOnly.Parse(reader.GetDateTime(reader.GetOrdinal("date")).ToString());
             string slot = reader.GetString(reader.GetOrdinal("slot"));
             int availability = reader.GetInt32(reader.GetOrdinal("availability"));
 

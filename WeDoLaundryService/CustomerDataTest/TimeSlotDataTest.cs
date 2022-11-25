@@ -5,6 +5,7 @@ using DataAccess.Database_layer;
 using Model.Model_layer;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,33 +26,34 @@ namespace Tests
         }
 
         [Fact]
-        public void testIncreaseAvailability()
+        public void testDecreaseAvailability()
         {
             //Arrange
-            var date = new DateOnly(2000, 1, 1);
-            TimeSlot newSlot = new(date, "19-21", 1);
+            var date = new DateOnly(2023, 1, 1); // 2000-01-01
+            TimeSlot foundSlot = _timeSlotDataAccess.Get(date, "19-21");
 
             //Act
-            bool wasUpdated = _timeSlotDataAccess.IncreateAvailability(newSlot);
-            int updatedAvailability = _timeSlotDataAccess.getTimeSlot().Availability;
+            bool wasUpdated = _timeSlotDataAccess.DecreaseAvailability(foundSlot);
+            int updatedAvailability = _timeSlotDataAccess.Get(date, "19-21").Availability;
+            extraOutput.WriteLine("avail: " + updatedAvailability);
 
             //Assert
             Assert.True(wasUpdated);
-            Assert.True(updatedAvailability = 0);
+            Assert.True(updatedAvailability == 0);
         }
 
-        [Fact]
-        public void testGetAll()
-        {
-            //Arrange
+        //[Fact]
+        //public void testGetAll()
+        //{
+        //    //Arrange
 
-            //Act
-            List<Booking> foundBookings = _bookingDatabaseAccess.GetAll();
-            extraOutput.WriteLine("Found bookings: " + foundBookings.Count);
+        //    //Act
+        //    List<Booking> foundBookings = _bookingDatabaseAccess.GetAll();
+        //    extraOutput.WriteLine("Found bookings: " + foundBookings.Count);
 
-            //Assert
-            Assert.True(foundBookings.Count > 0);
-        }
+        //    //Assert
+        //    Assert.True(foundBookings.Count > 0);
+        //}
 
     }
 }
