@@ -13,21 +13,18 @@ using static Model.Model_layer.Booking;
 
 namespace DataAccess.Database_layer
 {
-    public class TimeslotDatabaseAccess
+    public class TimeslotDatabaseAccess : TimeslotDatabaseAccess
     {
         private readonly string _connectionString;
-        private readonly ICustomerAccess _customerAccess;
 
         public TimeslotDatabaseAccess(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("WeDoLaundry");
-            _customerAccess = new CustomerDatabaseAccess(configuration);
         }
 
         public TimeslotDatabaseAccess(string connectionString)
         {
             _connectionString = connectionString;
-            _customerAccess = new CustomerDatabaseAccess(_connectionString);
         }
 
         public bool IncreaseAvailability(DateOnly date, string timeSlot)

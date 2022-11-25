@@ -4,7 +4,7 @@ namespace DataAccess.Database_layer
 {
     public interface ITimeslotDatabaseAccess
     {
-        bool IncreaseAvailiability();
+        bool IncreaseAvailability();
         List<TimeSlot> GetAll();
     }
 }
