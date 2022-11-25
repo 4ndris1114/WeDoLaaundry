@@ -12,15 +12,18 @@ namespace WebAppIdentity.Models
         [Key]
         public int Id { get; set; }
 
+        // [a-zA-Z]
 
         [DisplayName("First name")]
         [Required(ErrorMessage = "First name is required.")]
+        [RegularExpression("^(?=.{1,40}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")]
         [StringLength(50, MinimumLength = 2)]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
         [DisplayName("Last name")]
         [Required(ErrorMessage = "Last name is required.")]
+        [RegularExpression("^(?=.{1,40}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")]
         [StringLength(50, MinimumLength = 2)]
         [DataType(DataType.Text)]
         public string LastName { get; set; }
