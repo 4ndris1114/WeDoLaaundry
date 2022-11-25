@@ -5,20 +5,20 @@ using static Model.Model_layer.Booking;
 
 namespace Service.DTOs
 {
-    public class TimeslotDTO
+    public class TimeslotReadDTO
     {
         private CustomerdataControl _customerDataControl;
 
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
         public string Slot { get; set; }
         public int Availability { get; set; }
 
-        public TimeslotDTO()
+        public TimeslotReadDTO()
         {
 
         }
 
-        public TimeslotDTO(DateOnly date, string slot, int availability)
+        public TimeslotReadDTO(DateTime date, string slot, int availability)
         {
             Date = date;
             Slot = slot;

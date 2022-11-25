@@ -11,7 +11,7 @@ namespace Service.Controllers
     public class CustomersController : ControllerBase
     {
 
-        private readonly CustomerdataControl _customerdataControl;
+        private readonly ICustomerdata _customerdataControl;
         private readonly IConfiguration _configuration;
 
         public CustomersController(IConfiguration configuration)

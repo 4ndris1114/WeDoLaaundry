@@ -34,7 +34,9 @@ namespace DataAccess.Database_layer
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
-                SqlParameter dateParam = new("@Date", new DateTime(timeslot.Date.Year, timeslot.Date.Month, timeslot.Date.Day));
+                DateTime date = timeslot.Date;
+                Convert.ToDateTime(date);
+                SqlParameter dateParam = new("@Date", date);
                 command.Parameters.Add(dateParam);
                 SqlParameter slotParam = new("@Slot", timeslot.Slot);
                 command.Parameters.Add(slotParam);
@@ -69,7 +71,7 @@ namespace DataAccess.Database_layer
             return returnList;
         }
 
-        public TimeSlot Get(DateOnly date, String slot)
+        public TimeSlot Get(DateTime date, string slot)
         {
             TimeSlot timeslot = new();
 
@@ -77,7 +79,8 @@ namespace DataAccess.Database_layer
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
-                SqlParameter dateParam = new("@Date", new DateTime(date.Year, date.Month, date.Day));
+                date = Convert.ToDateTime(date);
+                SqlParameter dateParam = new("@Date", date);
                 command.Parameters.Add(dateParam);
                 SqlParameter slotParam = new("@slot", slot);
                 command.Parameters.Add(slotParam);
@@ -96,7 +99,7 @@ namespace DataAccess.Database_layer
         private TimeSlot GetTimeslotReader(SqlDataReader reader)
         {
             TimeSlot returnTimeslot;
-            DateOnly date = DateOnly.Parse(reader.GetDateTime(reader.GetOrdinal("date")).ToShortDateString());
+            DateTime date = reader.GetDateTime(reader.GetOrdinal("date"));
             string slot = reader.GetString(reader.GetOrdinal("slot"));
             int availability = reader.GetInt32(reader.GetOrdinal("availability"));
 

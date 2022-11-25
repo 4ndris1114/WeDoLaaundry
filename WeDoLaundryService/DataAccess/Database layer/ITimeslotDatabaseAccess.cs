@@ -7,7 +7,7 @@ namespace DataAccess.Database_layer
     {
         bool DecreaseAvailability(TimeSlot timeslot);
         List<TimeSlot> GetAll();
-        TimeSlot Get(DateOnly date, String slot);
+        TimeSlot Get(DateTime date, String slot);
     }
 }
 
