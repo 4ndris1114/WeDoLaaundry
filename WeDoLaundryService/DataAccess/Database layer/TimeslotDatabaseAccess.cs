@@ -13,33 +13,30 @@ using static Model.Model_layer.Booking;
 
 namespace DataAccess.Database_layer
 {
-    public class TimeslotDatabaseAccess
+    public class TimeslotDatabaseAccess : ITimeslotDatabaseAccess
     {
         private readonly string _connectionString;
-        private readonly ICustomerAccess _customerAccess;
 
         public TimeslotDatabaseAccess(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("WeDoLaundry");
-            _customerAccess = new CustomerDatabaseAccess(configuration);
         }
 
         public TimeslotDatabaseAccess(string connectionString)
         {
             _connectionString = connectionString;
-            _customerAccess = new CustomerDatabaseAccess(_connectionString);
         }
 
-        public bool IncreaseAvailability(DateOnly date, string timeSlot)
+        public bool DecreaseAvailability(TimeSlot timeslot)
         {
             int numberOfRowsModified = 0;
             string SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE date = @Date AND slot = @Slot";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
-                SqlParameter dateParam = new("@Date", date);
+                SqlParameter dateParam = new("@Date", timeslot.Date);
                 command.Parameters.Add(dateParam);
-                SqlParameter slotParam = new("@Slot", timeSlot);
+                SqlParameter slotParam = new("@Slot", timeslot.Slot);
                 command.Parameters.Add(slotParam);
 
                 con.Open();
