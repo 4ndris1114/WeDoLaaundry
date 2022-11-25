@@ -31,6 +31,7 @@ namespace Tests
             //Arrange
             var date = new DateOnly(2023, 1, 1); // 2000-01-01
             TimeSlot foundSlot = _timeSlotDataAccess.Get(date, "19-21");
+            int beforeDecrease = foundSlot.Availability;
 
             //Act
             bool wasUpdated = _timeSlotDataAccess.DecreaseAvailability(foundSlot);
@@ -39,7 +40,8 @@ namespace Tests
 
             //Assert
             Assert.True(wasUpdated);
-            Assert.True(updatedAvailability == 0);
+            Assert.True(updatedAvailability == beforeDecrease-1);
+
         }
 
         //[Fact]

@@ -96,7 +96,7 @@ namespace DataAccess.Database_layer
         private TimeSlot GetTimeslotReader(SqlDataReader reader)
         {
             TimeSlot returnTimeslot;
-            DateOnly date = DateOnly.Parse(reader.GetDateTime(reader.GetOrdinal("date")).ToString());
+            DateOnly date = DateOnly.Parse(reader.GetDateTime(reader.GetOrdinal("date")).ToShortDateString());
             string slot = reader.GetString(reader.GetOrdinal("slot"));
             int availability = reader.GetInt32(reader.GetOrdinal("availability"));
 
