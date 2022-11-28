@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Model.Model_layer;
 using Service.BusinessLogicLayer;
 using Service.DTOs;
+using Service.ModelConversion;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,8 +15,9 @@ namespace Service.Controllers
     {
         private readonly IBookingdataControl _bookingdataControl;
         private readonly IConfiguration _configuration;
-        private ICustomerdata _customerdataControl;
-        private ITimeslotDataControl _timeslotDataControl;
+        private readonly ICustomerdata _customerdataControl;
+        private readonly ITimeslotDataControl _timeslotDataControl;
+        private readonly BookingDtoConverter Convert;
 
         public BookingsController(IConfiguration configuration)
         {
@@ -23,6 +25,7 @@ namespace Service.Controllers
             _bookingdataControl = new BookingdataControl(configuration);
             _customerdataControl = new CustomerdataControl(configuration);
             _timeslotDataControl = new TimeslotdataControl(configuration);
+            Convert = new();
         }
 
         // GET: api/<BookingsController>
@@ -36,7 +39,7 @@ namespace Service.Controllers
 
             if (foundBookings != null)
             {
-                foundDtos = ModelConversion.BookingDtoConverter.ToDtoCollection(foundBookings);
+                foundDtos = Convert.ToDtoCollection(foundBookings);
             }
 
             //evaluate & return status code
@@ -66,7 +69,7 @@ namespace Service.Controllers
             ActionResult<BookingReadDTO> returnBookingDto;
 
             Booking? foundBooking = _bookingdataControl.GetById(id);
-            BookingReadDTO? foundDto = ModelConversion.BookingDtoConverter.ToBookingDto(foundBooking);
+            BookingReadDTO? foundDto = Convert.ToDto(foundBooking);
             //evaluate & return status code
             if (foundDto != null)
             {
@@ -96,7 +99,7 @@ namespace Service.Controllers
 
             if (bookingReadDto != null)
             {
-                Booking? dbBooking = ModelConversion.BookingDtoConverter.ToBooking(bookingReadDto);
+                Booking? dbBooking = Convert.ToModel(bookingReadDto);
                 dbBooking.Customer = _customerdataControl.GetById(bookingReadDto.CustomerId);
                 dbBooking.PickUpTime = _timeslotDataControl.Get(bookingReadDto.PickUpTimeId);
                 dbBooking.ReturnTime = _timeslotDataControl.Get(bookingReadDto.ReturnTimeId);

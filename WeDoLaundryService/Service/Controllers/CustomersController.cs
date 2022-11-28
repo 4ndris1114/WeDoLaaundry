@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.BusinessLogicLayer;
 using Service.DTOs;
+using Service.ModelConversion;
 
 namespace Service.Controllers
 {
@@ -13,11 +14,13 @@ namespace Service.Controllers
 
         private readonly ICustomerdata _customerdataControl;
         private readonly IConfiguration _configuration;
+        private readonly CustomerDtoConverter Convert;
 
         public CustomersController(IConfiguration configuration)
         {
             _configuration = configuration;
             _customerdataControl = new CustomerdataControl(configuration);
+            Convert = new();
         }
 
         [HttpGet]
@@ -30,7 +33,7 @@ namespace Service.Controllers
 
             if (foundCustomers != null)
             {
-                foundDtos = ModelConversion.CustomerDtoConverter.ToDtoCollection(foundCustomers);
+                foundDtos = Convert.ToDtoCollection(foundCustomers);
             }
             //evaluate & return status code
             if (foundDtos != null)
@@ -52,7 +55,7 @@ namespace Service.Controllers
             ActionResult<CustomerReadDTO> returnCustomerDto;
 
             Customer? foundCustomer = _customerdataControl.GetById(id);
-            CustomerReadDTO? foundCustomerDto = ModelConversion.CustomerDtoConverter.ToCustomerDto(foundCustomer);
+            CustomerReadDTO? foundCustomerDto = Convert.ToDto(foundCustomer);
             //evaluate & return status code
             if (foundCustomerDto != null)
             {
@@ -76,7 +79,7 @@ namespace Service.Controllers
             ActionResult<CustomerReadDTO> returnCustomerDto;
 
             Customer? foundCustomer = _customerdataControl.GetByUserId(userId);
-            CustomerReadDTO? foundCustomerDto = ModelConversion.CustomerDtoConverter.ToCustomerDto(foundCustomer);
+            CustomerReadDTO? foundCustomerDto = Convert.ToDto(foundCustomer);
             //evaluate & return status code
             if (foundCustomerDto != null)
             {
@@ -105,7 +108,7 @@ namespace Service.Controllers
             
             if (customerReadDto != null)
             {
-                Customer? dbCustomer = ModelConversion.CustomerDtoConverter.ToCustomer(customerReadDto);
+                Customer? dbCustomer = Convert.ToModel(customerReadDto);
                 insertedId = _customerdataControl.Add(dbCustomer);
             }
             if (insertedId > 0)
@@ -121,7 +124,7 @@ namespace Service.Controllers
         [HttpPut, Route("{id}")]
         public ActionResult Update(CustomerReadDTO customerDTO) {
             ActionResult retVal;
-            Customer? inCustomer = ModelConversion.CustomerDtoConverter.ToCustomer(customerDTO);
+            Customer? inCustomer = Convert.ToModel(customerDTO);
             bool wasOk = _customerdataControl.Update(inCustomer);
             if (wasOk)
             {

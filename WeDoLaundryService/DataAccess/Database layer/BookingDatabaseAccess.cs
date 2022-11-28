@@ -22,6 +22,7 @@ namespace DataAccess.Database_layer
         {
             _connectionString = configuration.GetConnectionString("WeDoLaundry");
             _customerAccess = new CustomerDatabaseAccess(configuration);
+            _timeslotAccess = new TimeslotDatabaseAccess(configuration);
         }
 
         public BookingDatabaseAccess(string connectionString)

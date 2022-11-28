@@ -4,21 +4,24 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 using Model.Model_layer;
 using Service.BusinessLogicLayer;
 using Service.DTOs;
+using Service.ModelConversion;
 
 namespace Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TimeslotsController : Controller
+    public class TimeslotsController : ControllerBase
     {
 
         private readonly ITimeslotDataControl _timeslotDataControl;
         private readonly IConfiguration _configuration;
+        private readonly TimeslotDtoConverter Convert;
 
         public TimeslotsController(IConfiguration configuration)
         {
             _configuration = configuration;
             _timeslotDataControl = new TimeslotdataControl(_configuration);
+            Convert = new();
         }
 
         [HttpGet]
@@ -32,7 +35,7 @@ namespace Service.Controllers
 
             if (foundTimeslots != null)
             {
-                foundDtos = ModelConversion.TimeslotDtoConverter.ToDtoCollection(foundTimeslots);
+                foundDtos = Convert.ToDtoCollection(foundTimeslots);
             }
             //evaluate & return status code
             if (foundDtos != null)
@@ -59,7 +62,7 @@ namespace Service.Controllers
             ActionResult<TimeslotReadDTO> returnTimeslotDto;
 
             TimeSlot? foundTimeslot = _timeslotDataControl.Get(id);
-            TimeslotReadDTO? foundTimeslotDto = ModelConversion.TimeslotDtoConverter.ToTimeslotDto(foundTimeslot);
+            TimeslotReadDTO? foundTimeslotDto = Convert.ToDto(foundTimeslot);
             //evaluate & return status code
             if (foundTimeslotDto != null)
             {
@@ -121,7 +124,7 @@ namespace Service.Controllers
 
             if (timeslotReadDto != null)
             {
-                TimeSlot? dbTimeSlot = ModelConversion.TimeslotDtoConverter.ToTimeslot(timeslotReadDto);
+                TimeSlot? dbTimeSlot = Convert.ToModel(timeslotReadDto);
                 insertedId = _timeslotDataControl.Add(dbTimeSlot);
             }
             if (insertedId > 0)

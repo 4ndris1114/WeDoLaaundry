@@ -3,37 +3,40 @@ using Service.DTOs;
 
 namespace Service.ModelConversion
 {
-    public class CustomerDtoConverter
+    public class CustomerDtoConverter : MovelDtoConversion<Customer, CustomerReadDTO>
     {
-        public static List<CustomerReadDTO> ToDtoCollection(List<Customer> customerList)
+
+        public override List<CustomerReadDTO> ToDtoCollection(List<Customer> dbList)
         {
             List<CustomerReadDTO> customerDtoList = new();
             CustomerReadDTO tempDto;
-            foreach (var customer in customerList)
+            foreach (var customer in dbList)
             {
                 if (customer != null)
                 {
-                    tempDto = ToCustomerDto(customer);
+                    tempDto = ToDto(customer);
                     customerDtoList.Add(tempDto);
                 }
             }
             return customerDtoList;
         }
-        
-        public static CustomerReadDTO? ToCustomerDto(Customer customer)
+
+        public override CustomerReadDTO ToDto(Customer model)
         {
+            Customer customer = model;
             CustomerReadDTO? returnCustomerDto = null;
 
             if (customer != null)
             {
-                returnCustomerDto = new CustomerReadDTO(customer.Id, customer.FirstName, customer.LastName, customer.Phone, customer.Email, customer.PostalCode, customer.City, customer.Address, (int) customer.CustomerType, customer.UserId);
+                returnCustomerDto = new CustomerReadDTO(customer.Id, customer.FirstName, customer.LastName, customer.Phone, customer.Email, customer.PostalCode, customer.City, customer.Address, (int)customer.CustomerType, customer.UserId);
             }
 
             return returnCustomerDto;
         }
 
-        public static Customer? ToCustomer(CustomerReadDTO customerReadDto)
+        public override Customer ToModel(CustomerReadDTO dto)
         {
+            CustomerReadDTO customerReadDto = dto;
             Customer? returnCustomer = null;
 
             if (customerReadDto != null)
@@ -45,6 +48,5 @@ namespace Service.ModelConversion
 
             return returnCustomer;
         }
-
     }    
 }

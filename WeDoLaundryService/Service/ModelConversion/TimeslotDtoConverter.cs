@@ -4,25 +4,27 @@ using Service.DTOs;
 
 namespace Service.ModelConversion
 {
-    public class TimeslotDtoConverter
+    public class TimeslotDtoConverter : MovelDtoConversion<TimeSlot, TimeslotReadDTO>
     {
-        public static List<TimeslotReadDTO> ToDtoCollection(List<TimeSlot> timeslotList)
+
+        public override List<TimeslotReadDTO> ToDtoCollection(List<TimeSlot> dbList)
         {
             List<TimeslotReadDTO> timeslotDtoList = new();
             TimeslotReadDTO tempDto;
-            foreach (var timeslot in timeslotList)
+            foreach (var timeslot in dbList)
             {
                 if (timeslot != null)
                 {
-                    tempDto = ToTimeslotDto(timeslot);
+                    tempDto = ToDto(timeslot);
                     timeslotDtoList.Add(tempDto);
                 }
             }
             return timeslotDtoList;
         }
-        
-        public static TimeslotReadDTO? ToTimeslotDto(TimeSlot timeslot)
+
+        public override TimeslotReadDTO ToDto(TimeSlot model)
         {
+            TimeSlot timeslot = model;
             TimeslotReadDTO? returnTimeslotDto = null;
 
             if (timeslot != null)
@@ -33,8 +35,9 @@ namespace Service.ModelConversion
             return returnTimeslotDto;
         }
 
-        public static TimeSlot? ToTimeslot(TimeslotReadDTO timeslotDto)
+        public override TimeSlot ToModel(TimeslotReadDTO dto)
         {
+            TimeslotReadDTO timeslotDto = dto;
             TimeSlot? returnTimeslot = null;
 
             if (timeslotDto != null)
@@ -44,6 +47,5 @@ namespace Service.ModelConversion
 
             return returnTimeslot;
         }
-
     }    
 }
