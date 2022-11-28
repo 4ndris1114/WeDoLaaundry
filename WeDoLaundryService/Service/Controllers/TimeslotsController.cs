@@ -53,7 +53,7 @@ namespace Service.Controllers
             return returnList;
         }
 
-        [HttpGet, Route("{date}/{slot}")]
+        [HttpGet, Route("{id}")]
         public ActionResult<TimeslotReadDTO>? Get(int id)
         {
             ActionResult<TimeslotReadDTO> returnTimeslotDto;
