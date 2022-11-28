@@ -15,12 +15,14 @@ namespace Service.Controllers
         private readonly IBookingdataControl _bookingdataControl;
         private readonly IConfiguration _configuration;
         private ICustomerdata _customerdataControl;
+        private ITimeslotDataControl _timeslotDataControl;
 
         public BookingsController(IConfiguration configuration)
         {
             _configuration = configuration;
             _bookingdataControl = new BookingdataControl(configuration);
             _customerdataControl = new CustomerdataControl(configuration);
+            _timeslotDataControl = new TimeslotdataControl(configuration);
         }
 
         // GET: api/<BookingsController>
@@ -96,6 +98,8 @@ namespace Service.Controllers
             {
                 Booking? dbBooking = ModelConversion.BookingDtoConverter.ToBooking(bookingReadDto);
                 dbBooking.Customer = _customerdataControl.GetById(bookingReadDto.CustomerId);
+                dbBooking.PickUpTime = _timeslotDataControl.Get(bookingReadDto.PickUpTimeId);
+                dbBooking.ReturnTime = _timeslotDataControl.Get(bookingReadDto.ReturnTimeId);
                 insertedId = _bookingdataControl.Add(dbBooking);
             }
             if (insertedId > 0)

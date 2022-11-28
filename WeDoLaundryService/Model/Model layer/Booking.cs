@@ -20,15 +20,15 @@ namespace Model.Model_layer
         public int Id { get; set; }
         public Customer Customer { get; set; }
         public int DriverId { get; set; }
-        public DateTime PickUpTime { get; set; }
-        public DateTime ReturnTime { get; set; }
+        public TimeSlot PickUpTime { get; set; }
+        public TimeSlot ReturnTime { get; set; }
         public string PickUpAddress { get; set; }
         public string ReturnAddress { get; set; }
         public Status BookingStatus { get; set; }
         public int AmountOfBags { get; set; }
         public int InvoiceId { get; set; }
 
-        public Booking(int id, Customer customer, int driverId, DateTime pickUpTime, DateTime returnTime, string pickUpAddress, string returnAddress, Status bookingStatus, int amountOfBags, int invoiceId)
+        public Booking(int id, Customer customer, int driverId, TimeSlot pickUpTime, TimeSlot returnTime, string pickUpAddress, string returnAddress, Status bookingStatus, int amountOfBags, int invoiceId)
         {
             Id = id;
             Customer = customer;
@@ -42,7 +42,7 @@ namespace Model.Model_layer
             InvoiceId = invoiceId;
         }
 
-        public Booking(Customer customer, int driverId, DateTime pickUpTime, DateTime returnTime, string pickUpAddress, string returnAddress, Status bookingStatus, int amountOfBags, int invoiceId)
+        public Booking(Customer customer, int driverId, TimeSlot pickUpTime, TimeSlot returnTime, string pickUpAddress, string returnAddress, Status bookingStatus, int amountOfBags, int invoiceId)
         {
             Customer = customer;
             DriverId = driverId;

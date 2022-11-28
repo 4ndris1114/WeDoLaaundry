@@ -62,7 +62,7 @@ namespace Tests
 
             //Act
             List<TimeSlot> foundSlots = _timeSlotDataAccess.GetAll();
-            extraOutput.WriteLine("Found bookings: " + foundSlots.Count);
+            extraOutput.WriteLine("Found timeslots: " + foundSlots.Count);
 
             //Assert
             Assert.True(foundSlots.Count > 0);
@@ -89,7 +89,7 @@ namespace Tests
 
             //Act
             TimeSlot foundTimeslot = _timeSlotDataAccess.Get(newSlot.Id);
-            extraOutput.WriteLine("Found customer: " + foundTimeslot.Id);
+            extraOutput.WriteLine("Found timeslot: " + foundTimeslot.Id);
 
             //Assert
             Assert.True(foundTimeslot != null);

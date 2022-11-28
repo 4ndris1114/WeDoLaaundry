@@ -16,6 +16,7 @@ namespace DataAccess.Database_layer
     {
         private readonly string _connectionString;
         private readonly ICustomerAccess _customerAccess;
+        private readonly ITimeslotDatabaseAccess _timeslotAccess;
 
         public BookingDatabaseAccess(IConfiguration configuration)
         {
@@ -27,42 +28,45 @@ namespace DataAccess.Database_layer
         {
             _connectionString = connectionString;
             _customerAccess = new CustomerDatabaseAccess(_connectionString);
+            _timeslotAccess = new TimeslotDatabaseAccess(_connectionString);
         }
 
         public int CreateBooking(Booking newBooking)
         {
             int insertedId = -1;
 
-            string insertString = "INSERT INTO Bookings(customerId, driverId, pickUpTime, returnTime, pickUpAddress, returnAddress, status, noOfBags, invoiceId) " +
+            string insertString = "INSERT INTO Bookings(customerId, driverId, pickUpTimeId, returnTimeId, pickUpAddress, returnAddress, status, noOfBags, invoiceId) " +
                 "OUTPUT INSERTED.ID VALUES(@CustomerId, @DriverId, @PickupTime, @ReturnTime, @PickupAddress, @ReturnAddress, @Status, @AmountOfBags, @InvoiceId)";
 
             using (SqlConnection con = new(_connectionString))
                 using (SqlCommand cmd = new(insertString, con))
-            {
-                //Assign parameters
-                SqlParameter customerIdParam = new("@CustomerId", newBooking.Customer.GetId());
-                cmd.Parameters.Add(customerIdParam);
-                SqlParameter driverIdParam = new("@DriverId", newBooking.DriverId);
-                cmd.Parameters.Add(driverIdParam);
-                SqlParameter pickupTimeParam = new("@PickupTime", newBooking.PickUpTime);
-                cmd.Parameters.Add(pickupTimeParam);
-                SqlParameter returnTimeParam = new("@ReturnTime", newBooking.ReturnTime);
-                cmd.Parameters.Add(returnTimeParam);
-                SqlParameter pickupAddressParam = new("@PickupAddress", newBooking.PickUpAddress);
-                cmd.Parameters.Add(pickupAddressParam);
-                SqlParameter returnAddressParam = new("@ReturnAddress", newBooking.ReturnAddress);
-                cmd.Parameters.Add(returnAddressParam);
-                SqlParameter statusParam = new("@Status", newBooking.BookingStatus);
-                cmd.Parameters.Add(statusParam);
-                SqlParameter amountOfBagsParam = new("@AmountOfBags", newBooking.AmountOfBags);
-                cmd.Parameters.Add(amountOfBagsParam);
-                SqlParameter invoiceIdParam = new("@InvoiceId", newBooking.InvoiceId);
-                cmd.Parameters.Add(invoiceIdParam);
+                {
+                    con.Open();
 
-                con.Open();
-                insertedId = (int) cmd.ExecuteScalar();
+                    //Assign parameters
+                    SqlParameter customerIdParam = new("@CustomerId", newBooking.Customer.GetId());
+                    cmd.Parameters.Add(customerIdParam);
+                    SqlParameter driverIdParam = new("@DriverId", newBooking.DriverId);
+                    cmd.Parameters.Add(driverIdParam);
+                    SqlParameter pickupTimeParam = new("@PickupTime", newBooking.PickUpTime.Id);
+                    cmd.Parameters.Add(pickupTimeParam);
+                    SqlParameter returnTimeParam = new("@ReturnTime", newBooking.ReturnTime.Id);
+                    cmd.Parameters.Add(returnTimeParam);
+                    SqlParameter pickupAddressParam = new("@PickupAddress", newBooking.PickUpAddress);
+                    cmd.Parameters.Add(pickupAddressParam);
+                    SqlParameter returnAddressParam = new("@ReturnAddress", newBooking.ReturnAddress);
+                    cmd.Parameters.Add(returnAddressParam);
+                    SqlParameter statusParam = new("@Status", newBooking.BookingStatus);
+                    cmd.Parameters.Add(statusParam);
+                    SqlParameter amountOfBagsParam = new("@AmountOfBags", newBooking.AmountOfBags);
+                    cmd.Parameters.Add(amountOfBagsParam);
+                    SqlParameter invoiceIdParam = new("@InvoiceId", newBooking.InvoiceId);
+                    cmd.Parameters.Add(invoiceIdParam);
 
-                con.Close();
+
+                    insertedId = (int) cmd.ExecuteScalar();
+
+                    con.Close();
             }
             return insertedId;
         }
@@ -125,8 +129,8 @@ namespace DataAccess.Database_layer
             {
                 reader.GetInt32(reader.GetOrdinal("driverId")); //change later to object
             }
-            DateTime pickupTime = reader.GetDateTime(reader.GetOrdinal("pickUpTime"));
-            DateTime returnTime = reader.GetDateTime(reader.GetOrdinal("returnTime"));
+            TimeSlot pickupTime = _timeslotAccess.Get(reader.GetInt32(reader.GetOrdinal("pickUpTimeId")));
+            TimeSlot returnTime = _timeslotAccess.Get(reader.GetInt32(reader.GetOrdinal("returnTimeId")));
             string pickupAddress = reader.GetString(reader.GetOrdinal("pickUpAddress"));
             string returnAddress = reader.GetString(reader.GetOrdinal("returnAddress"));
             Status status = (Status) Enum.Parse(typeof(Status), reader.GetString(reader.GetOrdinal("status")).ToUpper(), true);

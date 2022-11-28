@@ -20,13 +20,13 @@ namespace WebAppIdentity.Models
 
         [DisplayName("Collection time")]
         [Required(ErrorMessage = "Collection time is required")]
-        [DataType(DataType.DateTime)]
-        public DateTime PickUpTime { get; set; }
+        [DataType(DataType.Text)]
+        public int PickUpTimeId { get; set; }
 
         [DisplayName("Delivery time")]
         [Required(ErrorMessage = "Delivery time is required")]
-        [DataType(DataType.DateTime)]
-        public DateTime ReturnTime { get; set; }
+        [DataType(DataType.Text)]
+        public int ReturnTimeId { get; set; }
 
         [DisplayName("Collection address")]
         [Required(ErrorMessage = "Collection address is required")]

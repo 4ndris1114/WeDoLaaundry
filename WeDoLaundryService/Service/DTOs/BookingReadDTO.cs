@@ -12,8 +12,8 @@ namespace Service.DTOs
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public int DriverId { get; set; }
-        public DateTime PickUpTime { get; set; }
-        public DateTime ReturnTime { get; set; }
+        public int PickUpTimeId { get; set; }
+        public int ReturnTimeId { get; set; }
         public string PickUpAddress { get; set; }
         public string ReturnAddress { get; set; }
         public Status Status { get; set; }
@@ -25,14 +25,14 @@ namespace Service.DTOs
 
         }
 
-        public BookingReadDTO(int id, int customerId, int driverId, DateTime pickUpTime, DateTime returnTime, string pickUpAddress, string returnAddress, int bookingStatus, int amountOfBags, int invoiceId)
+        public BookingReadDTO(int id, int customerId, int driverId, int pickUpTimeId, int returnTimeId, string pickUpAddress, string returnAddress, int bookingStatus, int amountOfBags, int invoiceId)
         {
             _customerDataControl = new CustomerdataControl();
             Id = id;
             CustomerId = customerId;
             DriverId = driverId;
-            PickUpTime = pickUpTime;
-            ReturnTime = returnTime;
+            PickUpTimeId = pickUpTimeId;
+            ReturnTimeId = returnTimeId;
             PickUpAddress = pickUpAddress;
             ReturnAddress = returnAddress;
             Status = (Status) bookingStatus;
