@@ -188,7 +188,7 @@ namespace DataAccess
             string lastName = reader.GetString(reader.GetOrdinal("lname"));
             string phone = reader.GetString(reader.GetOrdinal("phone"));
             string userId = "No account";
-            if (!reader.IsDBNull(9))
+            if (!reader.IsDBNull(8))
             {
                 userId = reader.GetString(reader.GetOrdinal("userId"));
             }

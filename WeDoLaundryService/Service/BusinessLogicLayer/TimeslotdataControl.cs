@@ -27,12 +27,12 @@ namespace Service.BusinessLogicLayer
             return wasUpdated;
         }
 
-        public TimeSlot Get(DateTime date, string slot)
+        public TimeSlot Get(int id)
         {
             TimeSlot foundTimeslot = null;
             try
             {
-                foundTimeslot = _timeslotAccess.Get(date, slot);
+                foundTimeslot = _timeslotAccess.Get(id);
             }
             catch
             {

@@ -30,14 +30,14 @@ namespace Tests
         public void testDecreaseAvailability()
         {
             //Arrange
-            DateTime date = new DateTime(2023, 01, 01); // 2000-01-01
+            DateTime date = new DateTime(2022, 11, 26); // 2000-01-01
             extraOutput.WriteLine("date: " + date);
-            TimeSlot foundSlot = _timeSlotDataAccess.Get(date, "19-21");
+            TimeSlot foundSlot = _timeSlotDataAccess.Get(date, "15-18");
             int beforeDecrease = foundSlot.Availability;
 
             //Act
             bool wasUpdated = _timeSlotDataAccess.DecreaseAvailability(foundSlot);
-            int updatedAvailability = _timeSlotDataAccess.Get(date, "19-21").Availability;
+            int updatedAvailability = _timeSlotDataAccess.Get(date, "15-18").Availability;
             extraOutput.WriteLine("avail: " + updatedAvailability);
 
             //Assert
