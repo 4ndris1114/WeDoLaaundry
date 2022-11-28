@@ -113,7 +113,7 @@ namespace Service.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> Post(TimeslotReadDTO dbTimeSlot)
+        public ActionResult<int> Post(TimeslotReadDTO timeslotReadDto)
         {
 
             ActionResult<int> retVal;
@@ -121,7 +121,7 @@ namespace Service.Controllers
 
             if (timeslotReadDto != null)
             {
-                Customer? dbTimeSlot = ModelConversion.TimeslotDtoConverter.ToTimeslot(dbTimeSlot);
+                TimeSlot? dbTimeSlot = ModelConversion.TimeslotDtoConverter.ToTimeslot(timeslotReadDto);
                 insertedId = _timeslotDataControl.Add(dbTimeSlot);
             }
             if (insertedId > 0)

@@ -39,7 +39,7 @@ namespace Service.ModelConversion
 
             if (timeslotDto != null)
             {
-                returnTimeslot = new TimeSlot(timeslot.Id, timeslotDto.Date, timeslotDto.Slot, timeslotDto.Availability);
+                returnTimeslot = new TimeSlot(timeslotDto.Id, timeslotDto.Date, timeslotDto.Slot, timeslotDto.Availability);
             }
 
             return returnTimeslot;
