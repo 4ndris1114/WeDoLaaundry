@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -30,8 +29,7 @@ namespace Tests
         public void testDecreaseAvailability()
         {
             //Arrange
-            DateTime date = new DateTime(2023, 01, 01); // 2000-01-01
-            extraOutput.WriteLine("date: " + date);
+            var date = new DateOnly(2023, 1, 1); // 2000-01-01
             TimeSlot foundSlot = _timeSlotDataAccess.Get(date, "19-21");
             int beforeDecrease = foundSlot.Availability;
 
@@ -45,8 +43,6 @@ namespace Tests
             Assert.True(updatedAvailability == beforeDecrease-1);
 
         }
-
-        //TODO: TEST FOR: GETALL, GET
 
         //[Fact]
         //public void testGetAll()

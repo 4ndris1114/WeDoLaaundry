@@ -54,11 +54,11 @@ namespace Service.Controllers
         }
 
         [HttpGet, Route("{date}/{slot}")]
-        public ActionResult<TimeslotReadDTO>? Get(DateTime date, string slot)
+        public ActionResult<TimeslotReadDTO>? Get(int id)
         {
             ActionResult<TimeslotReadDTO> returnTimeslotDto;
 
-            TimeSlot? foundTimeslot = _timeslotDataControl.Get(date, slot);
+            TimeSlot? foundTimeslot = _timeslotDataControl.Get(id);
             TimeslotReadDTO? foundTimeslotDto = ModelConversion.TimeslotDtoConverter.ToTimeslotDto(foundTimeslot);
             //evaluate & return status code
             if (foundTimeslotDto != null)
@@ -86,6 +86,47 @@ namespace Service.Controllers
             if (wasUpdated)
             {
                 retVal = Ok(wasUpdated);
+            }
+            else
+            {
+                retVal = new StatusCodeResult(500);
+            }
+
+            return retVal;
+        }
+
+        [HttpDelete, Route("{id}")]
+        public ActionResult Delete(int id)
+        {
+            ActionResult retVal;
+            bool wasOk = _timeslotDataControl.Delete(id);
+
+            if (wasOk)
+            {
+                retVal = Ok();
+            }
+            else
+            {
+                retVal = new StatusCodeResult(500);
+            }
+            return retVal;
+        }
+
+        [HttpPost]
+        public ActionResult<int> Post(TimeslotReadDTO dbTimeSlot)
+        {
+
+            ActionResult<int> retVal;
+            int insertedId = -1;
+
+            if (timeslotReadDto != null)
+            {
+                Customer? dbTimeSlot = ModelConversion.TimeslotDtoConverter.ToTimeslot(dbTimeSlot);
+                insertedId = _timeslotDataControl.Add(dbTimeSlot);
+            }
+            if (insertedId > 0)
+            {
+                retVal = Ok(insertedId);
             }
             else
             {

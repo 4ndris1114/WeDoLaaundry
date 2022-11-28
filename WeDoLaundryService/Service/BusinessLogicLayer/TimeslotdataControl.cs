@@ -1,4 +1,6 @@
-﻿using DataAccess.Database_layer;
+﻿using Data.Database_layer;
+using Data.Model_layer;
+using DataAccess.Database_layer;
 using Model.Model_layer;
 
 namespace Service.BusinessLogicLayer
@@ -11,6 +13,33 @@ namespace Service.BusinessLogicLayer
         public TimeslotdataControl(IConfiguration config)
         {
             _timeslotAccess = new TimeslotDatabaseAccess(config);
+        }
+
+        public int Add(TimeSlot timeslot)
+        {
+            int insertedId;
+            try
+            {
+                insertedId = _timeslotAccess.CreateTimeSlot(timeslot);
+            }
+            catch
+            {
+                insertedId = -1;
+            }
+            return insertedId;
+        }
+        public TimeSlot Delete(int id)
+        {
+            bool wasDeleted;
+            try
+            {
+                wasDeleted = _timeslotAccess.DeleteTimeSlot(id);
+            }
+            catch
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
         }
 
         public bool DecreaseAvailability(TimeSlot timeslot)

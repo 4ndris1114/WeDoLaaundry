@@ -6,6 +6,8 @@ namespace Service.BusinessLogicLayer
     {
         bool DecreaseAvailability(TimeSlot timeslot);
         TimeSlot Get(DateTime date, string slot);
+        TimeSlot Delete(int id);
+        int Add(TimeSlot timeslot);
         List<TimeSlot> GetAll();
 
     }

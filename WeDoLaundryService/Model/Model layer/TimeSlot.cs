@@ -10,13 +10,15 @@ namespace Model.Model_layer
     public class TimeSlot
     {
 
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public String Slot { get; set; }
         public int Availability { get; set; }
 
 
-        public TimeSlot(DateTime date, String slot, int availability)
+        public TimeSlot(int id, DateTime date, String slot, int availability)
         {
+            Id = id;
             Date = date;
             Slot = slot;
             Availability = availability;
