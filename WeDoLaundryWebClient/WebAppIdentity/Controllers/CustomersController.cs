@@ -32,19 +32,34 @@ namespace WebAppIdentity.Controllers
         }
 
         [HttpGet]
+        // GET: CustomersController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpGet]
         // GET: CustomersController/Details/5
         public ActionResult Details(int id)
         {
 
             return View();
         }
-
+        
         [HttpGet]
-        // GET: CustomersController/Create
-        public ActionResult Create()
+        // GET: CustomersController/Edit/5
+        public ActionResult Edit(int id)
         {
             return View();
         }
+        
+        [HttpGet]
+        // GET: CustomersController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
 
         // POST: CustomersController/Create
         [HttpPost]
@@ -65,7 +80,7 @@ namespace WebAppIdentity.Controllers
                     bool wasOk = await _customerLogic.InsertCustomer(customer);
                     if (wasOk){
                         ViewBag.message = "Customer registered";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "Home");
                     } else
                     {
                         ViewBag.message = "Bad request";
@@ -79,12 +94,6 @@ namespace WebAppIdentity.Controllers
             return View();
         }
 
-        [HttpGet]
-        // GET: CustomersController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
         // POST: CustomersController/Edit/5
         [HttpPost]
@@ -101,12 +110,6 @@ namespace WebAppIdentity.Controllers
             }
         }
 
-        [HttpGet]
-        // GET: CustomersController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: CustomersController/Delete/5
         [HttpPost]
