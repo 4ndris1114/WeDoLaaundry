@@ -20,7 +20,7 @@ namespace Service.BusinessLogicLayer
             int insertedId;
             try
             {
-                insertedId = _timeslotAccess.CreateTimeSlot(timeslot);
+                insertedId = _timeslotAccess.Create(timeslot);
             }
             catch
             {
@@ -28,12 +28,12 @@ namespace Service.BusinessLogicLayer
             }
             return insertedId;
         }
-        public TimeSlot Delete(int id)
+        public bool Delete(int id)
         {
             bool wasDeleted;
             try
             {
-                wasDeleted = _timeslotAccess.DeleteTimeSlot(id);
+                wasDeleted = _timeslotAccess.Delete(id);
             }
             catch
             {
@@ -83,5 +83,6 @@ namespace Service.BusinessLogicLayer
             }
             return foundTimeslots;
         }
+
     }
 }
