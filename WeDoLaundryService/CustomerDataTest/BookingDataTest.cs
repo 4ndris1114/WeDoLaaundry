@@ -12,18 +12,25 @@ using Xunit.Abstractions;
 
 namespace Tests
 {
-    public class BookingDataTest
+    public class BookingDataTest : IDisposable
     {
         private readonly ITestOutputHelper extraOutput;
         private readonly ICustomerAccess _customerAccess;
+        private readonly MemoryStream _stream;
         private readonly IBookingDatabaseAccess _bookingDatabaseAccess;
         private readonly string _connectionString = "Server=hildur.ucn.dk,1433;Database=CSC-CSD-S211_10407554;User Id = CSC-CSD-S211_10407554; Password=Password1!";
 
         public BookingDataTest(ITestOutputHelper extraOutput)
         {
             this.extraOutput = extraOutput;
+            _stream = new MemoryStream();
             _customerAccess = new CustomerDatabaseAccess(_connectionString);
             _bookingDatabaseAccess = new BookingDatabaseAccess(_connectionString);
+        }
+
+        public void Dispose()
+        {
+            _stream.Dispose();
         }
 
         [Fact]
@@ -38,7 +45,6 @@ namespace Tests
 
             //Assert
             Assert.True(insertedId > 0);
-
         }
 
         [Fact]
@@ -57,7 +63,16 @@ namespace Tests
         [Fact]
         public void testGetBookingById()
         {
-            //TODO
+            //Arrange
+            Booking newBooking = new(_customerAccess.GetById(1010), 12, DateTime.Now, DateTime.Now, "pickupaddress", "returnaddress", Booking.Status.BOOKED, 2, 12);
+            string pickupAddress = newBooking.PickUpAddress;
+
+            //Act
+            int insertedId = _bookingDatabaseAccess.CreateBooking(newBooking);
+            string foundPickupAddress = _bookingDatabaseAccess.Get(insertedId).PickUpAddress;
+
+            //Assert
+            Assert.True(pickupAddress == foundPickupAddress);
         }
     }
 }
