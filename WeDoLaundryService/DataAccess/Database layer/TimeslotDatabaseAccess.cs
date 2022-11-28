@@ -6,6 +6,7 @@ using Model.Model_layer;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,15 +31,11 @@ namespace DataAccess.Database_layer
         public bool DecreaseAvailability(TimeSlot timeslot)
         {
             int numberOfRowsModified = 0;
-            string SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE date = @Date AND slot = @Slot";
+            string SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE id = @Id";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
-                DateTime date = timeslot.Date;
-                Convert.ToDateTime(date);
-                SqlParameter dateParam = new("@Date", date);
-                command.Parameters.Add(dateParam);
-                SqlParameter slotParam = new("@Slot", timeslot.Slot);
+                SqlParameter slotParam = new("@Id", timeslot.Id);
                 command.Parameters.Add(slotParam);
 
                 con.Open();
@@ -71,18 +68,15 @@ namespace DataAccess.Database_layer
             return returnList;
         }
 
-        public TimeSlot Get(DateTime date, string slot)
+        public TimeSlot Get(int id)
         {
             TimeSlot timeslot = new();
 
-            string SQL_string = "SELECT * from TimeSlots WHERE [date] = @date and slot = @slot";
+            string SQL_string = "SELECT * from TimeSlots WHERE id = @Id";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
-                date = Convert.ToDateTime(date);
-                SqlParameter dateParam = new("@Date", date);
-                command.Parameters.Add(dateParam);
-                SqlParameter slotParam = new("@slot", slot);
+                SqlParameter slotParam = new("@Id", id);
                 command.Parameters.Add(slotParam);
 
                 con.Open();
@@ -96,17 +90,65 @@ namespace DataAccess.Database_layer
             return timeslot;
         }
 
+        public int Create(TimeSlot timeslot)
+        {
+            int insertedId = -1;
+
+            string insertString = "INSERT INTO TimeSlots(id, [date], slot, availability) OUTPUT INSERTED.ID VALUES(@Id, @Date, @Slot, @Availability)";
+
+            using (SqlConnection con = new())
+            using (SqlCommand cmd = new(insertString, con))
+            {
+
+                SqlParameter timeslotIdParam = new("@Id", timeslot.Id);
+                cmd.Parameters.Add(timeslotIdParam);
+                SqlParameter dateParam = new("@Date", timeslot.Date);
+                cmd.Parameters.Add(dateParam);
+                SqlParameter slotParam = new("@Slot", timeslot.Slot);
+                cmd.Parameters.Add(slotParam);
+                SqlParameter availabilityParam = new("@Availability", timeslot.Availability);
+                cmd.Parameters.Add(availabilityParam);
+
+                con.Open();
+                insertedId = (int) cmd.ExecuteScalar();
+
+                con.Close();
+            }
+            return insertedId;
+        }
+
+        public bool Delete(int id)
+        {
+            int numberOfRowsModified = 0;
+
+            string deleteSqlString = "DELETE FROM TimeSlot WHERE id = @Id";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand command = new(deleteSqlString, conn))
+            {
+                SqlParameter idParam = new("@Id", id);
+                command.Parameters.Add(idParam);
+
+                if (conn != null)
+                {
+                    conn.Open();
+                    numberOfRowsModified = command.ExecuteNonQuery();
+                }
+            }
+            return (numberOfRowsModified > 0);
+        }
+
         private TimeSlot GetTimeslotReader(SqlDataReader reader)
         {
             TimeSlot returnTimeslot;
+            int id = reader.GetInt32(reader.GetOrdinal("id"));
             DateTime date = reader.GetDateTime(reader.GetOrdinal("date"));
             string slot = reader.GetString(reader.GetOrdinal("slot"));
             int availability = reader.GetInt32(reader.GetOrdinal("availability"));
 
-            returnTimeslot = new(date, slot, availability);
+            returnTimeslot = new(id, date, slot, availability);
 
             return returnTimeslot;
         }
-
     }
 }

@@ -9,6 +9,7 @@ namespace Service.DTOs
     {
         private CustomerdataControl _customerDataControl;
 
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public string Slot { get; set; }
         public int Availability { get; set; }
@@ -18,8 +19,9 @@ namespace Service.DTOs
 
         }
 
-        public TimeslotReadDTO(DateTime date, string slot, int availability)
+        public TimeslotReadDTO(int id, DateTime date, string slot, int availability)
         {
+            Id = id;
             Date = date;
             Slot = slot;
             Availability = availability;
