@@ -5,7 +5,7 @@ namespace DataAccess.Database_layer
 {
     public interface ITimeslotDatabaseAccess
     {
-        bool DecreaseAvailability(TimeSlot timeslot);
+        bool DecreaseAvailability(int id);
         List<TimeSlot> GetAll();
         TimeSlot Get(int id);
         int Create(TimeSlot timeslot);

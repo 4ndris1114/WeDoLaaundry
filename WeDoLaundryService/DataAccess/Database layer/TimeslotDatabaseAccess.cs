@@ -28,14 +28,14 @@ namespace DataAccess.Database_layer
             _connectionString = connectionString;
         }
 
-        public bool DecreaseAvailability(TimeSlot timeslot)
+        public bool DecreaseAvailability(int id)
         {
             int numberOfRowsModified = 0;
             string SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE id = @Id";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
-                SqlParameter slotParam = new("@Id", timeslot.Id);
+                SqlParameter slotParam = new("@Id", id);
                 command.Parameters.Add(slotParam);
 
                 con.Open();

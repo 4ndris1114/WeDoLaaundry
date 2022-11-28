@@ -42,12 +42,12 @@ namespace Service.BusinessLogicLayer
             return wasDeleted;
         }
 
-        public bool DecreaseAvailability(TimeSlot timeslot)
+        public bool DecreaseAvailability(int id)
         {
             bool wasUpdated = false;
             try
             {
-                wasUpdated = _timeslotAccess.DecreaseAvailability(timeslot);
+                wasUpdated = _timeslotAccess.DecreaseAvailability(id);
             }
             catch
             {

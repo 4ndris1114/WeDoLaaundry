@@ -73,15 +73,15 @@ namespace Service.Controllers
             return returnTimeslotDto;
         }
 
-        [HttpPut, Route("/decrease")]
-        public ActionResult<bool>? Decrease(TimeslotReadDTO timeslotDto)
+        [HttpPut, Route("/decrease/{id}")]
+        public ActionResult<bool>? Decrease(int id)
         {
             ActionResult<bool> retVal;
 
             bool wasUpdated;
 
-            TimeSlot? dbTimeslot = ModelConversion.TimeslotDtoConverter.ToTimeslot(timeslotDto);
-            wasUpdated = _timeslotDataControl.DecreaseAvailability(dbTimeslot);
+            //TimeSlot? dbTimeslot = ModelConversion.TimeslotDtoConverter.ToTimeslot(timeslotDto);
+            wasUpdated = _timeslotDataControl.DecreaseAvailability(id);
             //evaluate & return status code
             if (wasUpdated)
             {
