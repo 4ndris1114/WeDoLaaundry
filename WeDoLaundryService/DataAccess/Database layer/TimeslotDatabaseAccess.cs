@@ -94,14 +94,12 @@ namespace DataAccess.Database_layer
         {
             int insertedId = -1;
 
-            string insertString = "INSERT INTO TimeSlots(id, [date], slot, availability) OUTPUT INSERTED.ID VALUES(@Id, @Date, @Slot, @Availability)";
+            string insertString = "INSERT INTO TimeSlots([date], slot, availability) OUTPUT INSERTED.ID VALUES(@Date, @Slot, @Availability)";
 
-            using (SqlConnection con = new())
+            using (SqlConnection con = new(_connectionString))
             using (SqlCommand cmd = new(insertString, con))
             {
 
-                SqlParameter timeslotIdParam = new("@Id", timeslot.Id);
-                cmd.Parameters.Add(timeslotIdParam);
                 SqlParameter dateParam = new("@Date", timeslot.Date);
                 cmd.Parameters.Add(dateParam);
                 SqlParameter slotParam = new("@Slot", timeslot.Slot);
@@ -121,7 +119,7 @@ namespace DataAccess.Database_layer
         {
             int numberOfRowsModified = 0;
 
-            string deleteSqlString = "DELETE FROM TimeSlot WHERE id = @Id";
+            string deleteSqlString = "DELETE FROM TimeSlots WHERE id = @Id";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand command = new(deleteSqlString, conn))

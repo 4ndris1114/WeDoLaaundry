@@ -54,11 +54,10 @@ namespace CustomerDataTest
 
             //Act
             Customer foundCustomer = _customerAccess.GetById(newCustomer.Id);
-            string customerPhone = foundCustomer.Phone;
             extraOutput.WriteLine("Found customer: " + foundCustomer.Id);
 
             //Assert
-            Assert.True(foundCustomer.Phone != null);
+            Assert.True(foundCustomer != null);
         }
 
         [Fact]

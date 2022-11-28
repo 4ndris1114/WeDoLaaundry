@@ -39,7 +39,7 @@ namespace WebAppIdentity.Models
         [DisplayName("Postal code")]
         [Required(ErrorMessage = "Postal code is required.")]
         [IntegerValidator(MinValue = 100, MaxValue = 99999)]
-        [DataType(DataType.Custom)]
+        [DataType(DataType.PostalCode)]
         public int PostalCode { get; set; }
 
         [DisplayName("City")]
