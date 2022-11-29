@@ -135,6 +135,29 @@ namespace DataAccess.Database_layer
             }
             return (numberOfRowsModified > 0);
         }
+        public TimeSlot? GetByDateAndSlot(DateTime date, string slot)
+        {
+            TimeSlot timeslot = new();
+
+            string SQL_string = "SELECT * from TimeSlots WHERE date = @date and slot = @slot";
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand command = new(SQL_string, con))
+            {
+                SqlParameter dateParam = new("@date", date);
+                command.Parameters.Add(dateParam);
+                SqlParameter slotParam = new("@slot", slot);
+                command.Parameters.Add(slotParam);
+
+                con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    timeslot = GetTimeslotReader(reader);
+                }
+                con.Close();
+            }
+            return timeslot;
+        }
 
         private TimeSlot GetTimeslotReader(SqlDataReader reader)
         {
@@ -148,5 +171,6 @@ namespace DataAccess.Database_layer
 
             return returnTimeslot;
         }
+
     }
 }

@@ -19,7 +19,8 @@ namespace Tests
         private readonly ITimeslotDatabaseAccess _timeSlotDataAccess;
         private readonly MemoryStream _stream;
         private readonly string _connectionString = "Server=hildur.ucn.dk,1433;Database=CSC-CSD-S211_10407554;User Id = CSC-CSD-S211_10407554; Password=Password1!";
-        private TimeSlot newSlot;
+        private readonly TimeSlot newSlot;
+        private readonly int insertedId;
 
         public TimeSlotDataTest(ITestOutputHelper extraOutput)
         {
@@ -28,25 +29,24 @@ namespace Tests
             _timeSlotDataAccess = new TimeslotDatabaseAccess(_connectionString);
             newSlot = new(-1,new DateTime(2023, 05, 05),"15-18",10);
             int insertedId = _timeSlotDataAccess.Create(newSlot);
-            newSlot.Id = insertedId;
-
+            //newSlot.Id = insertedId;
         }
 
         public void Dispose()
         {
             _stream.Dispose();
-            _timeSlotDataAccess.Delete(newSlot.Id);
+            _timeSlotDataAccess.Delete(insertedId);
         }
 
         [Fact]
-        public void testDecreaseAvailability()
+        public void TestDecreaseAvailability()
         {
             //Arrange
             int beforeDecrease = newSlot.Availability;
 
             //Act
-            bool wasUpdated = _timeSlotDataAccess.DecreaseAvailability(newSlot.Id);
-            int updatedAvailability = _timeSlotDataAccess.Get(newSlot.Id).Availability;
+            bool wasUpdated = _timeSlotDataAccess.DecreaseAvailability(insertedId);
+            int updatedAvailability = _timeSlotDataAccess.Get(insertedId).Availability;
             extraOutput.WriteLine("avail: " + updatedAvailability);
 
             //Assert
@@ -56,7 +56,7 @@ namespace Tests
         }
 
         [Fact]
-        public void testGetAll()
+        public void TestGetAll()
         {
             //Arrange
 
@@ -69,7 +69,7 @@ namespace Tests
         }
 
         [Fact]
-        public void testCreateTimeslot()
+        public void TestCreateTimeslot()
         {
             //Arrange
 
@@ -83,12 +83,12 @@ namespace Tests
         }
 
         [Fact]
-        public void testGetTimeslotById()
+        public void TestGetTimeslotById()
         {
             //Arrange
 
             //Act
-            TimeSlot foundTimeslot = _timeSlotDataAccess.Get(newSlot.Id);
+            TimeSlot foundTimeslot = _timeSlotDataAccess.Get(insertedId);
             extraOutput.WriteLine("Found timeslot: " + foundTimeslot.Id);
 
             //Assert
@@ -96,7 +96,7 @@ namespace Tests
         }
 
         [Fact]
-        public void testDeleteTimeslot()
+        public void TestDeleteTimeslot()
         {
             //arrange
 

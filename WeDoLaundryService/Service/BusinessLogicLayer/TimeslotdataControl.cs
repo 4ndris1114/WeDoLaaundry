@@ -84,5 +84,18 @@ namespace Service.BusinessLogicLayer
             return foundTimeslots;
         }
 
+        public TimeSlot? GetByDateAndSlot(DateTime date, string slot)
+        {
+            TimeSlot foundTimeslot = null;
+            try
+            {
+                foundTimeslot = _timeslotAccess.GetByDateAndSlot(date, slot);
+            }
+            catch
+            {
+                foundTimeslot = null;
+            }
+            return foundTimeslot;
+        }
     }
 }

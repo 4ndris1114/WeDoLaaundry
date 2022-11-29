@@ -9,6 +9,6 @@ namespace Service.BusinessLogicLayer
         bool Delete(int id);
         int Add(TimeSlot timeslot);
         List<TimeSlot> GetAll();
-
+        TimeSlot? GetByDateAndSlot(DateTime date, string slot);
     }
 }
