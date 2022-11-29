@@ -1,5 +1,6 @@
 ﻿using Data.Database_layer;
 using Data.Model_layer;
+using DataAccess.Exceptions;
 using Microsoft.Extensions.Configuration;
 using Model.Model_layer;
 using System;
@@ -42,32 +43,54 @@ namespace DataAccess.Database_layer
             using (SqlConnection con = new(_connectionString))
                 using (SqlCommand cmd = new(insertString, con))
                 {
-                    con.Open();
 
-                    //Assign parameters
-                    SqlParameter customerIdParam = new("@CustomerId", newBooking.Customer.GetId());
-                    cmd.Parameters.Add(customerIdParam);
-                    SqlParameter driverIdParam = new("@DriverId", newBooking.DriverId);
-                    cmd.Parameters.Add(driverIdParam);
-                    SqlParameter pickupTimeParam = new("@PickupTime", newBooking.PickUpTime.Id);
-                    cmd.Parameters.Add(pickupTimeParam);
-                    SqlParameter returnTimeParam = new("@ReturnTime", newBooking.ReturnTime.Id);
-                    cmd.Parameters.Add(returnTimeParam);
-                    SqlParameter pickupAddressParam = new("@PickupAddress", newBooking.PickUpAddress);
-                    cmd.Parameters.Add(pickupAddressParam);
-                    SqlParameter returnAddressParam = new("@ReturnAddress", newBooking.ReturnAddress);
-                    cmd.Parameters.Add(returnAddressParam);
-                    SqlParameter statusParam = new("@Status", newBooking.BookingStatus);
-                    cmd.Parameters.Add(statusParam);
-                    SqlParameter amountOfBagsParam = new("@AmountOfBags", newBooking.AmountOfBags);
-                    cmd.Parameters.Add(amountOfBagsParam);
-                    SqlParameter invoiceIdParam = new("@InvoiceId", newBooking.InvoiceId);
-                    cmd.Parameters.Add(invoiceIdParam);
+                //Assign parameters
+                SqlParameter customerIdParam = new("@CustomerId", newBooking.Customer.Id);
+                cmd.Parameters.Add(customerIdParam);
+                SqlParameter driverIdParam = new("@DriverId", newBooking.DriverId);
+                cmd.Parameters.Add(driverIdParam);
+                SqlParameter pickupTimeParam = new("@PickupTime", newBooking.PickUpTime.Id);
+                cmd.Parameters.Add(pickupTimeParam);
+                SqlParameter returnTimeParam = new("@ReturnTime", newBooking.ReturnTime.Id);
+                cmd.Parameters.Add(returnTimeParam);
+                SqlParameter pickupAddressParam = new("@PickupAddress", newBooking.PickUpAddress);
+                cmd.Parameters.Add(pickupAddressParam);
+                SqlParameter returnAddressParam = new("@ReturnAddress", newBooking.ReturnAddress);
+                cmd.Parameters.Add(returnAddressParam);
+                SqlParameter statusParam = new("@Status", newBooking.BookingStatus);
+                cmd.Parameters.Add(statusParam);
+                SqlParameter amountOfBagsParam = new("@AmountOfBags", newBooking.AmountOfBags);
+                cmd.Parameters.Add(amountOfBagsParam);
+                SqlParameter invoiceIdParam = new("@InvoiceId", newBooking.InvoiceId);
+                cmd.Parameters.Add(invoiceIdParam);
 
+                con.Open();
 
-                    insertedId = (int) cmd.ExecuteScalar();
+                SqlTransaction transaction = con.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                cmd.Transaction = transaction;
 
+                try 
+                {
+                    if (_timeslotAccess.Get(newBooking.PickUpTime.Id).Availability > 0 &&
+                        _timeslotAccess.Get(newBooking.ReturnTime.Id).Availability > 0)
+                    {
+                        _timeslotAccess.DecreaseAvailability(newBooking.PickUpTime.Id);
+                        _timeslotAccess.DecreaseAvailability(newBooking.ReturnTime.Id);
+                    } else
+                    {
+                        throw new SlotNotAvailable("The slot availability is 0.");
+                    }
+                    insertedId = (int)cmd.ExecuteScalar();
+
+                    transaction.Commit();
+                }
+                catch (Exception ex) 
+                {
+                    transaction.Rollback();
+                } finally
+                {
                     con.Close();
+                }
             }
             return insertedId;
         }
