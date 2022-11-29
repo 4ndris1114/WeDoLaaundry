@@ -7,7 +7,7 @@ namespace WebAppIdentity.Models
     public class Booking
     {
         [Key]
-        public int Id { get; }
+        public int Id { get; set; }
 
         [ForeignKey("Fk_CustomerBooking")]
         [DataType(DataType.Text)]
@@ -17,6 +17,11 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         [Required]
         public int DriverId { get; set; } = 0;
+
+        public string PickUpDay { get; set; }
+        public string ReturnDay { get; set; }
+        public string PickUpTimeSlot { get; set; }
+        public string ReturnTimeSlot { get; set; }
 
         [DisplayName("Collection time")]
         [Required(ErrorMessage = "Collection time is required")]

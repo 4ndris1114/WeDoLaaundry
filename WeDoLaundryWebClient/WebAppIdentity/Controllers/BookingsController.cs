@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 using WebAppIdentity.BusinessLogicLayer;
+using WebAppIdentity.Data;
 using WebAppIdentity.Models;
 
 namespace WebAppIdentity.Controllers
@@ -10,11 +12,13 @@ namespace WebAppIdentity.Controllers
     {
         readonly BookingLogic _bookingLogic;
         readonly CustomerLogic _customerLogic;
+        readonly TimeSlotLogic _timeslotLogic;
 
         public BookingsController()
         {
             _bookingLogic = new();
             _customerLogic = new();
+            _timeslotLogic = new();
         }
 
         [HttpGet]
@@ -30,8 +34,20 @@ namespace WebAppIdentity.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            List<TimeSlot> timeSlotList = await _timeslotLogic.GetAll();
+            List<SelectListItem> returnDayList = new List<SelectListItem>();
+
+            foreach (var item in timeSlotList)
+            {
+                returnDayList.Add(new SelectListItem() { 
+                    Text = item.Date.ToString(),
+                    Value = item.Id.ToString()
+                });
+            }
+
+            ViewBag.ListofDays = returnDayList;
             return View();
         }
 
@@ -40,6 +56,8 @@ namespace WebAppIdentity.Controllers
         public async Task<ActionResult> Create(Booking booking)
             {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
+
+            string selectedId = booking.PickUpDay;
 
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 

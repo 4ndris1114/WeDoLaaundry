@@ -42,6 +42,31 @@ namespace WebAppIdentity.ServiceLayer
             return returnTimeslot;
         }
 
+        public async Task<TimeSlot> GetByDayAndSlot(DateTime date, string slot)
+        {
+            TimeSlot returnTimeSlot;
+
+            var uri = new Uri(string.Format(restUrl + date + "/" + slot));
+
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if(response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    returnTimeSlot = JsonConvert.DeserializeObject<TimeSlot>(content);
+                } else
+                {
+                    returnTimeSlot = new();
+                }
+            }
+            catch
+            {
+                returnTimeSlot = null;
+            }
+            return returnTimeSlot;
+        }
+
         public async Task<List<TimeSlot>> GetAll()
         {
             List<TimeSlot> returnList;
