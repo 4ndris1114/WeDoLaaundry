@@ -23,11 +23,6 @@ namespace DataAccess.Database_layer
             _connectionString = configuration.GetConnectionString("WeDoLaundry");
         }
 
-        public TimeslotDatabaseAccess(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
         public bool DecreaseAvailability(int id)
         {
             int numberOfRowsModified = 0;

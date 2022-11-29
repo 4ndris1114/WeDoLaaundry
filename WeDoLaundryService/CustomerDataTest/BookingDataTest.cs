@@ -2,12 +2,8 @@
 using Data.Model_layer;
 using DataAccess;
 using DataAccess.Database_layer;
+using Microsoft.Extensions.Configuration;
 using Model.Model_layer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit.Abstractions;
 
 namespace Tests
@@ -19,15 +15,24 @@ namespace Tests
         private readonly MemoryStream _stream;
         private readonly IBookingDatabaseAccess _bookingDatabaseAccess;
         private readonly ITimeslotDatabaseAccess _timeslotDatabaseAccess;
-        private readonly string _connectionString = "Server=hildur.ucn.dk,1433;Database=CSC-CSD-S211_10407554;User Id = CSC-CSD-S211_10407554; Password=Password1!";
 
         public BookingDataTest(ITestOutputHelper extraOutput)
         {
+            var config = InitConfiguration();
             this.extraOutput = extraOutput;
             _stream = new MemoryStream();
-            _customerAccess = new CustomerDatabaseAccess(_connectionString);
-            _bookingDatabaseAccess = new BookingDatabaseAccess(_connectionString);
-            _timeslotDatabaseAccess = new TimeslotDatabaseAccess(_connectionString);
+
+            _customerAccess = new CustomerDatabaseAccess(config);
+            _bookingDatabaseAccess = new BookingDatabaseAccess(config);
+            _timeslotDatabaseAccess = new TimeslotDatabaseAccess(config);
+        }
+
+        private IConfiguration InitConfiguration()
+        {
+            var config = new ConfigurationBuilder()
+               .AddJsonFile("appsettings.test.json")
+                .Build();
+            return config;
         }
 
         public void Dispose()

@@ -8,19 +8,12 @@ namespace DataAccess
     public class CustomerDatabaseAccess : ICustomerAccess
     {
 
-        readonly string _connectionString;
+        private readonly string _connectionString;
 
         public CustomerDatabaseAccess(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("WeDoLaundry");
         }
-
-        public CustomerDatabaseAccess(string connectionString)
-        {
-            this._connectionString = connectionString;
-        }
-
-
 
         public int CreateCustomer(Customer customer)
         {

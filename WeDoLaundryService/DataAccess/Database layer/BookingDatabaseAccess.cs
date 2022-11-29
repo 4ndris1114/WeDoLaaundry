@@ -26,13 +26,6 @@ namespace DataAccess.Database_layer
             _timeslotAccess = new TimeslotDatabaseAccess(configuration);
         }
 
-        public BookingDatabaseAccess(string connectionString)
-        {
-            _connectionString = connectionString;
-            _customerAccess = new CustomerDatabaseAccess(_connectionString);
-            _timeslotAccess = new TimeslotDatabaseAccess(_connectionString);
-        }
-
         public int CreateBooking(Booking newBooking)
         {
             int insertedId = -1;

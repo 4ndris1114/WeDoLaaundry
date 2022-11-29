@@ -2,6 +2,7 @@
 using Data.Model_layer;
 using DataAccess;
 using DataAccess.Database_layer;
+using Microsoft.Extensions.Configuration;
 using Model.Model_layer;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,6 @@ namespace Tests
         private readonly ITestOutputHelper extraOutput;
         private readonly ITimeslotDatabaseAccess _timeSlotDataAccess;
         private readonly MemoryStream _stream;
-        private readonly string _connectionString = "Server=hildur.ucn.dk,1433;Database=CSC-CSD-S211_10407554;User Id = CSC-CSD-S211_10407554; Password=Password1!";
         private readonly TimeSlot newSlot;
         private readonly int insertedId;
 
@@ -26,10 +26,21 @@ namespace Tests
         {
             this.extraOutput = extraOutput;
             _stream = new MemoryStream();
-            _timeSlotDataAccess = new TimeslotDatabaseAccess(_connectionString);
+            var config = InitConfiguration();
+
+            _timeSlotDataAccess = new TimeslotDatabaseAccess(config);
+
             newSlot = new(-1,new DateTime(2023, 05, 05),"15-18",10);
-            int insertedId = _timeSlotDataAccess.Create(newSlot);
+            insertedId = _timeSlotDataAccess.Create(newSlot);
             //newSlot.Id = insertedId;
+        }
+
+        private IConfiguration InitConfiguration()
+        {
+            var config = new ConfigurationBuilder()
+               .AddJsonFile("appsettings.test.json")
+                .Build();
+            return config;
         }
 
         public void Dispose()
