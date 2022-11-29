@@ -4,29 +4,30 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAppIdentity.Models
 {
-    public class Booking
+    public class BookingForm
     {
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Fk_CustomerBooking")]
         [DataType(DataType.Text)]
         [Required]
-        public int CustomerId { get; set; } 
+        public int CustomerId { get; set; }
 
         [DataType(DataType.Text)]
         [Required]
         public int DriverId { get; set; } = 0;
 
+        [DisplayName("Collection day")]
+        public DateTime PickUpDay { get; set; }
+
         [DisplayName("Collection time")]
-        [Required(ErrorMessage = "Collection time is required")]
-        [DataType(DataType.Text)]
-        public int PickUpTimeId { get; set; }
+        public DateTime ReturnDay { get; set; }
+
+        [DisplayName("Delivery day")]
+        public string PickUpTimeSlot { get; set; }
 
         [DisplayName("Delivery time")]
-        [Required(ErrorMessage = "Delivery time is required")]
-        [DataType(DataType.Text)]
-        public int ReturnTimeId { get; set; }
+        public string ReturnTimeSlot { get; set; }
 
         [DisplayName("Collection address")]
         [Required(ErrorMessage = "Collection address is required")]
@@ -50,14 +51,5 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         public int InvoiceId { get; set; } = 0;
 
-        public Booking(int customerId, int pickUpTimeId, int returnTimeId, string pickUpAddress, string returnAddress, int amountOfBags)
-        {
-            CustomerId = customerId;
-            PickUpTimeId = pickUpTimeId;
-            ReturnTimeId = returnTimeId;
-            PickUpAddress = pickUpAddress;
-            ReturnAddress = returnAddress;
-            AmountOfBags = amountOfBags;
-        }
     }
 }

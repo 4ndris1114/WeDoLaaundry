@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
 using System.Security.Claims;
 using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Data;
@@ -38,43 +39,57 @@ namespace WebAppIdentity.Controllers
         {
             List<TimeSlot> timeSlotList = await _timeslotLogic.GetAll();
             List<SelectListItem> returnDayList = new List<SelectListItem>();
+            List<SelectListItem> returnSlotList = new List<SelectListItem>();
 
             foreach (var item in timeSlotList)
             {
                 returnDayList.Add(new SelectListItem() { 
                     Text = item.Date.ToString(),
-                    Value = item.Id.ToString()
+                    Value = item.Date.ToString()
+                });
+
+                returnSlotList.Add(new SelectListItem()
+                {
+                    Text = item.Slot.ToString(),
+                    Value = item.Slot.ToString()
                 });
             }
 
             ViewBag.ListofDays = returnDayList;
+            ViewBag.ListofSlots = returnSlotList;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Booking booking)
+        public async Task<ActionResult> Create(BookingForm bookingForm)
             {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
 
-            string selectedId = booking.PickUpDay;
+            string pickUpDate = bookingForm.PickUpDay.ToString("yyyy-MM-dd");
+            string pickUpSlot = bookingForm.PickUpTimeSlot;
+            string returnDate = bookingForm.ReturnDay.ToString("yyyy-MM-dd");
+            string returnSlot = bookingForm.ReturnTimeSlot;
 
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
+
             if (ModelState.IsValid)
             {
+                int pickUpSlotId = _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot).Id; 
+                int returnSlotId = _timeslotLogic.GetByDayAndSlot(returnDate, returnSlot).Id;
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
-                booking.CustomerId = tempCustomer.Id;
+                Booking booking = new Booking(tempCustomer.Id, pickUpSlotId, returnSlotId, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
                 try
                 {
                     bool wasOk = await _bookingLogic.InsertBooking(booking);
                     if (wasOk)
                     {
                         ViewBag.message = "Laundry registered";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Success");
                     } else
                     {
-                        ViewBag.message = "Bad request";
+                        ViewBag.message = "Bad request"; // gets 404 here i guess
                     }
                 }
                 catch
@@ -83,7 +98,7 @@ namespace WebAppIdentity.Controllers
                     return View();
                 }
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

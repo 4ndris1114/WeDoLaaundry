@@ -26,7 +26,7 @@ namespace WebAppIdentity.BusinessLogicLayer
             return returnList;
         }
 
-        public async Task<TimeSlot> GetByDayAndSlot(DateTime date, string slot)
+        public async Task<TimeSlot> GetByDayAndSlot(string date, string slot)
         {
             TimeSlot returnSlot;
             try

@@ -1,4 +1,4 @@
-﻿@model WebAppIdentity.Models.Booking
+﻿@model WebAppIdentity.Models.BookingForm
 
 @{
     ViewData["Title"] = "Create";
@@ -12,32 +12,25 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>*@
-            @*<div class="form-group">
-                <label asp-for="DriverId" class="control-label"></label>
-                <input asp-for="DriverId" class="form-control" />
-                <span asp-validation-for="DriverId" class="text-danger"></span>
-            </div>*@
-           @* <div class="form-group">
-                <label asp-for="PickUpTimeId" class="control-label"></label>
-                <input asp-for="PickUpTimeId" class="form-control" />
-                <span asp-validation-for="PickUpTimeId" class="text-danger"></span>
-            </div>*@
-            @*<div class="form-group">
-                <label asp-for="ReturnTimeId" class="control-label"></label>
-                <input asp-for="ReturnTimeId" class="form-control" />
-                <span asp-validation-for="ReturnTimeId" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
                 <label asp-for="PickUpDay"></label>
-                <select asp-for="PickUpDay" class="form-control" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))">
-
-                </select>
+                <select asp-for="PickUpDay" class="form-control" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))"></select>
+            </div>
+            <div class="form-group">
+                <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                <label asp-for="PickUpTimeSlot"></label>
+                <select asp-for="PickUpTimeSlot" class="form-control" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
+            </div>
+            <div class="form-group">
+                <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                <label asp-for="ReturnDay"></label>
+                <select asp-for="ReturnDay" class="form-control" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))"></select>
+            </div>
+            <div class="form-group">
+                <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                <label asp-for="ReturnTimeSlot"></label>
+                <select asp-for="ReturnTimeSlot" class="form-control" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
             </div>
             <div class="form-group">
                 <label asp-for="PickUpAddress" class="control-label"></label>
@@ -49,21 +42,11 @@
                 <input asp-for="ReturnAddress" class="form-control" />
                 <span asp-validation-for="ReturnAddress" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="BookingStatus" class="control-label"></label>
-                <input asp-for="BookingStatus" class="form-control" />
-                <span asp-validation-for="BookingStatus" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="AmountOfBags" class="control-label"></label>
                 <input asp-for="AmountOfBags" class="form-control" />
                 <span asp-validation-for="AmountOfBags" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="InvoiceId" class="control-label"></label>
-                <input asp-for="InvoiceId" class="form-control" />
-                <span asp-validation-for="InvoiceId" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
