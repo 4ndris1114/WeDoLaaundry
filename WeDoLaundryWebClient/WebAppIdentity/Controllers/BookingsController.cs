@@ -76,8 +76,8 @@ namespace WebAppIdentity.Controllers
 
             if (ModelState.IsValid)
             {
-                int pickUpSlotId = _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot).Id; 
-                int returnSlotId = _timeslotLogic.GetByDayAndSlot(returnDate, returnSlot).Id;
+                int pickUpSlotId = await _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot).Id; // dont know what the fuck is this, but it has to be await cuz otherwise the booking is created with pickup and return id == 0 I GUESS KURWA xd
+                int returnSlotId = await _timeslotLogic.GetByDayAndSlot(returnDate, returnSlot).Id;
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
                 Booking booking = new Booking(tempCustomer.Id, pickUpSlotId, returnSlotId, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
                 try
@@ -89,7 +89,7 @@ namespace WebAppIdentity.Controllers
                         return RedirectToAction("Success");
                     } else
                     {
-                        ViewBag.message = "Bad request"; // gets 404 here i guess
+                        ViewBag.message = "Bad request"; 
                     }
                 }
                 catch

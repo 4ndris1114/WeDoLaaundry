@@ -26,16 +26,16 @@ namespace WebAppIdentity.BusinessLogicLayer
             return returnList;
         }
 
-        public async Task<TimeSlot> GetByDayAndSlot(string date, string slot)
+        public async Task<int> GetByDayAndSlot(string date, string slot)
         {
-            TimeSlot returnSlot;
+            int returnSlot;
             try
             {
                 returnSlot = await _timeslotService.GetByDayAndSlot(date, slot);
             }
             catch 
             {
-                returnSlot = null;
+                returnSlot = 0;
             }
             return returnSlot;
         }
