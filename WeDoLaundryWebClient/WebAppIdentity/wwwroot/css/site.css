@@ -86,6 +86,10 @@ button {
     padding: 40px;
 }
 
+.date-time {
+    display: flex;
+}
+
 #banner {
     background-color: #EAE6E5;
 }

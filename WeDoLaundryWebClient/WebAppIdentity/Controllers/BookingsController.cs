@@ -44,8 +44,8 @@ namespace WebAppIdentity.Controllers
             foreach (var item in timeSlotList)
             {
                 returnDayList.Add(new SelectListItem() { 
-                    Text = item.Date.ToString(),
-                    Value = item.Date.ToString()
+                    Text = item.Date.ToString("ddd d MMM"),
+                    Value = item.Date.ToString("ddd d MMM")
                 });
 
                 returnSlotList.Add(new SelectListItem()
@@ -76,7 +76,7 @@ namespace WebAppIdentity.Controllers
 
             if (ModelState.IsValid)
             {
-                int pickUpSlotObj = await _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot); // dont know what the fuck is this, but it has to be await cuz otherwise the booking is created with pickup and return id == 0 I GUESS KURWA xd
+                int pickUpSlotObj = await _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot);
                 int returnSlotObj = await _timeslotLogic.GetByDayAndSlot(returnDate, returnSlot);
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
                 Booking booking = new Booking(tempCustomer.Id, pickUpSlotObj, returnSlotObj, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
@@ -119,6 +119,12 @@ namespace WebAppIdentity.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult Success()
+        {
+            return View();
         }
 
         [HttpGet]

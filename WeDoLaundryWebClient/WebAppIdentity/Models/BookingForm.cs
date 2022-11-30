@@ -20,10 +20,10 @@ namespace WebAppIdentity.Models
         [DisplayName("Collection day")]
         public DateTime PickUpDay { get; set; }
 
-        [DisplayName("Collection time")]
+        [DisplayName("Delivery day")]
         public DateTime ReturnDay { get; set; }
 
-        [DisplayName("Delivery day")]
+        [DisplayName("Collection time")]
         public string PickUpTimeSlot { get; set; }
 
         [DisplayName("Delivery time")]
