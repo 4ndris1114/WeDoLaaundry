@@ -18,16 +18,16 @@ namespace WebAppIdentity.Models
         public int DriverId { get; set; } = 0;
 
         [DisplayName("Collection day")]
-        public DateTime PickUpDay { get; set; }
+        public int PickUpDay { get; set; }
 
         [DisplayName("Delivery day")]
-        public DateTime ReturnDay { get; set; }
+        public int ReturnDay { get; set; }
 
-        [DisplayName("Collection time")]
-        public string PickUpTimeSlot { get; set; }
+        //[DisplayName("Collection time")]
+        //public string PickUpTimeSlot { get; set; }
 
-        [DisplayName("Delivery time")]
-        public string ReturnTimeSlot { get; set; }
+        //[DisplayName("Delivery time")]
+        //public string ReturnTimeSlot { get; set; }
 
         [DisplayName("Collection address")]
         [Required(ErrorMessage = "Collection address is required")]

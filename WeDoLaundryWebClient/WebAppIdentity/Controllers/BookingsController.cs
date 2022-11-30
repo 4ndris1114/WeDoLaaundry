@@ -38,29 +38,18 @@ namespace WebAppIdentity.Controllers
         public async Task<ActionResult> Create()
         {
             List<TimeSlot> timeSlotList = await _timeslotLogic.GetAll();
-            List<SelectListItem> returnDayList = new List<SelectListItem>();
-            List<SelectListItem> returnSlotList = new List<SelectListItem>();
-            List<string> slotsWithoutDuplicates = new List<string>();
+            List<SelectListItem> returnList = new List<SelectListItem>(); 
 
             foreach (var item in timeSlotList)
             {
-                returnDayList.Add(new SelectListItem() { 
-                    Text = item.Date.ToString("ddd d MMM"),
-                    Value = item.Date.ToString("ddd d MMM")
-                });
-                if(!slotsWithoutDuplicates.Contains(item.Slot))
+                returnList.Add(new SelectListItem()
                 {
-                    slotsWithoutDuplicates.Add(item.Slot);
-                    returnSlotList.Add(new SelectListItem()
-                    {
-                        Text = item.Slot.ToString(),
-                        Value = item.Slot.ToString()
-                    });
-                }
+                    Text = item.Date.ToString("ddd d MMM") + " " + item.Slot.ToString(),
+                    Value = item.Id.ToString()
+                }) ;    
             }
 
-            ViewBag.ListofDays = returnDayList;
-            ViewBag.ListofSlots = returnSlotList;
+            ViewBag.List = returnList;
             return View();
         }
 
@@ -70,20 +59,14 @@ namespace WebAppIdentity.Controllers
             {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
 
-            string pickUpDate = bookingForm.PickUpDay.ToString("yyyy-MM-dd");
-            string pickUpSlot = bookingForm.PickUpTimeSlot;
-            string returnDate = bookingForm.ReturnDay.ToString("yyyy-MM-dd");
-            string returnSlot = bookingForm.ReturnTimeSlot;
-
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-
 
             if (ModelState.IsValid)
             {
-                int pickUpSlotObj = await _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot);
-                int returnSlotObj = await _timeslotLogic.GetByDayAndSlot(returnDate, returnSlot);
+                //TimeSlot pickUpSlotObj = await _timeslotLogic.GetById(pickUpDate);
+                //TimeSlot returnSlotObj = await _timeslotLogic.GetById(returnDate);
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
-                Booking booking = new Booking(tempCustomer.Id, pickUpSlotObj, returnSlotObj, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
+                Booking booking = new Booking(tempCustomer.Id, bookingForm.PickUpDay, bookingForm.ReturnDay, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
                 try
                 {
                     bool wasOk = await _bookingLogic.InsertBooking(booking);
