@@ -55,6 +55,29 @@ namespace Tests
         }
 
         [Fact]
+        public void testCreateBookingConcurrently()
+        {
+            //Arrange
+            int insert1Id = _timeslotDatabaseAccess.Create(new TimeSlot(-1, new DateTime(2022, 12, 02), "15-18", 1));
+            int insert2Id = _timeslotDatabaseAccess.Create(new TimeSlot(-1, new DateTime(2022, 12, 02), "18-21", 1));
+            Booking newBooking1 = new(_customerAccess.GetById(1010), 12, _timeslotDatabaseAccess.Get(insert1Id), _timeslotDatabaseAccess.Get(insert2Id), "1addressCollection", "1addressReturn", Booking.Status.BOOKED, 2, 1);
+
+            Booking newBooking2 = new(_customerAccess.GetById(1010), 12, _timeslotDatabaseAccess.Get(insert1Id), _timeslotDatabaseAccess.Get(insert2Id), "2addressCollection", "2addressReturn", Booking.Status.BOOKED, 2, 3);
+            //Act
+            int insertedId1 = _bookingDatabaseAccess.CreateBooking(newBooking1);
+            extraOutput.WriteLine("Generated key newBooking1 (id): " + insertedId1);
+
+            Thread.Sleep(500);
+
+            int insertedId2 = _bookingDatabaseAccess.CreateBooking(newBooking2);
+            extraOutput.WriteLine("Generated key newBooking2 (id): " + insertedId2);
+
+            //Assert
+            Assert.True(insertedId1 > 0);
+            Assert.True(insertedId2 == -1);
+        }
+
+        [Fact]
         public void testGetAllBookings()
         {
             //Arrange
