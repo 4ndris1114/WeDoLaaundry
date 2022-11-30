@@ -62,17 +62,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-<script>
-    const dropDownSlotEl = document.querySelector(".slots");
-    const withoutDuplicates = [];
-    for (let x = 0; x < dropDownSlotEl.length; x++) {
-        if (!withoutDuplicates.includes(dropDownSlotEl.options[x].value)) {
-            withoutDuplicates.push(dropDownSlotEl.options[x].value);
-        } else {
-            dropDownSlotEl.options.remove(x);
-        }
-    }
-</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

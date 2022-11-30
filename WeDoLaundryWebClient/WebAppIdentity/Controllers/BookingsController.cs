@@ -40,6 +40,7 @@ namespace WebAppIdentity.Controllers
             List<TimeSlot> timeSlotList = await _timeslotLogic.GetAll();
             List<SelectListItem> returnDayList = new List<SelectListItem>();
             List<SelectListItem> returnSlotList = new List<SelectListItem>();
+            List<string> slotsWithoutDuplicates = new List<string>();
 
             foreach (var item in timeSlotList)
             {
@@ -47,12 +48,15 @@ namespace WebAppIdentity.Controllers
                     Text = item.Date.ToString("ddd d MMM"),
                     Value = item.Date.ToString("ddd d MMM")
                 });
-
-                returnSlotList.Add(new SelectListItem()
+                if(!slotsWithoutDuplicates.Contains(item.Slot))
                 {
-                    Text = item.Slot.ToString(),
-                    Value = item.Slot.ToString()
-                });
+                    slotsWithoutDuplicates.Add(item.Slot);
+                    returnSlotList.Add(new SelectListItem()
+                    {
+                        Text = item.Slot.ToString(),
+                        Value = item.Slot.ToString()
+                    });
+                }
             }
 
             ViewBag.ListofDays = returnDayList;
