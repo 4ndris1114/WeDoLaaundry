@@ -1,6 +1,7 @@
 ﻿using Data.Database_layer;
 using Data.Model_layer;
 using DataAccess.Database_layer;
+using DataAccess.Exceptions;
 using Model.Model_layer;
 
 namespace Service.BusinessLogicLayer
@@ -49,8 +50,9 @@ namespace Service.BusinessLogicLayer
             {
                 wasUpdated = _timeslotAccess.DecreaseAvailability(id);
             }
-            catch
+            catch (SlotNotAvailable ex)
             {
+                Console.WriteLine(ex.Message);
                 wasUpdated = false;
             }
             return wasUpdated;

@@ -17,16 +17,16 @@ namespace WebAppIdentity.Models
         [Required]
         public int DriverId { get; set; } = 0;
 
-        [DisplayName("Select day")]
+        [DisplayName("Collection day")]
         public DateTime PickUpDay { get; set; }
 
-        [DisplayName("Select day")]
+        [DisplayName("Collection time")]
         public DateTime ReturnDay { get; set; }
 
-        [DisplayName("Select hour")]
+        [DisplayName("Delivery day")]
         public string PickUpTimeSlot { get; set; }
 
-        [DisplayName("Select hour")]
+        [DisplayName("Delivery time")]
         public string ReturnTimeSlot { get; set; }
 
         [DisplayName("Collection address")]

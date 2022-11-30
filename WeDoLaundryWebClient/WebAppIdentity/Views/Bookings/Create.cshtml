@@ -17,20 +17,17 @@
                 <label asp-for="PickUpDay"></label>
                 <select asp-for="PickUpDay" class="form-control" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))"></select>
             </div>
-            </div>
-            <div class="column">
+            <div class="form-group">
                 <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
                 <label asp-for="PickUpTimeSlot"></label>
                 <select asp-for="PickUpTimeSlot" class="form-control" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
             </div>
-        <p>Delivery time</p>
-            <div class="column">
+            <div class="form-group">
                 <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
                 <label asp-for="ReturnDay"></label>
                 <select asp-for="ReturnDay" class="form-control" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))"></select>
             </div>
-
-            <div class="column">
+            <div class="form-group">
                 <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
                 <label asp-for="ReturnTimeSlot"></label>
                 <select asp-for="ReturnTimeSlot" class="form-control" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
@@ -61,6 +58,9 @@
     <a asp-action="">Back to List</a>
 </div>
 
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
 }

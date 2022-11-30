@@ -16,6 +16,30 @@ namespace WebAppIdentity.ServiceLayer
             _handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         }
 
+        public async Task<List<Booking>> GetAll()
+        {
+            List<Booking> returnList;
+            var uri = new Uri(string.Format(restUrl));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    returnList = JsonConvert.DeserializeObject<List<Booking>>(content);
+                }
+                else
+                {
+                    returnList = new();
+                }
+            }
+            catch
+            {
+                returnList = null;
+            }
+            return returnList;
+        }
+
         public async Task<bool> PostBooking(Booking booking)
         {
             bool wasPosted;
