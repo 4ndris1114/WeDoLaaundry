@@ -76,10 +76,10 @@ namespace WebAppIdentity.Controllers
 
             if (ModelState.IsValid)
             {
-                int pickUpSlotId = await _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot).Id; // dont know what the fuck is this, but it has to be await cuz otherwise the booking is created with pickup and return id == 0 I GUESS KURWA xd
-                int returnSlotId = await _timeslotLogic.GetByDayAndSlot(returnDate, returnSlot).Id;
+                int pickUpSlotObj = await _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot); // dont know what the fuck is this, but it has to be await cuz otherwise the booking is created with pickup and return id == 0 I GUESS KURWA xd
+                int returnSlotObj = await _timeslotLogic.GetByDayAndSlot(returnDate, returnSlot);
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
-                Booking booking = new Booking(tempCustomer.Id, pickUpSlotId, returnSlotId, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
+                Booking booking = new Booking(tempCustomer.Id, pickUpSlotObj, returnSlotObj, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
                 try
                 {
                     bool wasOk = await _bookingLogic.InsertBooking(booking);
