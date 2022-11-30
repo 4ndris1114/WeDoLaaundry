@@ -109,8 +109,10 @@ namespace Service.Controllers
             if (wasUpdated)
             {
                 retVal = Ok(wasUpdated);
-            } else {
-                retVal = new StatusCodeResult(204);
+            }
+            else
+            {
+                retVal = new StatusCodeResult(500);
             }
 
             return retVal;

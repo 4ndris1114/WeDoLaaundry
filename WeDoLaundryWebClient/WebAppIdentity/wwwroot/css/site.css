@@ -23,11 +23,6 @@ body {
     box-sizing: border-box
 }
 
-.nav-pills .nav-link.active {
-    width: 200px;
-    background: #8FCB9B;
-}
-
 /* Full-width input fields */
 input[type=text], input[type=password], input[type=number] {
     width: 100%;
@@ -84,10 +79,6 @@ button {
     scroll-margin-top: 66px;
     height: 60vh;
     padding: 40px;
-}
-
-.date-time {
-    display: flex;
 }
 
 #banner {
