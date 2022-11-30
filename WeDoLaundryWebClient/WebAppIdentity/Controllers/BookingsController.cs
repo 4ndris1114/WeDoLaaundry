@@ -127,6 +127,9 @@ namespace WebAppIdentity.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Success() {  return View(); }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
