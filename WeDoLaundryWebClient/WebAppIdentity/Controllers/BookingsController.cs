@@ -29,6 +29,14 @@ namespace WebAppIdentity.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> History()
+        {
+            List<Booking> bookings = await _bookingLogic.GetAll();
+            ViewBag.Bookings = bookings;
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Details(int id)
         {
             return View();

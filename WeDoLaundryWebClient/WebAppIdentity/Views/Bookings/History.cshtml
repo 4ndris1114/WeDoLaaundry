@@ -1,18 +1,24 @@
+<<<<<<< Updated upstream:WeDoLaundryWebClient/WebAppIdentity/Areas/Identity/Pages/Account/Manage/Orders.cshtml
 ﻿@page
 @using WebAppIdentity.Models
 @model OrdersModel //IEnumerable<Booking>
     @{
+=======
+﻿@using WebAppIdentity.Models
+@model Booking
+@{
+>>>>>>> Stashed changes:WeDoLaundryWebClient/WebAppIdentity/Views/Bookings/History.cshtml
         ViewData["Title"] = "Order history";
-        string[] TableHeaders = new string[] {"id"
-        ,"customerId"
-        ,"driverId"
-        ,"pickUpTimeId]"
-        ,"returnTimeId]"
-        ,"pickUpAddress]"
-        ,"returnAddress]"
-        ,"status"
-        ,"noOfBags"
-        ,"invoiceId"};
+        string[] TableHeaders = new string[] {
+         "Order id"
+        ,"Customer id"
+        ,"Driver id"
+        ,"Collection time"
+        ,"Delivery time"
+        ,"Collection address"
+        ,"Delivery address"
+        ,"Status"
+        ,"Amount of bags"};
 }
 
 <div class="table">
@@ -30,25 +36,29 @@
             </tr>
         </thead>
 
-@*        <tbody>
+        <tbody>
             @{
-                if (Model != null)
-                {
-                    foreach (var Data in Model)
+                
+                    foreach (var Data in ViewBag.Bookings)
                     {
                         <tr>
                             <td>@Data.Id</td>
                             <td>@Data.CustomerId</td>
                             <td>@Data.DriverId</td>
                             <td>@Data.PickUpTimeId</td>
+                            <td>@Data.ReturnTimeId</td>
+                            <td>@Data.PickUpAddress</td>
                             <td>@Data.ReturnAddress</td>
                             <td>@Data.Status</td>
                             <td>@Data.AmountOfBags</td>
+<<<<<<< Updated upstream:WeDoLaundryWebClient/WebAppIdentity/Areas/Identity/Pages/Account/Manage/Orders.cshtml
                             <td>@Data.InvoiceId</td>
+=======
+>>>>>>> Stashed changes:WeDoLaundryWebClient/WebAppIdentity/Views/Bookings/History.cshtml
                         </tr>
                     }
-                }
+                
             }
-        </tbody>*@
+        </tbody>
     </table>
 </div>
