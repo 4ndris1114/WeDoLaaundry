@@ -12,26 +12,12 @@ namespace WebAppIdentity.BusinessLogicLayer
             _bookingService = new();
         }
 
-        public async Task<List<Booking>> GetAllBookings()
-        {
-            List<Booking> returnList;
-            try
-            {
-                returnList = await _bookingService.GetAll();
-            }
-            catch
-            {
-                returnList = null;
-            }
-            return returnList;
-        }
-
         public async Task<List<Booking>> GetAll()
         {
             List<Booking> returnList;
             try
             {
-                returnList = await _bookingServiceAccess.GetAll();
+                returnList = await _bookingService.GetAll();
             }
             catch 
             {

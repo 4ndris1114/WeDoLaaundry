@@ -43,13 +43,6 @@ namespace WebAppIdentity.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Orders()
-        {
-            List<Booking> bookings = await _bookingLogic.GetAllBookings();
-            return View(bookings);
-        }
-
-        [HttpGet]
         public async Task<ActionResult> Create()
         {
             List<TimeSlot> timeSlotList = await _timeslotLogic.GetAll();

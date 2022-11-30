@@ -1,15 +1,8 @@
-<<<<<<< Updated upstream:WeDoLaundryWebClient/WebAppIdentity/Areas/Identity/Pages/Account/Manage/Orders.cshtml
-﻿@page
 @using WebAppIdentity.Models
-@model OrdersModel //IEnumerable<Booking>
-    @{
-=======
-﻿@using WebAppIdentity.Models
 @model Booking
 @{
->>>>>>> Stashed changes:WeDoLaundryWebClient/WebAppIdentity/Views/Bookings/History.cshtml
-        ViewData["Title"] = "Order history";
-        string[] TableHeaders = new string[] {
+    ViewData["Title"] = "Order history";
+    string[] TableHeaders = new string[] {
          "Order id"
         ,"Customer id"
         ,"Driver id"
@@ -38,26 +31,24 @@
 
         <tbody>
             @{
-                
-                    foreach (var Data in ViewBag.Bookings)
-                    {
-                        <tr>
-                            <td>@Data.Id</td>
-                            <td>@Data.CustomerId</td>
-                            <td>@Data.DriverId</td>
-                            <td>@Data.PickUpTimeId</td>
-                            <td>@Data.ReturnTimeId</td>
-                            <td>@Data.PickUpAddress</td>
-                            <td>@Data.ReturnAddress</td>
-                            <td>@Data.Status</td>
-                            <td>@Data.AmountOfBags</td>
-<<<<<<< Updated upstream:WeDoLaundryWebClient/WebAppIdentity/Areas/Identity/Pages/Account/Manage/Orders.cshtml
-                            <td>@Data.InvoiceId</td>
-=======
->>>>>>> Stashed changes:WeDoLaundryWebClient/WebAppIdentity/Views/Bookings/History.cshtml
-                        </tr>
-                    }
-                
+
+                foreach (var Data in ViewBag.Bookings)
+                {
+                    <tr>
+                        <td>@Data.Id</td>
+                        <td>@Data.CustomerId</td>
+                        <td>@Data.DriverId</td>
+                        <td>@Data.PickUpTimeId</td>
+                        <td>@Data.ReturnTimeId</td>
+                        <td>@Data.PickUpAddress</td>
+                        <td>@Data.ReturnAddress</td>
+                        <td>@Data.Status</td>
+                        <td>@Data.AmountOfBags</td>
+                        <td>@Data.InvoiceId</td>
+
+                    </tr>
+                }
+
             }
         </tbody>
     </table>
