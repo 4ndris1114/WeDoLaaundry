@@ -5,11 +5,25 @@ namespace WebAppIdentity.BusinessLogicLayer
 {
     public class BookingLogic : IBookingLogic
     {
-        private readonly BookingService _bookingServiceAccess;
+        private readonly BookingService _bookingService;
 
         public BookingLogic()
         {
-            _bookingServiceAccess = new();
+            _bookingService = new();
+        }
+
+        public async Task<List<Booking>> GetAll()
+        {
+            List<Booking> returnList;
+            try
+            {
+                returnList = await _bookingService.GetAll();
+            }
+            catch 
+            {
+                returnList = null;
+            }
+            return returnList;
         }
 
         public async Task<bool> InsertBooking(Booking booking)
@@ -17,7 +31,7 @@ namespace WebAppIdentity.BusinessLogicLayer
             bool wasInserted;
             try
             {
-                wasInserted = await _bookingServiceAccess.PostBooking(booking);
+                wasInserted = await _bookingService.PostBooking(booking);
             }
             catch
             {

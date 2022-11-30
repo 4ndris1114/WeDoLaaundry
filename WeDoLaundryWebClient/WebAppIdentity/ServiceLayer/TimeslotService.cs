@@ -69,6 +69,31 @@ namespace WebAppIdentity.ServiceLayer
             return returnId;
         }
 
+        public async Task<TimeSlot> GetById(int id)
+        {
+            TimeSlot returnSlot;
+
+            var uri = new Uri(string.Format(restUrl + id));
+
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if(response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    returnSlot = JsonConvert.DeserializeObject<TimeSlot>(content);
+                } else
+                {
+                    returnSlot = new();
+                }
+            }
+            catch 
+            {
+                returnSlot = null;
+            }
+            return returnSlot;
+        }
+
         public async Task<List<TimeSlot>> GetAll()
         {
             List<TimeSlot> returnList;
