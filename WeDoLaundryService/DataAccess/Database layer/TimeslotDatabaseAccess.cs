@@ -1,5 +1,6 @@
 ﻿using Data.Database_layer;
 using Data.Model_layer;
+using DataAccess.Exceptions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
 using Model.Model_layer;
@@ -26,7 +27,7 @@ namespace DataAccess.Database_layer
         public bool DecreaseAvailability(int id)
         {
             int numberOfRowsModified = 0;
-            string SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE id = @Id";
+            string SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE id = @Id AND availability > 0";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
@@ -39,8 +40,12 @@ namespace DataAccess.Database_layer
 
                 con.Close();
             }
-
-            return (numberOfRowsModified > 0);
+            if (numberOfRowsModified > 0)
+            {
+                return true;
+            } else {
+                throw new SlotNotAvailable("Slot is not available.");
+            }
         }
 
         public List<TimeSlot> GetAll()
