@@ -92,7 +92,7 @@ namespace WebAppIdentity.Controllers
                         ViewBag.message = "Bad request"; 
                     }
                 }
-                catch
+                catch (NullReferenceException)
                 {
                     ViewBag.message = "Error while booking";
                     return View();
