@@ -56,48 +56,37 @@ namespace WebAppIdentity.Controllers
         public async Task<ActionResult> Create()
         {
             List<TimeSlot> timeSlotList = await _timeslotLogic.GetAll();
-            List<SelectListItem> returnDayList = new List<SelectListItem>();
-            List<SelectListItem> returnSlotList = new List<SelectListItem>();
-
+            List<SelectListItem> returnList = new List<SelectListItem>();
             foreach (var item in timeSlotList)
             {
-                returnDayList.Add(new SelectListItem() { 
-                    Text = item.Date.ToString("ddd d MMM"),
-                    Value = item.Date.ToString("ddd d MMM")
-                });
-
-                returnSlotList.Add(new SelectListItem()
+                returnList.Add(new SelectListItem()
                 {
-                    Text = item.Slot.ToString(),
-                    Value = item.Slot.ToString()
+                    Text = item.Date.ToString("ddd d MMM") + " " + item.Slot.ToString(),
+                    Value = item.Id.ToString()
                 });
+                
             }
 
-            ViewBag.ListofDays = returnDayList;
-            ViewBag.ListofSlots = returnSlotList;
+            ViewBag.List = returnList;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(BookingForm bookingForm)
-            {
+        {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            string pickUpDate = bookingForm.PickUpDay.ToString("yyyy-MM-dd");
-            string pickUpSlot = bookingForm.PickUpTimeSlot;
-            string returnDate = bookingForm.ReturnDay.ToString("yyyy-MM-dd");
-            string returnSlot = bookingForm.ReturnTimeSlot;
-
+           
 
 
             if (ModelState.IsValid)
             {
-                int pickUpSlotObj = await _timeslotLogic.GetByDayAndSlot(pickUpDate, pickUpSlot); // dont know what the fuck is this, but it has to be await cuz otherwise the booking is created with pickup and return id == 0 I GUESS KURWA xd
-                int returnSlotObj = await _timeslotLogic.GetByDayAndSlot(returnDate, returnSlot);
+                //TimeSlot pickUpSlotObj = await _timeslotLogic.GetById(pickUpDate);
+                //TimeSlot returnSlotObj = await _timeslotLogic.GetById(returnDate);
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
-                Booking booking = new Booking(tempCustomer.Id, pickUpSlotObj, returnSlotObj, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
+                Booking booking = new Booking(tempCustomer.Id, bookingForm.PickUpDay, bookingForm.ReturnDay, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
                 try
                 {
                     bool wasOk = await _bookingLogic.InsertBooking(booking);
