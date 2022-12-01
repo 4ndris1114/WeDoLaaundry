@@ -112,6 +112,26 @@ namespace DataAccess.Database_layer
             return booking;
         }
 
+        public List<Booking> GetCustomersBookings(int customerId)
+        {
+            List<Booking> bookings = new List<Booking>();
+            string SQL_string = "SELECT * FROM Bookings WHERE customerId = @customerId";
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand command = new(SQL_string, con))
+            {
+                SqlParameter customerIdParam = new("@customerID", customerId);
+                command.Parameters.Add(customerIdParam);
+
+                con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    bookings.Add(GetBookingReader(reader));
+                }
+            }
+            return bookings;
+        }
+
         public List<Booking> GetAll()
         {
             List<Booking>? returnList = new();

@@ -59,7 +59,36 @@ namespace Service.Controllers
                 returnList = new StatusCodeResult(500);
             }
             return returnList;
+        }
 
+        // GET api/<BookingsController>/customerBookings/5
+        [HttpGet, Route("customerBookings/{customerId}")]
+        public ActionResult<List<BookingReadDTO>> GetCustomersBookings(int customerId)
+        {
+            ActionResult<List<BookingReadDTO>> returnList = null;
+
+            List<Booking> foundBookings = _bookingdataControl.GetCustomersBookings(customerId);
+            List<BookingReadDTO> foundDtos = null;
+            //evaluate & return status code
+            if (foundBookings != null)
+            {
+                foundDtos = Convert.ToDtoCollection(foundBookings);
+            }
+            
+            if(foundDtos != null)
+            {
+                if(foundDtos.Count > 0)
+                {
+                    returnList = Ok(foundDtos);
+                } else
+                {
+                    returnList = new StatusCodeResult(204);
+                }
+            } else
+            {
+                returnList = new StatusCodeResult(500);
+            }
+            return returnList;
         }
 
         // GET api/<BookingsController>/5

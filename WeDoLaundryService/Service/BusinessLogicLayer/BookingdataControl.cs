@@ -53,5 +53,19 @@ namespace Service.BusinessLogicLayer
             }
             return foundBooking;
         }
+
+        public List<Booking> GetCustomersBookings(int customerId)
+        {
+            List<Booking> foundBookings;
+            try
+            {
+                foundBookings = _bookingDbAccess.GetCustomersBookings(customerId);
+            }
+            catch 
+            {
+                foundBookings = null;
+            }
+            return foundBookings;
+        }
     }
 }

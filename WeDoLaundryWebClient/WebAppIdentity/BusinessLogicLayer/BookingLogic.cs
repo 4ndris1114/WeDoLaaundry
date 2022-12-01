@@ -12,6 +12,7 @@ namespace WebAppIdentity.BusinessLogicLayer
             _bookingServiceAccess = new();
         }
 
+<<<<<<< Updated upstream
         public async Task<List<Booking>?> GetAll()
         {
             List<Booking>? returnList = null;
@@ -20,6 +21,16 @@ namespace WebAppIdentity.BusinessLogicLayer
                 returnList = await _bookingServiceAccess.GetAll();
             }
             catch
+=======
+        public async Task<List<Booking>> GetCustomersBookings(int customerId)
+        {
+            List<Booking> returnList;
+            try
+            {
+                returnList = await _bookingServiceAccess.GetCustomersBookings(customerId);
+            }
+            catch 
+>>>>>>> Stashed changes
             {
                 returnList = null;
             }

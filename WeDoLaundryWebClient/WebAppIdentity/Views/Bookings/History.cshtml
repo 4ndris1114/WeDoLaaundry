@@ -1,0 +1,55 @@
+﻿@using WebAppIdentity.Models
+@model Booking
+@{
+        ViewData["Title"] = "Order history";
+        string[] TableHeaders = new string[] {
+         "Order id"
+        ,"Customer id"
+        ,"Driver id"
+        ,"Collection time"
+        ,"Delivery time"
+        ,"Collection address"
+        ,"Delivery address"
+        ,"Status"
+        ,"Amount of bags"};
+}
+
+<div class="table">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                @{
+                    foreach (var head in TableHeaders)
+                    {
+                        <th>
+                            @head
+                        </th>
+                    }
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+
+                    foreach (var Data in ViewBag.Bookings)
+                    {
+                        <tr>
+                            <td>@Data.Id</td>
+                            <td>@Data.CustomerId</td>
+                            <td>@Data.DriverId</td>
+                            <td>@Data.PickUpTimeId</td>
+                            <td>@Data.ReturnTimeId</td>
+                            <td>@Data.PickUpAddress</td>
+                            <td>@Data.ReturnAddress</td>
+                            <td>@Data.Status</td>
+                            <td>@Data.AmountOfBags</td>
+                            <td>@Data.InvoiceId</td>
+
+                        </tr>
+                    }
+
+            }
+        </tbody>
+    </table>
+</div>

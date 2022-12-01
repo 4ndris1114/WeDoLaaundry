@@ -12,6 +12,7 @@ namespace DataAccess.Database_layer
 
         List<Booking> GetAll();
         Booking Get(int id);
+        List<Booking> GetCustomersBookings(int customerId);
         int CreateBooking(Booking newBooking);
 
     }

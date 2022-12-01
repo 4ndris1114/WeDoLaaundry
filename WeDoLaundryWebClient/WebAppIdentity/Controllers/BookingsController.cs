@@ -31,7 +31,11 @@ namespace WebAppIdentity.Controllers
         [HttpGet]
         public async Task<ActionResult> History()
         {
-            List<Booking> bookings = await _bookingLogic.GetAll();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
+
+            List<Booking> bookings = await _bookingLogic.GetCustomersBookings(tempCustomer.Id);
             ViewBag.Bookings = bookings;
             return View();
         }
@@ -74,13 +78,13 @@ namespace WebAppIdentity.Controllers
         public async Task<ActionResult> Create(BookingForm bookingForm)
             {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             string pickUpDate = bookingForm.PickUpDay.ToString("yyyy-MM-dd");
             string pickUpSlot = bookingForm.PickUpTimeSlot;
             string returnDate = bookingForm.ReturnDay.ToString("yyyy-MM-dd");
             string returnSlot = bookingForm.ReturnTimeSlot;
 
-            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
 
             if (ModelState.IsValid)
