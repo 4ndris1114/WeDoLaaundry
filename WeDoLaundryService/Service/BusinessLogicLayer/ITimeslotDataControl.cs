@@ -10,5 +10,7 @@ namespace Service.BusinessLogicLayer
         int Add(TimeSlot timeslot);
         List<TimeSlot> GetAll();
         TimeSlot? GetByDateAndSlot(DateTime date, string slot);
+        List<TimeSlot> GetByDate(DateTime date);
+
     }
 }

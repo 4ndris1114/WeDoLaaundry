@@ -96,6 +96,26 @@ namespace Service.Controllers
             return returnTimeslotDto;
         }
 
+        [HttpGet, Route("date/{date}")]
+        public ActionResult<List<TimeslotReadDTO>>? GetByDate(DateTime date)
+        {
+            ActionResult<List<TimeslotReadDTO>> returnList;
+
+            List<TimeSlot> foundTimeslots = _timeslotDataControl.GetByDate(date);
+            List<TimeslotReadDTO> foundTimeslotsDto = Convert.ToDtoCollection(foundTimeslots);
+            //evaluate & return status code
+            if (foundTimeslotsDto != null)
+            {
+                returnList = Ok(foundTimeslotsDto);
+            } else if (foundTimeslotsDto.Count > 0){
+                returnList = new StatusCodeResult(204);
+            } else {
+                returnList = new StatusCodeResult(500);
+            }
+
+            return returnList;
+        }
+
         [HttpPut, Route("/decrease/{id}")]
         public ActionResult<bool>? Decrease(int id)
         {

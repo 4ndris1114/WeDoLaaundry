@@ -99,5 +99,19 @@ namespace Service.BusinessLogicLayer
             }
             return foundTimeslot;
         }
+
+        public List<TimeSlot> GetByDate(DateTime date)
+        {
+            List<TimeSlot> foundTimeslots = null;
+            try
+            {
+                foundTimeslots = _timeslotAccess.GetByDate(date);
+            }
+            catch
+            {
+                foundTimeslots = null;
+            }
+            return foundTimeslots;
+        }
     }
 }
