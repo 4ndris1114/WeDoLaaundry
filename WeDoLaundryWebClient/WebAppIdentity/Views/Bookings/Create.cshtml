@@ -12,26 +12,28 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
-                <label asp-for="PickUpDay"></label>
-                <select asp-for="PickUpDay" class="form-control" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))"></select>
-            </div>
-            <div class="form-group">
-                <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
-                <label asp-for="PickUpTimeSlot"></label>
-                <select asp-for="PickUpTimeSlot" class="form-control" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
-            </div>
-            <div class="form-group">
-                <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
-                <label asp-for="ReturnDay"></label>
-                <select asp-for="ReturnDay" class="form-control" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))"></select>
-            </div>
-            <div class="form-group">
-                <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
-                <label asp-for="ReturnTimeSlot"></label>
-                <select asp-for="ReturnTimeSlot" class="form-control" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
-            </div>
+            <div class="date-time">
+                <div class="form-group">
+                    <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                    <label asp-for="PickUpDay"></label>
+                    <select asp-for="PickUpDay" class="form-control days" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))"></select>
+                </div>
+                <div class="form-group">
+                    <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                    <label asp-for="PickUpTimeSlot"></label>
+                    <select asp-for="PickUpTimeSlot" class="form-control slots" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
+                </div>
+            <div class="date-time">
+                <div class="form-group">
+                    <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                    <label asp-for="ReturnDay"></label>
+                    <select asp-for="ReturnDay" class="form-control days" asp-items="@(new SelectList(ViewBag.ListofDays, "Value", "Text"))"></select>
+                </div>
+                <div class="form-group">
+                    <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                    <label asp-for="ReturnTimeSlot"></label>
+                     <select asp-for="ReturnTimeSlot" class="form-control slots" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
+                </div>
             <div class="form-group">
                 <label asp-for="PickUpAddress" class="control-label"></label>
                 <input asp-for="PickUpAddress" class="form-control" />
@@ -58,6 +60,22 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script>
+    const dropDownSlotEl = document.querySelector(".slots");
+    const withoutDuplicates = [];
+    for (let x = 0; x < dropDownSlotEl.length; x++) {
+        if (!withoutDuplicates.includes(dropDownSlotEl.options[x].value)) {
+            withoutDuplicates.push(dropDownSlotEl.options[x].value);
+        } else {
+            dropDownSlotEl.options.remove(x);
+        }
+    }
+</script>
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
 }

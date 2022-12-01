@@ -40,9 +40,14 @@ namespace WebAppIdentity.Controllers
             return View();
         }
 
-
         [HttpGet]
         public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Success()
         {
             return View();
         }
@@ -57,8 +62,8 @@ namespace WebAppIdentity.Controllers
             foreach (var item in timeSlotList)
             {
                 returnDayList.Add(new SelectListItem() { 
-                    Text = item.Date.ToString(),
-                    Value = item.Date.ToString()
+                    Text = item.Date.ToString("ddd d MMM"),
+                    Value = item.Date.ToString("ddd d MMM")
                 });
 
                 returnSlotList.Add(new SelectListItem()
@@ -139,9 +144,6 @@ namespace WebAppIdentity.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public ActionResult Success() {  return View(); }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
