@@ -11,6 +11,8 @@ namespace DataAccess.Database_layer
         int Create(TimeSlot timeslot);
         bool Delete(int id);
         TimeSlot? GetByDateAndSlot(DateTime date, string slot);
+        List<TimeSlot> GetByDate(DateTime date);
+
     }
 }
 

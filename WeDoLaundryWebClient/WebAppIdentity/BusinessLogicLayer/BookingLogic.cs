@@ -12,6 +12,20 @@ namespace WebAppIdentity.BusinessLogicLayer
             _bookingServiceAccess = new();
         }
 
+        public async Task<List<Booking>?> GetAll()
+        {
+            List<Booking>? returnList = null;
+            try
+            {
+                returnList = await _bookingServiceAccess.GetAll();
+            }
+            catch
+            {
+                returnList = null;
+            }
+            return returnList;
+        }
+
         public async Task<bool> InsertBooking(Booking booking)
         {
             bool wasInserted;
