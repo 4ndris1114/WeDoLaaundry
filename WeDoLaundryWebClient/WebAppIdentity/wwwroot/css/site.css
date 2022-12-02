@@ -28,6 +28,10 @@ body {
     background: #8FCB9B;
 }
 
+.success-container {
+    padding: 40px;
+}
+
 /* Full-width input fields */
 input[type=text], input[type=password], input[type=number] {
     width: 100%;

@@ -5,4 +5,19 @@
 }
 
 <h1>Success</h1>
-﻿
+<h2>Your order with ID of <strong>???@*@ViewBag.bookingInfo.Id*@</strong> was successfully placed!</h2>﻿
+<div class="success-container">
+    <h3>Collection</h3>
+    <p><strong>Date:</strong> @ViewBag.PickUpDate.Date.ToString("dd-MM-yyyy")</p>
+    <p><strong>Time:</strong> @ViewBag.PickUpDate.Slot</p>
+    <p><strong>Address:</strong> @ViewBag.bookingInfo.PickUpAddress</p>
+</div>
+<div class="success-container">
+    <h3>Delivery</h3>
+    <p><strong>Date:</strong> @ViewBag.ReturnDate.Date.ToString("dd-MM-yyyy")</p>
+    <p><strong>Time:</strong> @ViewBag.ReturnDate.Slot</p>
+    <p><strong>Address:</strong> @ViewBag.bookingInfo.ReturnAddress</p>
+</div>
+<div class="success-container">
+    <p><strong>Amount of bags:</strong> @ViewBag.bookingInfo.AmountOfBags</p>
+</div>

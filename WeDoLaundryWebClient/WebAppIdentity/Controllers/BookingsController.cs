@@ -49,6 +49,7 @@ namespace WebAppIdentity.Controllers
         [HttpGet]
         public ActionResult Success()
         {
+
             return View();
         }
 
@@ -83,8 +84,6 @@ namespace WebAppIdentity.Controllers
 
             if (ModelState.IsValid)
             {
-                //TimeSlot pickUpSlotObj = await _timeslotLogic.GetById(pickUpDate);
-                //TimeSlot returnSlotObj = await _timeslotLogic.GetById(returnDate);
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
                 Booking booking = new Booking(tempCustomer.Id, bookingForm.PickUpDay, bookingForm.ReturnDay, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
                 try
@@ -92,8 +91,10 @@ namespace WebAppIdentity.Controllers
                     bool wasOk = await _bookingLogic.InsertBooking(booking);
                     if (wasOk)
                     {
-                        ViewBag.message = "Laundry registered";
-                        return RedirectToAction("Success");
+                        ViewBag.pickUpDate = await _timeslotLogic.GetById(bookingForm.PickUpDay);
+                        ViewBag.returnDate = await _timeslotLogic.GetById(bookingForm.ReturnDay);
+                        ViewBag.bookingInfo = booking;
+                        return View("Success");
                     } else
                     {
                         ViewBag.message = "Bad request"; 
