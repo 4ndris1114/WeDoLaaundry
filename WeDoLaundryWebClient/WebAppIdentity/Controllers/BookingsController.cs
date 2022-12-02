@@ -83,24 +83,30 @@ namespace WebAppIdentity.Controllers
             {
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
                 Booking booking = new Booking(tempCustomer.Id, bookingForm.PickUpDay, bookingForm.ReturnDay, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
-                try
-                {
-                    bool wasOk = await _bookingLogic.InsertBooking(booking);
-                    if (wasOk)
+                if (bookingForm.PickUpDay != bookingForm.ReturnDay)
+                    try
                     {
-                        ViewBag.pickUpDate = await _timeslotLogic.GetById(bookingForm.PickUpDay);
-                        ViewBag.returnDate = await _timeslotLogic.GetById(bookingForm.ReturnDay);
-                        ViewBag.bookingInfo = booking;
-                        return View("Success");
-                    } else
-                    {
-                        ViewBag.message = "Bad request"; 
+                        bool wasOk = await _bookingLogic.InsertBooking(booking);
+                        if (wasOk)
+                        {
+                            ViewBag.pickUpDate = await _timeslotLogic.GetById(bookingForm.PickUpDay);
+                            ViewBag.returnDate = await _timeslotLogic.GetById(bookingForm.ReturnDay);
+                            ViewBag.bookingInfo = booking;
+                            return View("Success");
+                        } else
+                        {
+                            ViewBag.message = "Bad request"; 
+                        }
                     }
-                }
-                catch (NullReferenceException)
+                    catch (NullReferenceException)
+                    {
+                        ViewBag.message = "Error while booking";
+                        return View();
+                    }
+                else
                 {
                     ViewBag.message = "Error while booking";
-                    return View();
+                    return RedirectToAction("Create", "Bookings");
                 }
             }
             return RedirectToAction("Index");
