@@ -1,18 +1,20 @@
 ﻿@page
 @using WebAppIdentity.Models
-@model Booking
+@model OrdersModel
 @{
-        ViewData["Title"] = "Order history";
-        string[] TableHeaders = new string[] {"id"
-        ,"customerId"
-        ,"driverId"
-        ,"pickUpTimeId]"
-        ,"returnTimeId]"
-        ,"pickUpAddress]"
-        ,"returnAddress]"
-        ,"status"
-        ,"noOfBags"
-        ,"invoiceId"};
+    ViewData["Title"] = "Order history";
+    ViewData["ActivePage"] = ManageNavPages.Orders;
+    string[] TableHeaders = new string[] {
+         "Order id"
+        ,"Customer id"
+        ,"Driver id"
+        ,"Collection time"
+        ,"Delivery time"
+        ,"Collection address"
+        ,"Delivery address"
+        ,"Status"
+        ,"Amount of bags"};
+    var bookings = (List<Booking>) ViewData["bookingList"];
 }
 
 <div class="table">
@@ -30,25 +32,27 @@
             </tr>
         </thead>
 
-@*        <tbody>
+        <tbody>
             @{
-                if (Model != null)
+
+                foreach (var Data in @bookings)
                 {
-                    foreach (var Data in Model)
-                    {
-                        <tr>
-                            <td>@Data.Id</td>
-                            <td>@Data.CustomerId</td>
-                            <td>@Data.DriverId</td>
-                            <td>@Data.PickUpTimeId</td>
-                            <td>@Data.ReturnAddress</td>
-                            <td>@Data.Status</td>
-                            <td>@Data.NoOfBags</td>
-                            <td>@Data.InvoiceId</td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>@Data.Id</td>
+                        <td>@Data.CustomerId</td>
+                        <td>@Data.DriverId</td>
+                        <td>@Data.PickUpTimeId</td>
+                        <td>@Data.ReturnTimeId</td>
+                        <td>@Data.PickUpAddress</td>
+                        <td>@Data.ReturnAddress</td>
+                        <td>@Data.Status</td>
+                        <td>@Data.AmountOfBags</td>
+                        <td>@Data.InvoiceId</td>
+
+                    </tr>
                 }
+
             }
-        </tbody>*@
+        </tbody>
     </table>
 </div>
