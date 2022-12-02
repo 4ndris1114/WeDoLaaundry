@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Runtime.Serialization;
 using System.Security.Claims;
 using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Models;
@@ -51,8 +52,8 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
                 TimeSlot deliveryTime = await _timeSlotLogic.GetById(booking.ReturnTimeId);
                 CollectionTimeStrings = new();
                 DeliveryTimeStrings = new();
-                CollectionTimeStrings.Add(collectionTime.Date.ToShortDateString() + collectionTime.Slot);
-                DeliveryTimeStrings.Add(deliveryTime.Date.ToShortDateString() + deliveryTime.Slot);
+                CollectionTimeStrings.Add(collectionTime.Date.ToString("dd/MM-yyyy") + "  " + collectionTime.Slot);
+                DeliveryTimeStrings.Add(deliveryTime.Date.ToString("dd/MM-yyyy") + " " + deliveryTime.Slot);
             }
 
             ViewData["bookingList"] = BookingList;
