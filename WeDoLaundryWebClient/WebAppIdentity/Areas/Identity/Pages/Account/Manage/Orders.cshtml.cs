@@ -12,15 +12,21 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
     {
         public List<Booking> BookingList { get; set; }
 
+        public List<string> CollectionTimeStrings { get; set; }
+
+        public List<string> DeliveryTimeStrings { get; set; }
+
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ICustomerLogic _customerLogic;
         private readonly IBookingLogic _bookingLogic;
+        private readonly ITimeSlotLogic _timeSlotLogic;
 
         public OrdersModel(UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _customerLogic = new CustomerLogic();
             _bookingLogic = new BookingLogic();
+            _timeSlotLogic = new TimeSlotLogic();
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -39,6 +45,15 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
         {
             var tempCustomer = await _customerLogic.GetCustomerByUserId(user.Id);
             BookingList = await _bookingLogic.GetCustomersBookings(tempCustomer.Id);
+            foreach (var booking in BookingList)
+            {
+                TimeSlot collectionTime = await _timeSlotLogic.GetById(booking.PickUpTimeId);
+                TimeSlot deliveryTime = await _timeSlotLogic.GetById(booking.ReturnTimeId);
+                CollectionTimeStrings = new();
+                DeliveryTimeStrings = new();
+                CollectionTimeStrings.Add(collectionTime.Date.ToShortDateString() + collectionTime.Slot);
+                DeliveryTimeStrings.Add(deliveryTime.Date.ToShortDateString() + deliveryTime.Slot);
+            }
 
             ViewData["bookingList"] = BookingList;
         }
