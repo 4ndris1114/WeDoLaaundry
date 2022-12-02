@@ -3,7 +3,7 @@ using WebAppIdentity.ServiceLayer;
 
 namespace WebAppIdentity.BusinessLogicLayer
 {
-    public class TimeSlotLogic
+    public class TimeSlotLogic : ITimeSlotLogic
     {
         private readonly TimeslotService _timeslotService;
 

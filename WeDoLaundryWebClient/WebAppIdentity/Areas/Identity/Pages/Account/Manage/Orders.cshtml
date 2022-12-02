@@ -6,27 +6,27 @@
     ViewData["ActivePage"] = ManageNavPages.Orders;
     string[] TableHeaders = new string[] {
          "Order id"
-        ,"Customer id"
-        ,"Driver id"
         ,"Collection time"
         ,"Delivery time"
         ,"Collection address"
         ,"Delivery address"
         ,"Status"
-        ,"Amount of bags"};
+        ,"Provided bags"
+        ,"Manage"};
     var bookings = (List<Booking>) ViewData["bookingList"];
 }
 
-<div class="table">
-    <table class="table table-bordered table-hover">
+<div class="bookings-table-placeholder">
+    <h2 class="title">@ViewData["Title"]</h2>
+    <table class="bookingHistory-table">
         <thead>
             <tr>
                 @{
                     foreach (var head in TableHeaders)
                     {
-                        <th>
-                            @head
-                        </th>
+                                            <th>
+                                                @head
+                                            </th>
                     }
                 }
             </tr>
@@ -37,21 +37,22 @@
 
                 foreach (var Data in @bookings)
                 {
-                    <tr>
-                        <td>@Data.Id</td>
-                        <td>@Data.CustomerId</td>
-                        <td>@Data.DriverId</td>
-                        <td>@Data.PickUpTimeId</td>
-                        <td>@Data.ReturnTimeId</td>
-                        <td>@Data.PickUpAddress</td>
-                        <td>@Data.ReturnAddress</td>
-                        <td>@Data.Status</td>
-                        <td>@Data.AmountOfBags</td>
-                        <td>@Data.InvoiceId</td>
+                    int index = 0;
+                            <tr>
+                              <td>@Data.Id</td>
+                              <td>@Model.CollectionTimeStrings[index]</td>
+                              <td>@Model.DeliveryTimeStrings[index]</td>
+                              <td>@Data.PickUpAddress</td>
+                              <td>@Data.ReturnAddress</td>
+                              <td>@Data.Status</td> @* currently displays int. TODO: Refine Booking model to use Status enum *@
+                              <td>@Data.AmountOfBags</td>
+                        <td>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501">Remove from history</a>
 
-                    </tr>
+                        </td>
+                            </tr>
+                    index++;
                 }
-
             }
         </tbody>
     </table>

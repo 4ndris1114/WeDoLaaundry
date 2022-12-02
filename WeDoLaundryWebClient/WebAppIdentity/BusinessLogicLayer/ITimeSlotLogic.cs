@@ -6,5 +6,6 @@ namespace WebAppIdentity.BusinessLogicLayer
     {
         Task<List<TimeSlot>> GetAll();
         Task<TimeSlot> GetById(int id);
+        Task<int> GetByDayAndSlot(string date, string slot);
     }
 }
