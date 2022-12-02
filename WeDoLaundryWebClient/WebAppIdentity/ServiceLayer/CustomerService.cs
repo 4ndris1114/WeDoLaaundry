@@ -141,7 +141,7 @@ namespace WebAppIdentity.ServiceLayer
                 }
                 else
                 {
-                    wasDeleted = new();
+                    wasDeleted = false;
                 }
             }
             catch

@@ -55,7 +55,7 @@ namespace WebAppIdentity.Controllers
         
         [HttpGet]
         // GET: CustomersController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
             return View();
         }
@@ -114,16 +114,26 @@ namespace WebAppIdentity.Controllers
         // POST: CustomersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(Customer customer)
         {
+            bool wasDeleted;
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+         
             try
             {
-                return RedirectToAction(nameof(Index));
+                Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
+                wasDeleted = await _customerLogic.DeleteCustomer(tempCustomer);
+                if(wasDeleted)
+                { 
+                    return RedirectToAction("Index", "Home");   
+                }
             }
             catch
             {
                 return View();
             }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -79,9 +79,6 @@ namespace WebAppIdentity.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-           
-
-
             if (ModelState.IsValid)
             {
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
