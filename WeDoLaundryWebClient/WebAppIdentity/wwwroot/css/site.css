@@ -81,9 +81,9 @@ button {
     padding: 6px;
 }
 
-.fillPage {
-    height:510px;
-}
+/*.fillPage {
+    height:max-content;
+}*/
 
 .content1 {
     padding-top:60px;
