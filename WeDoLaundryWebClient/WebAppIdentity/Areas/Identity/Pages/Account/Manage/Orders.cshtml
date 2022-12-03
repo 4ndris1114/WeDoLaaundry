@@ -22,6 +22,7 @@
         <thead>
             <tr>
                 @{
+                    /*Populate headers*/
                     foreach (var head in TableHeaders)
                     {
                                             <th>
@@ -34,7 +35,7 @@
 
         <tbody>
             @{
-
+                /*Populate table*/
                 foreach (var Data in @bookings)
                 {
                     int index = 0;
@@ -44,7 +45,7 @@
                               <td>@Model.DeliveryTimeStrings[index]</td>
                               <td>@Data.PickUpAddress</td>
                               <td>@Data.ReturnAddress</td>
-                              <td>@Data.Status</td> @* currently displays int. TODO: Refine Booking model to use Status enum *@
+                              <td>@Data.Status.ToString()</td>
                               <td>@Data.AmountOfBags</td>
                         <td>
                             <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501">Remove from history</a>

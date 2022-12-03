@@ -30,6 +30,7 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
             _timeSlotLogic = new TimeSlotLogic();
         }
 
+        [HttpGet]
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);

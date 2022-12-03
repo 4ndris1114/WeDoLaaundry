@@ -1,11 +1,20 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace WebAppIdentity.Models
 {
     public class Booking
     {
+
+        public enum BookingStatus
+        {
+            BOOKED = 0,
+            IN_PROGRESS = 1,
+            RETURNED = 2
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -39,7 +48,7 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         public string ReturnAddress { get; set; }
 
-        public int Status { get; set; } = 0;
+        public BookingStatus Status { get; set; }
 
         [DisplayName("Amount of bags")]
         [Required(ErrorMessage = "Amount of bags is required")]
@@ -50,14 +59,16 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         public int InvoiceId { get; set; } = 0;
 
-        public Booking(int customerId, int pickUpTimeId, int returnTimeId, string pickUpAddress, string returnAddress, int amountOfBags)
+        public Booking(int customerId, int pickUpTimeId, int returnTimeId, string pickUpAddress, string returnAddress, int status, int amountOfBags)
         {
             CustomerId = customerId;
             PickUpTimeId = pickUpTimeId;
             ReturnTimeId = returnTimeId;
             PickUpAddress = pickUpAddress;
             ReturnAddress = returnAddress;
+            Status = (BookingStatus) status;
             AmountOfBags = amountOfBags;
         }
+
     }
 }

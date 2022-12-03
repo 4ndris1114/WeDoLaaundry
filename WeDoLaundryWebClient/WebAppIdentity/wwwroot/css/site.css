@@ -50,6 +50,28 @@ body {
   text-align: center;
 }
 
+#validationTextPU {
+    display: none;
+    padding: 6px;
+    width: 360px;
+    border-radius: 3px 3px 3px 3px;
+    font-family: "HelveticaNeue-Light";
+    font-weight: 300;
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
+#validationTextR {
+    display: none;
+    padding: 6px;
+    width: 360px;
+    border-radius: 3px 3px 3px 3px;
+    font-family: "HelveticaNeue-Light";
+    font-weight: 300;
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
 /*Booking history*/
 .bookingHistory-table {
   border-collapse: collapse;
@@ -227,6 +249,10 @@ input[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+input[type="submit"]:disabled {
+    background-color: #9d9d9d;
 }
 
 input[type="submit"]:hover {

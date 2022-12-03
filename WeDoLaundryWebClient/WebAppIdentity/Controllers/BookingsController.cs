@@ -58,6 +58,11 @@ namespace WebAppIdentity.Controllers
         {
             List<TimeSlot> timeSlotList = await _timeslotLogic.GetAll();
             List<SelectListItem> returnList = new List<SelectListItem>();
+            returnList.Add(new SelectListItem()
+            {
+                Text = "--- Select a date & time ---",
+                Value = null
+            });
             foreach (var item in timeSlotList)
             {
                 returnList.Add(new SelectListItem()
@@ -82,27 +87,27 @@ namespace WebAppIdentity.Controllers
             if (ModelState.IsValid)
             {
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
-                Booking booking = new Booking(tempCustomer.Id, bookingForm.PickUpDay, bookingForm.ReturnDay, bookingForm.PickUpAddress, bookingForm.ReturnAddress, bookingForm.AmountOfBags);
-                if (bookingForm.PickUpDay != bookingForm.ReturnDay)
+                if (bookingForm.PickUpDay != bookingForm.ReturnDay) {
+
+                    Booking booking = new Booking(tempCustomer.Id, bookingForm.PickUpDay, bookingForm.ReturnDay, bookingForm.PickUpAddress, bookingForm.ReturnAddress, 0 /*Status: BOOKED*/, bookingForm.AmountOfBags);
                     try
                     {
-                        bool wasOk = await _bookingLogic.InsertBooking(booking);
-                        if (wasOk)
-                        {
-                            ViewBag.pickUpDate = await _timeslotLogic.GetById(bookingForm.PickUpDay);
-                            ViewBag.returnDate = await _timeslotLogic.GetById(bookingForm.ReturnDay);
-                            ViewBag.bookingInfo = booking;
-                            return View("Success");
-                        } else
-                        {
-                            ViewBag.message = "Bad request"; 
-                        }
+                         bool wasOk = await _bookingLogic.InsertBooking(booking);
+                         if (wasOk) {
+                          ViewBag.pickUpDate = await _timeslotLogic.GetById(bookingForm.PickUpDay);
+                          ViewBag.returnDate = await _timeslotLogic.GetById(bookingForm.ReturnDay);
+                          ViewBag.bookingInfo = booking;
+                          return View("Success");
+                         }  else {
+                             ViewBag.message = "Bad request";
+                          }
                     }
                     catch (NullReferenceException)
                     {
                         ViewBag.message = "Error while booking";
                         return View();
                     }
+                }
                 else
                 {
                     ViewBag.message = "Error while booking";
