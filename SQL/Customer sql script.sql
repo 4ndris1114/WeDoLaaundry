@@ -1,8 +1,8 @@
 use [CSC-CSD-S211_10407554]
 
-DROP TABLE IF EXISTS Customer
+DROP TABLE IF EXISTS Customers
 
-CREATE TABLE Customer (
+CREATE TABLE Customers (
 id int PRIMARY KEY IDENTITY (1000,1) NOT NULL,
 fname varchar(50) NOT NULL,
 lname varchar(50) NOT NULL,

@@ -47,16 +47,20 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
         {
             var tempCustomer = await _customerLogic.GetCustomerByUserId(user.Id);
             BookingList = await _bookingLogic.GetCustomersBookings(tempCustomer.Id);
-            foreach (var booking in BookingList)
+            if (BookingList != null){
+                foreach (var booking in BookingList)
+                {
+                    TimeSlot collectionTime = await _timeSlotLogic.GetById(booking.PickUpTimeId);
+                    TimeSlot deliveryTime = await _timeSlotLogic.GetById(booking.ReturnTimeId);
+                    CollectionTimeStrings = new();
+                    DeliveryTimeStrings = new();
+                    CollectionTimeStrings.Add(collectionTime.Date.ToString("dd/MM-yyyy") + "  " + collectionTime.Slot);
+                    DeliveryTimeStrings.Add(deliveryTime.Date.ToString("dd/MM-yyyy") + " " + deliveryTime.Slot);
+                }
+            } else
             {
-                TimeSlot collectionTime = await _timeSlotLogic.GetById(booking.PickUpTimeId);
-                TimeSlot deliveryTime = await _timeSlotLogic.GetById(booking.ReturnTimeId);
-                CollectionTimeStrings = new();
-                DeliveryTimeStrings = new();
-                CollectionTimeStrings.Add(collectionTime.Date.ToString("dd/MM-yyyy") + "  " + collectionTime.Slot);
-                DeliveryTimeStrings.Add(deliveryTime.Date.ToString("dd/MM-yyyy") + " " + deliveryTime.Slot);
+                BookingList = new();
             }
-
             ViewData["bookingList"] = BookingList;
         }
     }

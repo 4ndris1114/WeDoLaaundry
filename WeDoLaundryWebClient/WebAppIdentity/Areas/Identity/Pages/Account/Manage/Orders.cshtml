@@ -27,7 +27,7 @@
                     {
                                             <th>
                                                 @head
-                                            </th>
+                        </th>
                     }
                 }
             </tr>
@@ -36,23 +36,30 @@
         <tbody>
             @{
                 /*Populate table*/
-                foreach (var Data in @bookings)
+                if (@bookings != null)
                 {
-                    int index = 0;
-                            <tr>
-                              <td>@Data.Id</td>
-                              <td>@Model.CollectionTimeStrings[index]</td>
-                              <td>@Model.DeliveryTimeStrings[index]</td>
-                              <td>@Data.PickUpAddress</td>
-                              <td>@Data.ReturnAddress</td>
-                              <td>@Data.Status.ToString()</td>
-                              <td>@Data.AmountOfBags</td>
-                        <td>
-                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501">Remove from history</a>
+                    <p>Couldn't find any booking...Click <a href="~/Bookings/Create"> here</a> to place your first Booking!</p>
+                }
+                else
+                {
+                    foreach (var Data in @bookings)
+                    {
+                        int index = 0;
+                        <tr>
+                            <td>@Data.Id</td>
+                            <td>@Model.CollectionTimeStrings[index]</td>
+                            <td>@Model.DeliveryTimeStrings[index]</td>
+                            <td>@Data.PickUpAddress</td>
+                            <td>@Data.ReturnAddress</td>
+                            <td>@Data.Status.ToString()</td>
+                            <td>@Data.AmountOfBags</td>
+                            <td>
+                                <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501">Remove from history</a>
 
-                        </td>
-                            </tr>
-                    index++;
+                            </td>
+                        </tr>
+                        index++;
+                    }
                 }
             }
         </tbody>

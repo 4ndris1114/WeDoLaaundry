@@ -52,7 +52,7 @@ namespace DataAccess.Database_layer
         {
             List<TimeSlot>? returnList = new();
 
-            string SQL_string = "SELECT * FROM TimeSlots";
+            string SQL_string = "SELECT * FROM TimeSlots order by [date] asc, slot asc";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {

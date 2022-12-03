@@ -19,7 +19,7 @@ namespace DataAccess
         {
             int insertedId = -1;
 
-            string insertString = "INSERT INTO Customer(fname, lname, phone, postalCode, city, address, email, userId, userType) " +
+            string insertString = "INSERT INTO Customers(fname, lname, phone, postalCode, city, address, email, userId, userType) " +
                 "OUTPUT INSERTED.ID VALUES(@FirstName, @LastName, @Phone, @PostalCode, @City, @Address, @Email, @UserId, @UserType)";
 
             using (SqlConnection con = new(_connectionString))
@@ -58,7 +58,7 @@ namespace DataAccess
         {
             List<Customer>? returnList = new();
 
-            string SQL_string = "SELECT * FROM Customer";
+            string SQL_string = "SELECT * FROM Customers";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
@@ -78,7 +78,7 @@ namespace DataAccess
         {
             Customer customer = new();
 
-            string SQL_string = "SELECT * FROM Customer WHERE id = @id";
+            string SQL_string = "SELECT * FROM Customers WHERE id = @id";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
@@ -102,7 +102,7 @@ namespace DataAccess
         {
             Customer customer = new();
 
-            string SQL_string = "SELECT * FROM Customer WHERE userId = @UserId";
+            string SQL_string = "SELECT * FROM Customers WHERE userId = @UserId";
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
@@ -126,7 +126,7 @@ namespace DataAccess
         {
             int numberOfRowsModified = 0;
 
-            string queryString = "UPDATE Customer SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, userType=@CustomerType, userId=@UserId WHERE id=@Id";
+            string queryString = "UPDATE Customers SET fname=@FirstName, lname=@LastName, phone=@Phone, postalCode=@PostalCode, city=@City, address=@Address, email=@Email, userType=@CustomerType, userId=@UserId WHERE id=@Id";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(queryString, conn))
@@ -156,7 +156,7 @@ namespace DataAccess
         {
             int numberOfRowsDeleted = 0;
 
-            string SQL_string = "DELETE FROM Customer WHERE id = @id";
+            string SQL_string = "DELETE FROM Customers WHERE id = @id";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand command = new(SQL_string, conn))
