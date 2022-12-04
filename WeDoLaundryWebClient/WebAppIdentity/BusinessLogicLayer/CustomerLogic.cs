@@ -73,6 +73,21 @@ namespace WebAppIdentity.BusinessLogicLayer
             return wasInserted;
         }
 
+        public async Task<bool> UpdateSubscription(int id, int subscription)
+        {
+            bool wasInserted;
+            try
+            {
+                wasInserted = await _customerServiceAccess.UpdateSubscription(id, subscription);
+            }
+            catch
+            {
+                wasInserted = false;
+            }
+
+            return wasInserted;
+        }
+
         public async Task<bool> DeleteCustomer(Customer customer)
         {
             bool wasInserted;

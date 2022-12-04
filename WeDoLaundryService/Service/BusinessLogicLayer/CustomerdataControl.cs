@@ -91,6 +91,20 @@ namespace Service.BusinessLogicLayer
             return wasUpdated;
         }
 
+        public bool UpdateSub(int id, int subscription)
+        {
+            bool wasUpdated;
+            try
+            {
+                wasUpdated = _customerAccess.UpdateSubscription(id, subscription);
+            }
+            catch
+            {
+                wasUpdated = false;
+            }
+            return wasUpdated;
+        }
+
         public bool Delete(int id)
         {
             bool wasDeleted; 

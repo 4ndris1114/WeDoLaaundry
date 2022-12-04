@@ -110,6 +110,31 @@ namespace WebAppIdentity.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Choose(int button)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            bool wasUpdated;
+            
+            try
+            {
+                Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
+                int customerId = tempCustomer.Id;
+                wasUpdated = await _customerLogic.UpdateSubscription(customerId, button);
+                if(wasUpdated)
+                {
+                    return RedirectToAction("Success", "Bookings");
+                } 
+            }
+            catch 
+            {
+                return View();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
 
         // POST: CustomersController/Delete/5
         [HttpPost]

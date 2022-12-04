@@ -20,6 +20,8 @@ namespace Data.Database_layer
 
         bool UpdateCustomer(Customer customer);
 
+        bool UpdateSubscription(int id, int subscription);
+
         bool DeleteCustomer(int id);
 
     }

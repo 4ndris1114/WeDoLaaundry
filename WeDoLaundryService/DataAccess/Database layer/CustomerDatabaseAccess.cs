@@ -152,6 +152,31 @@ namespace DataAccess
             return (numberOfRowsModified > 0);
         }
 
+        public bool UpdateSubscription(int id, int subscription)
+        {
+            int numberOfRowsModified = 0;
+            string SQL_string = "UPDATE Customers SET userType = @UserType WHERE id = @Id";
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand command = new(SQL_string, con))
+            {
+                SqlParameter userTypeParam = new("@UserType", subscription);
+                command.Parameters.Add(userTypeParam);
+                SqlParameter idParam = new("@Id", id);
+                command.Parameters.Add(idParam);
+
+                con.Open();
+
+                numberOfRowsModified = command.ExecuteNonQuery();
+                if(numberOfRowsModified > 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        }
+
         public bool DeleteCustomer(int id)
         {
             int numberOfRowsDeleted = 0;

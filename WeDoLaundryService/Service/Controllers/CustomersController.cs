@@ -136,6 +136,25 @@ namespace Service.Controllers
             return retVal;
         }
 
+        [HttpPut, Route("{id}/{subscription}")]
+        public ActionResult<bool> UpdateSubscription(int id, int subscription)
+        {
+            ActionResult<bool> retVal;
+
+            bool wasUpdated;
+
+            wasUpdated = _customerdataControl.UpdateSub(id, subscription);
+            if (wasUpdated)
+            {
+                retVal = Ok(wasUpdated);
+            }
+            else
+            {
+                retVal = new StatusCodeResult(204);
+            }
+            return retVal;
+        }
+
         [HttpDelete, Route("{id}")]
         public ActionResult Delete(int id) {
             ActionResult retVal;
