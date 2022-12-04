@@ -1,8 +1,8 @@
 ﻿@page
 @using WebAppIdentity.Models
-@model OrdersModel
+@model CurrentOrderModel
 @{
-    ViewData["Title"] = "Booking history";
+    ViewData["Title"] = "Ongoing bookings";
     ViewData["ActivePage"] = ManageNavPages.Orders;
     string[] TableHeaders = new string[] {
          "Order id"
@@ -12,7 +12,8 @@
         ,"Delivery address"
         ,"Status"
         ,"Provided bags"
-        ,"Manage"};
+        //maybe add estimated collection+delivery time later when we have calculated the route
+    };
     var bookings = (List<Booking>)ViewData["bookingList"];
 }
 
@@ -22,29 +23,27 @@
     @{
         if (@bookings == null)
         {
-            <p id="noBookingsParagraph">Couldn't find any booking...Click <a href="~/Bookings/Create"> here</a> to place your first booking!</p>
+            <p id="noBookingsParagraph">Couldn't find any ongoing booking...Click <a href="~/Bookings/Create">here</a> to place a booking!</p>
         }
-        else
-        {
-            <table class="bookingHistory-table">
-                <thead>
-                    <tr>
-                        @{
-                            /*Populate headers*/
-                            foreach (var head in TableHeaders)
-                            {
-                                <th>
-                                    @head
-                                </th>
-                            }
-                        }
-                    </tr>
-                </thead>
-
-                <tbody>
+        <table class="bookingHistory-table">
+            <thead>
+                <tr>
                     @{
-                        /*Populate table*/
+                        /*Populate headers*/
+                        foreach (var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }
+                    }
+                </tr>
+            </thead>
 
+            <tbody>
+                @{
+                    if (@bookings != null)
+                    {
                         foreach (var Data in @bookings)
                         {
                             int index = 0;
@@ -56,21 +55,17 @@
                                 <td>@Data.ReturnAddress</td>
                                 <td>@Data.Status.ToString()</td>
                                 <td>@Data.AmountOfBags</td>
-                                <td>
-                                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501">Remove from history</a>
-
-                                </td>
                             </tr>
                             index++;
                         }
                     }
-                </tbody>
-            </table>
-        }
+                }
+            </tbody>
+        </table>
     }
 </div>
 <div>
-    <a asp-page="./CurrentOrder">
-        <button type="button" id="ongoingButton">Back to ongoing bookings</button>
+    <a asp-page="./Orders">
+        <button type="button" id="historyButton">History</button>
     </a>
 </div>

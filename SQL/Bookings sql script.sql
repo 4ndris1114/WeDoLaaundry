@@ -16,10 +16,10 @@ noOfBags int NOT NULL,
 invoiceId int NOT NULL,
 
 CONSTRAINT Fk_CustomerBooking
-FOREIGN KEY (customerId) REFERENCES Customer(id) ON DELETE SET NULL ON UPDATE CASCADE,
+FOREIGN KEY (customerId) REFERENCES Customers(id) ON DELETE SET NULL ON UPDATE CASCADE,
 
 CONSTRAINT Fk_BookingPickUpTime
-FOREIGN KEY (pickUpTimeId) REFERENCES TimeSlots(id),
+FOREIGN KEY (pickUpTimeId) REFERENCES TimeSlots(id) on delete set null,
 
 CONSTRAINT Fk_BookingReturnTime
 FOREIGN KEY (returnTimeId) REFERENCES TimeSlots(id)

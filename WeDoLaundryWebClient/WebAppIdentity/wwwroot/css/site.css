@@ -73,6 +73,18 @@ body {
 }
 
 /*Booking history*/
+#historyButton {
+    background-color: #bfb893;
+    width: 200px;
+    font-weight: bold;
+}
+
+#ongoingButton {
+    background-color: #bfb893;
+    width: 300px;
+    font-weight: bold;
+}
+
 .bookingHistory-table {
   border-collapse: collapse;
   margin: 25px 0;

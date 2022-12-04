@@ -9,4 +9,12 @@ CREATE table TimeSlots (
 	availability int not null,
 );
 
-INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-01', '19-21', 10);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-01', '12-15', 1000);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-01', '15-18', 10);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-01', '18-21', 10);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-02', '12-15', 1000);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-02', '15-18', 10);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-02', '18-21', 10);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-03', '12-15', 1000);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-03', '15-18', 10);
+INSERT INTO TimeSlots([date], slot, [availability]) VALUES ('2023-01-03', '18-21', 10);

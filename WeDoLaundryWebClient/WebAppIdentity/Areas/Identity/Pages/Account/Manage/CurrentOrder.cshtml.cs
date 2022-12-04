@@ -1,15 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Runtime.Serialization;
-using System.Security.Claims;
 using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Models;
 
 namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
 {
-    public class OrdersModel : PageModel
+    public class CurrentOrderModel : PageModel
     {
         public List<Booking> BookingList { get; set; }
 
@@ -22,7 +19,7 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
         private readonly IBookingLogic _bookingLogic;
         private readonly ITimeSlotLogic _timeSlotLogic;
 
-        public OrdersModel(UserManager<IdentityUser> userManager)
+        public CurrentOrderModel(UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _customerLogic = new CustomerLogic();
@@ -47,19 +44,23 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
         {
             var tempCustomer = await _customerLogic.GetCustomerByUserId(user.Id);
             BookingList = await _bookingLogic.GetCustomersBookings(tempCustomer.Id);
-            if (BookingList != null){
+            if (BookingList != null)
+            {
                 foreach (var booking in BookingList)
                 {
-                    TimeSlot collectionTime = await _timeSlotLogic.GetById(booking.PickUpTimeId);
-                    TimeSlot deliveryTime = await _timeSlotLogic.GetById(booking.ReturnTimeId);
-                    CollectionTimeStrings = new();
-                    DeliveryTimeStrings = new();
-                    CollectionTimeStrings.Add(collectionTime.Date.ToString("dd/MM-yyyy") + "  " + collectionTime.Slot);
-                    DeliveryTimeStrings.Add(deliveryTime.Date.ToString("dd/MM-yyyy") + " " + deliveryTime.Slot);
+                    if (booking.Status == Booking.BookingStatus.BOOKED || booking.Status == Booking.BookingStatus.IN_PROGRESS)
+                    {
+                        TimeSlot collectionTime = await _timeSlotLogic.GetById(booking.PickUpTimeId);
+                        TimeSlot deliveryTime = await _timeSlotLogic.GetById(booking.ReturnTimeId);
+                        CollectionTimeStrings = new();
+                        DeliveryTimeStrings = new();
+                        CollectionTimeStrings.Add(collectionTime.Date.ToString("dd/MM-yyyy") + "  " + collectionTime.Slot);
+                        DeliveryTimeStrings.Add(deliveryTime.Date.ToString("dd/MM-yyyy") + " " + deliveryTime.Slot);
+                    } else
+                    {
+                        BookingList = null;
+                    }
                 }
-            } else
-            {
-                BookingList = null;
             }
             ViewData["bookingList"] = BookingList;
         }
