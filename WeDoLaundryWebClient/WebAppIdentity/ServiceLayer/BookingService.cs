@@ -6,7 +6,7 @@ namespace WebAppIdentity.ServiceLayer
 {
     public class BookingService : IBookingService
     {
-        static readonly string restUrl = "https://localhost:7091/api/bookings";
+        static readonly string restUrl = "https://localhost:7091/api/bookings/";
         readonly HttpClient _client;
         readonly HttpClientHandler _handler = new();
 
@@ -20,7 +20,7 @@ namespace WebAppIdentity.ServiceLayer
         {
             List<Booking> returnList;
 
-            var uri = new Uri(string.Format(restUrl + "/customerBookings/" + customerId));
+            var uri = new Uri(string.Format(restUrl + "customerBookings/" + customerId));
 
             try
             {
@@ -66,6 +66,32 @@ namespace WebAppIdentity.ServiceLayer
                 wasPosted = false;
             }
             return wasPosted;
+        }
+
+        public async Task<Booking?> Get(int id)
+        {
+            Booking? returnBooking = null;
+
+            var uri = new Uri(string.Format(restUrl+"id"));
+
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    returnBooking = JsonConvert.DeserializeObject<Booking>(content);
+                }
+                else
+                {
+                    returnBooking = null;
+                }
+            }
+            catch
+            {
+                returnBooking = null;
+            }
+            return returnBooking;
         }
 
         public async Task<List<Booking>?> GetAll()

@@ -38,6 +38,20 @@ namespace WebAppIdentity.BusinessLogicLayer
             return returnList;
         }
 
+        public async Task<Booking?> Get(int id)
+        {
+            Booking? returnBooking;
+            try
+            {
+                returnBooking = await _bookingServiceAccess.Get(id);
+            }
+            catch
+            {
+                returnBooking = null;
+            }
+            return returnBooking;
+        }
+
         public async Task<bool> InsertBooking(Booking booking)
         {
             bool wasInserted;
