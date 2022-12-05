@@ -1,0 +1,51 @@
+﻿@import "site.css";
+
+#historyButton {
+    background-color: #bfb893;
+    width: 200px;
+    font-weight: bold;
+}
+
+#ongoingButton {
+    background-color: #bfb893;
+    width: 300px;
+    font-weight: bold;
+}
+
+.bookingHistory-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+    .bookingHistory-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .bookingHistory-table th,
+    .bookingHistory-table td {
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    .bookingHistory-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+        .bookingHistory-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .bookingHistory-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+.bookings-table-placeholder {
+    margin-left: auto;
+    margin-right: auto;
+}

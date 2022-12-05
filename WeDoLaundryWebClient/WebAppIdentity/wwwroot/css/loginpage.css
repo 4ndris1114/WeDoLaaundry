@@ -1,0 +1,78 @@
+﻿@import "site.css";
+
+body {
+    background-color: #5078FF;
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+}
+
+.login-form-container {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1em; /*16px*/
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 500px;
+    border-radius: 1em;
+    background-color: #FFBA00;
+    overflow: hidden
+}
+
+.login-form-container header {
+    background-color: #0029B2;
+    color: #C5C6C8;
+    padding: 1em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.login-form-container .input-wrapper {
+    display: block;
+    margin: 2em auto;
+    border-bottom: 2px solid #fc7148;
+    border-radius: 0px;
+    width: 500px;
+    padding-left: 20px;
+}
+
+.login-form-container .input-wrapper input {
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        padding: .4em .3em;
+        outline: 0;
+}
+
+.login-form-container .input-wrapper input::placeholder {
+  color: #9ea2ab;
+  display: inline-block;
+}
+
+.login-form-container .checkbox .form-label {
+  color: white;
+  padding-left: 20px;
+}
+
+.login-form-container button {
+  outline: 0;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  background-color: #0029B2;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 1.5em 0;
+  margin: 4em auto;
+  display: block;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+
+.login-form-container button:hover {
+    background-color: #0029B2;
+    border-bottom-color: #335be1;
+}
