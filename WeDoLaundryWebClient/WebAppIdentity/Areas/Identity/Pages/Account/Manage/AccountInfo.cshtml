@@ -1,6 +1,33 @@
 ﻿@page
-@model WebAppIdentity.Areas.Identity.Pages.Account.Manage.Account_infoModel
+@model AccountInfo
 @{
+    ViewData["Title"] = "Manage Email and Password";
+    ViewData["ActivePage"] = ManageNavPages.AccountInfo;
 }
 
-@*page for the account info and stuff u know*@
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="email-form" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" readonly/>
+                <label asp-for="Input.NewEmail" class="form-label"></label>
+                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.NewPassword" class="form-control" autocomplete="password" aria-required="true" readonly/>
+                <label asp-for="Input.NewPassword" class="form-label"></label>
+                <span asp-validation-for="Input.NewPassword" class="text-danger"></span>
+                </div>
+            <button onclick="location.href='Email'" type="button">Change email </button>
+            <button onclick="location.href='ChangePassword'" type="button">Change password </button>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
