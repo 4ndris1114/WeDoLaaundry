@@ -89,7 +89,7 @@ namespace WebAppIdentity.Controllers
             if (ModelState.IsValid)
             {
                 Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
-                if (bookingForm.PickUpDay != bookingForm.ReturnDay) {
+                if (await _timeslotLogic.validateOrder(bookingForm.PickUpDay, bookingForm.ReturnDay)) { // validates timeslots
 
                     Booking booking = new Booking(tempCustomer.Id, bookingForm.PickUpDay, bookingForm.ReturnDay, bookingForm.PickUpAddress, bookingForm.ReturnAddress, 0 /*Status: BOOKED*/, bookingForm.AmountOfBags);
                     try

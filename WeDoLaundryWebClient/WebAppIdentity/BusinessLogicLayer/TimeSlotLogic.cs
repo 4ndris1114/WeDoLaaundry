@@ -54,5 +54,23 @@ namespace WebAppIdentity.BusinessLogicLayer
             }
             return returnSlot;
         }
+
+        public async Task<bool> validateOrder(int id1, int id2)
+        {
+            TimeSlot n1 = await GetById(id1);
+            DateTime d1 = n1.Date;
+            int i1 = Convert.ToInt16(n1.Slot.Split('-')[1]); // End of slot 1
+
+            TimeSlot n2 = await GetById(id2);
+            DateTime d2 = n2.Date;
+            int i2 = Convert.ToInt16(n2.Slot.Split('-')[0]); // Start of slot 2
+            if (d1.CompareTo(d2) < 0) {
+                return true;
+            }
+            if (d1.CompareTo(d2) == 0 && i1 <= i2) {
+                return true;
+            }
+            return false;
+        }
     }
 }
