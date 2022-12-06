@@ -151,13 +151,25 @@ button {
   padding: 40px;
 }
 
+.Index_picture {
+    width: 1100px;
+    height: auto;
+    margin-top: 32px
+}
+
+.button_style_1 {
+    width: 150px;
+    border-radius: 5px;
+    font-size: 18px
+}
+
 #inputBooking {
-  height: 37px;
-  background-color: ghostwhite;
+    height: 37px;
+    background-color: ghostwhite;
 }
 
 #banner {
-  background-color: #eae6e5;
+    background-color: #E8F7EC;
 }
 
 #about-us {
@@ -165,16 +177,16 @@ button {
 }
 
 #services {
-  background-color: #5b9279;
-  color: #eae6e5;
+    background-color: #5b9279;
+    color: #E8F7EC;
 }
 
 #contact {
-  background-color: #12130f;
-  color: #eae6e5;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
+    background-color: #12130f;
+    color: #eae6e5; /* #E8F7EC */
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* Clear floats */
