@@ -1,4 +1,5 @@
-﻿using DataAccess.Database_layer;
+﻿using Data.Database_layer;
+using DataAccess.Database_layer;
 using Model.Model_layer;
 
 namespace Service.BusinessLogicLayer
@@ -24,6 +25,20 @@ namespace Service.BusinessLogicLayer
                 insertedId = -1;
             }
             return insertedId;
+        }
+
+        public bool Delete(int id)
+        {
+            bool wasDeleted;
+            try
+            {
+                wasDeleted = _bookingDbAccess.DeleteBooking(id);
+            }
+            catch
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
         }
 
         public List<Booking>? Get()

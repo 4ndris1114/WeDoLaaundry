@@ -146,6 +146,23 @@ namespace Service.Controllers
             return retVal;
         }
 
+        [HttpDelete, Route("{id}")]
+        public ActionResult Delete(int id)
+        {
+            ActionResult retVal;
+            bool wasOk = _bookingdataControl.Delete(id);
+
+            if (wasOk)
+            {
+                retVal = Ok();
+            }
+            else
+            {
+                retVal = new StatusCodeResult(500);
+            }
+            return retVal;
+        }
+
         //// PUT api/<BookingsController>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)

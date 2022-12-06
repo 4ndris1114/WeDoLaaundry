@@ -65,5 +65,19 @@ namespace WebAppIdentity.BusinessLogicLayer
             }
             return wasInserted;
         }
+
+        public async Task<bool> DeleteBooking(int id)
+        {
+            bool wasDeleted;
+            try
+            {
+                wasDeleted = await _bookingServiceAccess.DeleteBooking(id);
+            }
+            catch
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
+        }
     }
 }

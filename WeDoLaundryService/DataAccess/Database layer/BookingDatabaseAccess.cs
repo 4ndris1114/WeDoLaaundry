@@ -152,6 +152,27 @@ namespace DataAccess.Database_layer
             return returnList;
         }
 
+        public bool DeleteBooking(int id)
+        {
+            int numberOfRowsDeleted = 0;
+
+            string SQL_string = "DELETE FROM Bookings WHERE id = @id";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand command = new(SQL_string, conn))
+            {
+                SqlParameter idParam = new("@id", id);
+                command.Parameters.Add(idParam);
+
+                if (conn != null)
+                {
+                    conn.Open();
+                    numberOfRowsDeleted = command.ExecuteNonQuery();
+                }
+            }
+            return (numberOfRowsDeleted > 0);
+        }
+
         private Booking GetBookingReader(SqlDataReader reader)
         {
             Booking returnBooking;

@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Globalization;
 using System.Security.Claims;
+using System.Security.Principal;
 using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Data;
 using WebAppIdentity.Models;
@@ -145,24 +147,23 @@ namespace WebAppIdentity.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                bool wasDeleted = await _bookingLogic.DeleteBooking(id);
+                if (wasDeleted)
+                {
+                    return LocalRedirect("~/Identity/Account/Manage/CurrentOrder");
+                }
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -119,5 +119,30 @@ namespace WebAppIdentity.ServiceLayer
             }
             return returnList;
         }
+
+        public async Task<bool> DeleteBooking(int id)
+        {
+            bool wasDeleted;
+            var uri = new Uri(string.Format(restUrl+id));
+            try
+            {
+
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    wasDeleted = true;
+                }
+                else
+                {
+                    wasDeleted = false;
+                }
+            }
+            catch
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
+        }
     }
 }
