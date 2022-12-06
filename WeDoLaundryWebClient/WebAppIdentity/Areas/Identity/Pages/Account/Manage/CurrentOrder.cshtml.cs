@@ -46,6 +46,7 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
             BookingList = await _bookingLogic.GetCustomersBookings(tempCustomer.Id);
             if (BookingList != null)
             {
+                BookingList.RemoveAll(booking => booking.Status == Booking.BookingStatus.RETURNED);
                 foreach (var booking in BookingList)
                 {
                     if (booking.Status == Booking.BookingStatus.BOOKED || booking.Status == Booking.BookingStatus.IN_PROGRESS)
@@ -56,9 +57,6 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
                         DeliveryTimeStrings = new();
                         CollectionTimeStrings.Add(collectionTime.Date.ToString("dd/MM-yyyy") + "  " + collectionTime.Slot);
                         DeliveryTimeStrings.Add(deliveryTime.Date.ToString("dd/MM-yyyy") + " " + deliveryTime.Slot);
-                    } else
-                    {
-                        BookingList = null;
                     }
                 }
             }
