@@ -103,6 +103,25 @@ namespace WebAppIdentity.BusinessLogicLayer
             return wasInserted;
         }
 
+        public int GetMaxAmountOfBags(Customer customer)
+        {
+            int maxAmount = 2;
+            switch (customer.CustomerType)
+            {
+                case 0:
+                    break;
+                case 1:
+                    maxAmount = 4;
+                    break;
+                case 2:
+                    maxAmount = 6;
+                    break;
+                default:
+                    break;
+            }
+            return maxAmount;
+        }
+
     }
 }
 

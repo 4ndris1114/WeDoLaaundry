@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 
 namespace WebAppIdentity.Models
 {
@@ -45,6 +46,7 @@ namespace WebAppIdentity.Models
         public int Status { get; set; } = 0;
 
         [DisplayName("Amount of bags")]
+        [Range(1,8)]
         [Required(ErrorMessage = "Amount of bags is required")]
         [DataType(DataType.Text)]
         public int AmountOfBags { get; set; }
@@ -52,6 +54,5 @@ namespace WebAppIdentity.Models
         [Required]
         [DataType(DataType.Text)]
         public int InvoiceId { get; set; } = 0;
-
     }
 }
