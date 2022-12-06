@@ -160,5 +160,43 @@ namespace WebAppIdentity.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+
+        // POST: CustomersController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Update(Customer customer)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var claimsEmail = claimsIdentity.FindFirst(ClaimTypes.Email);
+
+            if (ModelState.IsValid)
+            {
+                customer.Email = claimsEmail.Value;
+                customer.UserId = claimsId.Value;
+                try
+                {
+                    bool wasOk = await _customerLogic.UpdateCustomer(customer);
+                    if (wasOk)
+                    {
+                        ViewBag.message = "Customer updated";
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.message = "Bad request";
+                    }
+                }
+                catch
+                {
+                    ViewBag.message = "Error while registering customer";
+                    return View();
+                }
+            }
+            return View();
+        }
     }
 }
