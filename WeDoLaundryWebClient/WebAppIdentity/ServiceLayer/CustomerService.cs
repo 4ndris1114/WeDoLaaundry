@@ -78,19 +78,21 @@ namespace WebAppIdentity.ServiceLayer
         {
             bool wasUpdated;
 
-            var uri = new Uri(string.Format(restUrl + "userId/" + customer));
+            var uri = new Uri(string.Format(restUrl + customer.Id));
 
             try
             {
-                var response = await _client.GetAsync(uri);
+                var json = JsonConvert.SerializeObject(customer);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _client.PutAsync(uri, content);
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    wasUpdated = JsonConvert.DeserializeObject<bool>(content);
+                    wasUpdated = true;
                 }
                 else
                 {
-                    wasUpdated = new();
+                    wasUpdated = false;
                 }
             }
             catch

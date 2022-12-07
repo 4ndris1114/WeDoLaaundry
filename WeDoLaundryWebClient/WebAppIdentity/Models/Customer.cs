@@ -9,6 +9,24 @@ namespace WebAppIdentity.Models
 {
     public class Customer
     {
+        public Customer()
+        {
+        }
+
+        public Customer(int id, string? firstName, string? lastName, string? phone, string email, int postalCode, string? city, string? address, int customerType, string userId)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Phone = phone;
+            Email = email;
+            PostalCode = postalCode;
+            City = city;
+            Address = address;
+            CustomerType = customerType;
+            UserId = userId;
+        }
+
         [Key]
         public int Id { get; set; }
 
