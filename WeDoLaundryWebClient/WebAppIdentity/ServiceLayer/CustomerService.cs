@@ -102,19 +102,21 @@ namespace WebAppIdentity.ServiceLayer
             return wasUpdated;
         }
 
-        public async Task<bool> UpdateSubscription(int id, int subscription)
+        public async Task<bool> UpdateSubscription(Customer customer)
         {
             bool wasUpdated;
 
-            var uri = new Uri(string.Format(restUrl + id + "/" + subscription));
+            var uri = new Uri(string.Format(restUrl + customer.Id + "/" + customer.CustomerType));
 
             try
             {
-                var response = await _client.GetAsync(uri);
+                var json = JsonConvert.SerializeObject(customer);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _client.PutAsync(uri, content);
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    wasUpdated = JsonConvert.DeserializeObject<bool>(content);
+                    wasUpdated = true;
                 }
                 else
                 {

@@ -110,19 +110,19 @@ namespace WebAppIdentity.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Choose(int button)
+        public async Task<ActionResult> Choose(int button, ClaimsPrincipal user)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claimsIdentity = (ClaimsIdentity)user.Identity;
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             bool wasUpdated;
             
             try
             {
-                Customer tempCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
-                int customerId = tempCustomer.Id;
-                wasUpdated = await _customerLogic.UpdateSubscription(customerId, button);
+                Customer customer = await _customerLogic.GetCustomerByUserId(claimsId);
+                customer.CustomerType = button;
+                wasUpdated = await _customerLogic.UpdateSubscription(customer);
                 if(wasUpdated)
                 {
                     return RedirectToAction("Success", "Bookings");

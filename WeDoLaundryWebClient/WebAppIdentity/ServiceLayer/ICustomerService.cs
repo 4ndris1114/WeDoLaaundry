@@ -8,6 +8,6 @@ public interface ICustomerService
     Task<bool> PostCustomer(Customer customer);
     //Task<Customer>CreateCustomer(Customer customer);
     Task<bool> UpdateCustomer(Customer customer);
-    Task<bool> UpdateSubscription(int id, int subscription);
+    Task<bool> UpdateSubscription(Customer customer);
     Task<bool>DeleteCustomer(Customer customer);
 }

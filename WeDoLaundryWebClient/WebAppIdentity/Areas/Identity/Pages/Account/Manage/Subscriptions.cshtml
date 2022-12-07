@@ -1,13 +1,12 @@
 ﻿@page
 @model WebAppIdentity.Areas.Identity.Pages.Account.Manage.Index1Model
 @{
-    var choosenSubscription = 0;
 }
 
 <h1>Subscriptions</h1>
 
-@using (Html.BeginForm("Choose", "Customers", FormMethod.Post, null))
-{
+<form id="choose-form" method="post">
+    @*<input type="hidden" id="choosen" name="choosen" value="" />*@
     <div class="subscriptions">
         <div class="sub-option">
             <h3>No subscription</h3>
@@ -25,4 +24,13 @@
             <button name="button" value="2">Choose</button>
         </div>
     </div>
-}
+</form>
+
+@*@section scripts {
+    <script type="text/javascript">
+document.querySelector('.subscriptions').addEventListener('click', event => {
+    let clickedValue = event.target.value;
+    document.getElementById('choosen').value = clickedValue;
+})
+    </script>
+}*@
