@@ -5,11 +5,18 @@
     ViewData["Title"] = "Create account";
 }
 
-<h1>Give us some more information about you</h1>
+<html>
 
-<hr />
+<head>
+    <link rel="stylesheet" href="~/css/loginpage.css">
+</head>
+
+<h1 style="margin-top:10px">Give us some more information about you</h1>
+
+
 <div class="row">
-    <div class="col-md-4">
+
+    <div class="col-md-4 login-form-container create-customer">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
@@ -19,32 +26,32 @@
             </div>*@
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" class="form-control input_create_customer" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control input_create_customer" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
+                <input asp-for="Phone" class="form-control input_create_customer" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PostalCode" class="control-label"></label>
-                <input asp-for="PostalCode" class="form-control" />
+                <input asp-for="PostalCode" class="form-control input_create_customer" />
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
+                <input asp-for="City" class="form-control input_create_customer" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+                <input asp-for="Address" class="form-control input_create_customer" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
 
@@ -58,7 +65,10 @@
             <span asp-validation-for="CustomerType" class="text-danger"></span>
             </div>*@
 
-            <div class="form-group">
+            <div class="form-group submit_placement">
+                <p style="margin-right:30px">
+                    <a asp-controller="Identity" asp-action="Account/Manage">Back to home page</a>
+                </p>
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -66,12 +76,10 @@
     <h1>@ViewBag.message</h1>
 </div>
 
-<div>
-    <a asp-controller="Identity" asp-action="Account/Manage">Back to home page</a>
-</div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}
+
+</html>

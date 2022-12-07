@@ -3,6 +3,8 @@ html {
     color: #12130f;
     position: relative;
     min-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 @media (min-width: 768px) {
@@ -16,6 +18,7 @@ html {
 :root {
     --white: #ffffff;
     --background: #E8F7EC;
+    --background2: #c9d8cd;
     --highlight-1: #8fcb9b;
     --highlight-2: #5b9279;
     --dark: #12130f;
@@ -26,17 +29,23 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-  padding-top: 57px;
+    margin-bottom: 60px;
+    padding-top: 57px;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 * {
   box-sizing: border-box;
 }
 
+.navbar-brand{
+    padding-left: 13px;
+}
+
 .nav-pills .nav-link.active {
-  width: 200px;
-  background: #8fcb9b;
+    width: 200px;
+    background: #04aa6d !important;
 }
 
 .success-container {
@@ -70,6 +79,46 @@ body {
     font-weight: 300;
     color: #D8000C;
     background-color: #FFBABA;
+}
+
+#about_section1 {
+    max-height: 430px;
+    min-height: 380px;
+    min-width: 450px;
+    max-width: 700px;
+    margin: 50px;
+    margin-top: 30px !important;
+    background-color: #E8F7EC;
+    border-radius: 1rem;
+    padding: 50px;
+    padding-top: 30px;
+    font-size: 17px;
+}
+
+.input_create_customer {
+    height: 35px !important;
+    margin-bottom: 7px !important;
+    margin-top: 5px !important;
+    background-color: ghostwhite !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid !important;
+    border-radius: 2px !important;
+    border-color: dimgrey !important;
+}
+
+.create-customer {
+    padding: 25px !important;
+    padding-top: 30px !important;
+    margin-top: 20px;
+}
+
+.submit_placement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 #validationTextR {
@@ -114,7 +163,6 @@ h1 {
 
 /* Set a style for all buttons */
 button {
-  background-color: #04aa6d !important;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -124,8 +172,19 @@ button {
   opacity: 1;
 }
 
+#registerSubmit{
+    margin-top: 40px;
+}
+
+#registerForm {
+    margin: 25px;
+    margin-top: 2em;
+    margin-bottom: 28px;
+}
+
 .btn-primary {
-    border-color: #04aa6d;
+    border-color: black;
+    background-color: black !important;
 }
 /* Extra styles for the cancel button */
 .cancelbtn {
@@ -136,8 +195,8 @@ button {
 /* Float cancel and signup buttons and add an equal width */
 .signupbtn,
 .cancelbtn {
-  float: left;
-  width: 30%;
+    float: left;
+    width: 30%;
 }
 
 /* Add padding to container elements */
@@ -176,9 +235,35 @@ button {
 .button_style_1 {
     width: 150px;
     border-radius: 5px;
-    font-size: 18px
+    font-size: 18px;
+    background-color: #04aa6d !important;
 }
 
+.button_style_2 {
+    background-color: var(--button-main);
+    border-radius: 8px;
+}
+
+.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown) {
+    /*#E8F0FE*/
+    /*height: 50px;*/
+    padding-top: 30px;
+    border: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid;
+    border-radius: 2px;
+    border-color: dimgrey;
+    /*padding: 0px !important;*/
+    background-color: ghostwhite !important;
+}
+
+.contactForm {
+    background-color: var(--background2) !important;
+}
+
+/*#account{
+    height
+}*/
 #inputBooking {
     height: 37px;
     background-color: ghostwhite;
@@ -195,6 +280,18 @@ button {
 #services {
     background-color: #5b9279;
     color: #E8F7EC;
+}
+
+#fname {
+    background-color: ghostwhite;
+}
+
+#lname {
+    background-color: ghostwhite;
+}
+
+#subject {
+    background-color: ghostwhite;
 }
 
 #contact {
@@ -248,21 +345,21 @@ textarea {
 }
 
 input[type="submit"] {
-  background-color: #8fcb9b;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    background-color: #04aa6d !important;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 input[type="submit"]:disabled {
     background-color: #9d9d9d;
 }
 
-input[type="submit"]:hover {
-  background-color: #5b9279;
-}
+    input[type="submit"]:hover {
+        background-color: #8fcb9b;
+    }
 
 .form-container {
   border-radius: 5px;
