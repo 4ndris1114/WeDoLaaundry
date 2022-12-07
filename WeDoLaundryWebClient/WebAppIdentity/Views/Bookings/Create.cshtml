@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="site.css">
 </head>
 
-<h1>Create</h1>
+<h1>Place an order</h1>
 
-<h4>Booking</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -26,11 +25,6 @@
                 </div>
                 <a id="validationTextPU"></a>
                 <br />
-                @*<div class="form-group">
-                    <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
-                    <label asp-for="PickUpTimeSlot"></label>
-                    <select asp-for="PickUpTimeSlot" class="form-control slots" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
-                </div>*@
                 <div class="form-group">
                     <label asp-for="PickUpAddress" class="control-label"></label>
                     <input asp-for="PickUpAddress" class="form-control" />
@@ -46,26 +40,21 @@
                 </div>
                 <a id="validationTextR"></a>
                 <br />
-               @* <div class="form-group">
-                    <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
-                    <label asp-for="ReturnTimeSlot"></label>
-                    <select asp-for="ReturnTimeSlot" class="form-control slots" asp-items="@(new SelectList(ViewBag.ListofSlots, "Value", "Text"))"></select>
-                </div>*@
                 <div class="form-group">
                     <label asp-for="ReturnAddress" class="control-label"></label>
                     <input asp-for="ReturnAddress" class="form-control" />
                     <span asp-validation-for="ReturnAddress" class="text-danger"></span>
                 </div>
-            </div>
                 <div class="form-group">
                     <label asp-for="AmountOfBags" class="control-label"></label>
                     <input asp-for="AmountOfBags" class="form-control" />
                     <span asp-validation-for="AmountOfBags" class="text-danger"></span>
                 </div>
-            <div class="form-group">
-                <input id="btnSubmit" type="submit" value="Create" class="btn btn-primary" />
+                <div class="form-group">
+                    <input id="btnSubmit" type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                <a>@ViewBag.message</a>
             </div>
-            <a>@ViewBag.message</a>
         </form>
     </div>
 </div>

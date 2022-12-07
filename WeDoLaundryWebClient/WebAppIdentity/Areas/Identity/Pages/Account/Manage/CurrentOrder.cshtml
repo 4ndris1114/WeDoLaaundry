@@ -28,57 +28,55 @@
     @{
         if (@bookings == null)
         {
-            <p id="noBookingsParagraph">Couldn't find any ongoing booking...Click <a href="~/Bookings/Create">here</a> to place a booking!</p>
-        }
-        <table class="bookingHistory-table">
-            <thead>
-                <tr>
-                    @{
+                <p id="noBookingsParagraph">Couldn't find any ongoing booking...Click <a href="~/Bookings/Create">here</a> to place a booking!</p>
+        } else {
+            <table class="bookingHistory-table">
+                <thead>
+                    <tr>
+                        @{
                         /*Populate headers*/
                         foreach (var head in TableHeaders)
                         {
-                            <th>
-                                @head
-                            </th>
+                                    <th>
+                                        @head
+                                    </th>
                         }
-                    }
-                </tr>
-            </thead>
+                        }
+                    </tr>
+                </thead>
 
-            <tbody>
-                @{
-                    if (@bookings != null)
-                    {
+                <tbody>
+                    @{
                         foreach (var Data in @bookings)
                         {
                             int index = 0;
-                            <tr>
-                                <td>@Data.Id</td>
-                                <td>@Model.CollectionTimeStrings[index]</td>
-                                <td>@Model.DeliveryTimeStrings[index]</td>
-                                <td>@Data.PickUpAddress</td>
-                                <td>@Data.ReturnAddress</td>
-                                <td>@Data.Status.ToString()</td>
-                                <td>@Data.AmountOfBags</td>
-                                @{
+                                    <tr>
+                                        <td>@Data.Id</td>
+                                        <td>@Model.CollectionTimeStrings[index]</td>
+                                        <td>@Model.DeliveryTimeStrings[index]</td>
+                                        <td>@Data.PickUpAddress</td>
+                                        <td>@Data.ReturnAddress</td>
+                                        <td>@Data.Status.ToString()</td>
+                                        <td>@Data.AmountOfBags</td>
+                                        @{
                                     if (@Data.Status == Booking.BookingStatus.BOOKED)
                                     {
-                                        <td>
-                                            <form asp-controller="Bookings" asp-action="Delete" asp-route-id="@Data.Id">
-                                                <input onclick="return confirm('Are you sure you want to cancel the order?');" type="submit" value="Cancel" />
-                                            </form>
-                                            <br />
-                                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501">Update booking info</a>
-                                        </td>
+                                                    <td>
+                                                        <form asp-controller="Bookings" asp-action="Delete" asp-route-id="@Data.Id">
+                                                            <input onclick="return confirm('Are you sure you want to cancel the order?');" type="submit" value="Cancel" />
+                                                        </form>
+                                                        <br />
+                                                        <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501">Update booking info</a>
+                                                    </td>
                                     }
-                                }
-                            </tr>
+                                        }
+                                    </tr>
                             index++;
                         }
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        }
     }
 </div>
 <div>
