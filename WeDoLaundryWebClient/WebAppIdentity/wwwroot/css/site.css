@@ -189,6 +189,18 @@ button {
     justify-content: space-between;
 }
 
+#footer {
+    border-top: solid 1px;
+    background: #E8F7EC;
+    width: 100%;
+    height: 50px;
+    padding-top: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
 /* Clear floats */
 .clearfix::after {
   content: "";
