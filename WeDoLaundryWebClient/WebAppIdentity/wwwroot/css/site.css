@@ -15,11 +15,19 @@ html {
 /* Usage --> body { background-color: var(--white); }*/
 :root {
     --white: #ffffff;
+    --background: #E8F7EC;
+    --highlight-1: #8fcb9b;
+    --highlight-2: #5b9279;
+    --dark: #12130f;
+    --navigation: background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity)) !important;
+    --button-main: #04aa6d;
+    --button-main-hover: #04aa6d; /* change */
+    --button-main-disabled: #04aa6d; /* change */
 }
 
 body {
   margin-bottom: 60px;
-  padding-top: 66px;
+  padding-top: 57px;
 }
 
 * {
@@ -99,9 +107,14 @@ hr {
   margin-bottom: 5px;
 }
 
+h1 {
+    padding-top: 15px;
+    text-align: center;
+}
+
 /* Set a style for all buttons */
 button {
-  background-color: #04aa6d;
+  background-color: #04aa6d !important;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -111,10 +124,13 @@ button {
   opacity: 1;
 }
 
+.btn-primary {
+    border-color: #04aa6d;
+}
 /* Extra styles for the cancel button */
 .cancelbtn {
-  padding: 14px 20px;
-  background-color: red;
+    padding: 14px 20px;
+    background-color: red;
 }
 
 /* Float cancel and signup buttons and add an equal width */
@@ -191,7 +207,9 @@ button {
 
 #footer {
     border-top: solid 1px;
-    background: #E8F7EC;
+    /*background: #E8F7EC;*/
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity)) !important;
     width: 100%;
     height: 50px;
     padding-top: 10px;
