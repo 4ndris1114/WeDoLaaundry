@@ -58,9 +58,17 @@ namespace WebAppIdentity.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult> Create(string msg = "")
+        public async Task<ActionResult> Create()
         {
-            ViewBag.message = msg;
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            Customer loggedInCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
+
+            if (loggedInCustomer == null)
+            {
+                return RedirectToAction("Create", "Customers");
+            }
             List<TimeSlot> timeSlotList = await _timeslotLogic.GetAll();
             List<SelectListItem> returnList = new List<SelectListItem>();
             returnList.Add(new SelectListItem()

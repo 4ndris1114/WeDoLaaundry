@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Net;
 using System.Text;
 using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Models;
@@ -27,14 +29,14 @@ namespace WebAppIdentity.ServiceLayer
             try
             {
                 var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     returnCustomer = JsonConvert.DeserializeObject<Customer>(content);
                 }
-                else
+                else //if 204 or 500
                 {
-                    returnCustomer = new();
+                    returnCustomer = null;
                 }
             }
             catch

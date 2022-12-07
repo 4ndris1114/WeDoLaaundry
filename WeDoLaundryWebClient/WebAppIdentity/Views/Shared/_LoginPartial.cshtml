@@ -2,9 +2,10 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+
 <ul style="align-items: center" class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
-{
+{   
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>
     </li>

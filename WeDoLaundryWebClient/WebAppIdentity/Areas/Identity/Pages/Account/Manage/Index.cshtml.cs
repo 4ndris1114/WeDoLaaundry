@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Models;
 using WebAppIdentity.Controllers;
+using System.Security.Claims;
 
 namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
 {
@@ -57,6 +58,15 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGetAsync()
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            Customer loggedInCustomer = await _customerLogic.GetCustomerByUserId(claimsId);
+
+            if (loggedInCustomer == null)
+            {
+                return RedirectToAction("Create", "Customers");
+            }
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
