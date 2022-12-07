@@ -1,45 +1,46 @@
 ﻿@page
 @using WebAppIdentity.Models
-@model Customer
+@model IndexModel
 @{
     ViewData["Title"] = "Manage your profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
+    var customer = (Customer) ViewData["CurrentCustomer"];
 }
 
 <h3>@ViewData["Title"]</h3>
 <div class = "row">
     <div class = "col-md-6">
-        <form asp-controller="Home" asp-action="">
+        <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="form-label"></label>
-                <input asp-for="FirstName" class="form-control" autocomplete="Input.FirstName" aria-required="true" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="Input.NewFirstName" class="form-label"></label>
+                <input asp-for="Input.NewFirstName" class="form-control" aria-required="true" value="@customer.FirstName">
+                <span asp-validation-for="@customer.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="form-label"></label>
-                <input asp-for="LastName" class="form-control" autocomplete="Lastname" aria-required="true" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="Input.NewLastName" class="form-label"></label>
+                <input asp-for="Input.NewLastName" class="form-control" autocomplete="@customer.LastName" aria-required="true" value="@customer.LastName" />
+                <span asp-validation-for="@customer.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Phone" class="form-label"></label>
-                <input asp-for="Phone" class="form-control" autocomplete="Phone" aria-required="true" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+                <label asp-for="Input.NewPhone" class="form-label"></label>
+                <input asp-for="Input.NewPhone" class="form-control" autocomplete="@customer.Phone" aria-required="true" value="@customer.Phone" />
+                <span asp-validation-for="@customer.Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PostalCode" class="form-label"></label>
-                <input asp-for="PostalCode" class="form-control" autocomplete="PostalCode" aria-required="true" />
-                <span asp-validation-for="PostalCode" class="text-danger"></span>
+                <label asp-for="Input.NewPostalCode" class="form-label"></label>
+                <input asp-for="Input.NewPostalCode" class="form-control" autocomplete="@customer.PostalCode" aria-required="true" value="@customer.PostalCode" />
+                <span asp-validation-for="@customer.PostalCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="City" class="form-label"></label>
-                <input asp-for="City" class="form-control" autocomplete="City" aria-required="true"/>
-                <span asp-validation-for="City" class="text-danger"></span>
+                <label asp-for="Input.NewCity" class="form-label"></label>
+                <input asp-for="Input.NewCity" class="form-control" autocomplete="@customer.City" aria-required="true" value="@customer.City" />
+                <span asp-validation-for="@customer.City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="form-label"></label>
-                <input asp-for="Address" class="form-control" autocomplete="Address" aria-required="true" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+                <label asp-for="Input.NewAddress" class="form-label"></label>
+                <input asp-for="Input.NewAddress" class="form-control" autocomplete="@customer.Address" aria-required="true" value="@customer.Address" />
+                <span asp-validation-for="@customer.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Update" class="btn btn-primary" />

@@ -161,13 +161,11 @@ namespace WebAppIdentity.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-        // POST: CustomersController/Create
-        [HttpPost]
+        [HttpPut]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Update(Customer customer)
+        public async Task<ActionResult> Update(Customer customer, ClaimsPrincipal user)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claimsIdentity = (ClaimsIdentity)user.Identity;
 
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
@@ -183,7 +181,7 @@ namespace WebAppIdentity.Controllers
                     if (wasOk)
                     {
                         ViewBag.message = "Customer updated";
-                        return RedirectToAction("Index", "Home");
+                        return LocalRedirect("~/Identity/Account/Manage/Index");
                     }
                     else
                     {
@@ -193,10 +191,10 @@ namespace WebAppIdentity.Controllers
                 catch
                 {
                     ViewBag.message = "Error while registering customer";
-                    return View();
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
