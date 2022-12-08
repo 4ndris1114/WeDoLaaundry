@@ -2,6 +2,7 @@
 using WebAppIdentity.Data.Migrations;
 using WebAppIdentity.ServiceLayer;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using static WebAppIdentity.Models.Customer;
 
 namespace WebAppIdentity.BusinessLogicLayer
 {
@@ -108,12 +109,12 @@ namespace WebAppIdentity.BusinessLogicLayer
             int maxAmount = 2;
             switch (customer.CustomerType)
             {
-                case 0:
+                case (Subscription) 0:
                     break;
-                case 1:
+                case (Subscription) 1:
                     maxAmount = 4;
                     break;
-                case 2:
+                case (Subscription) 2:
                     maxAmount = 6;
                     break;
                 default:

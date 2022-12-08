@@ -11,6 +11,7 @@ using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Models;
 using WebAppIdentity.Controllers;
 using System.Security.Claims;
+using static WebAppIdentity.Models.Customer;
 
 namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
 {
@@ -102,7 +103,8 @@ namespace WebAppIdentity.Areas.Identity.Pages.Account.Manage
             if (Input.NewFirstName != CurrentCustomer.FirstName || Input.NewLastName != CurrentCustomer.LastName || Input.NewPhone != CurrentCustomer.Phone || 
                 Input.NewPostalCode != CurrentCustomer.PostalCode || Input.NewCity != CurrentCustomer.City || Input.NewAddress != CurrentCustomer.Address)
             {
-                var customerToPost = new Customer(CurrentCustomer.Id, Input.NewFirstName, Input.NewLastName, Input.NewPhone, CurrentCustomer.Email, Input.NewPostalCode, Input.NewCity, Input.NewAddress, CurrentCustomer.CustomerType, CurrentCustomer.UserId);
+                var customerToPost = new Customer(CurrentCustomer.Id, Input.NewFirstName, Input.NewLastName, Input.NewPhone, 
+                    CurrentCustomer.Email, Input.NewPostalCode, Input.NewCity, Input.NewAddress, (int) CurrentCustomer.CustomerType, CurrentCustomer.UserId);
 
                 _customerController.Update(customerToPost, User);
             }

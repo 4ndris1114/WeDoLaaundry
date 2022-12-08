@@ -11,6 +11,7 @@ using System.Text;
 using WebAppIdentity.BusinessLogicLayer;
 using WebAppIdentity.Data;
 using WebAppIdentity.Models;
+using static WebAppIdentity.Models.Customer;
 
 namespace WebAppIdentity.Controllers
 {
@@ -121,7 +122,7 @@ namespace WebAppIdentity.Controllers
             try
             {
                 Customer customer = await _customerLogic.GetCustomerByUserId(claimsId);
-                customer.CustomerType = button;
+                customer.CustomerType = (Subscription) button;
                 wasUpdated = await _customerLogic.UpdateSubscription(customer);
                 if(wasUpdated)
                 {

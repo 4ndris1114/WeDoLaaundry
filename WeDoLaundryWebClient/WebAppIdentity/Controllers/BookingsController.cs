@@ -58,7 +58,7 @@ namespace WebAppIdentity.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult> Create()
+        public async Task<ActionResult> Create(string message = "")
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claimsId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -78,14 +78,15 @@ namespace WebAppIdentity.Controllers
             });
             foreach (var item in timeSlotList)
             {
+                if (item.Availability > 0)
                 returnList.Add(new SelectListItem()
                 {
-                    Text = item.Date.ToString("ddd d MMM") + " " + item.Slot.ToString(),
+                    Text = item.Date.ToString("ddd d MMM") + " " + item.Slot.ToString() + $" | Availability {item.Availability}",
                     Value = item.Id.ToString()
                 });
-
             }
 
+            ViewBag.message = message;
             ViewBag.List = returnList;
             return View();
         }
@@ -119,6 +120,7 @@ namespace WebAppIdentity.Controllers
                         else
                         {
                             ViewBag.message = "Bad request";
+                            return RedirectToAction("Create", "Bookings", new {message = "Slot taken"});
                         }
                     }
                     catch (NullReferenceException)

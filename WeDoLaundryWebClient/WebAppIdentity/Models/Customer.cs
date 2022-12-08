@@ -9,6 +9,13 @@ namespace WebAppIdentity.Models
 {
     public class Customer
     {
+        public enum Subscription
+        {
+            NO_SUBSCRIPTION = 0,
+            NORMAL_SUBSCRIPTION = 1,
+            PREMIUM_SUBSCRIPTION = 2
+        }
+
         public Customer()
         {
         }
@@ -23,7 +30,7 @@ namespace WebAppIdentity.Models
             PostalCode = postalCode;
             City = city;
             Address = address;
-            CustomerType = customerType;
+            CustomerType = (Subscription) customerType;
             UserId = userId;
         }
 
@@ -74,10 +81,10 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         public string Address { get; set; }
 
-        [DisplayName("Customer type")]
+        [DisplayName("Subscription")]
         [Required(ErrorMessage = "Customer type is required.")]
         [DataType(DataType.Text)]
-        public int CustomerType  { get; set; }
+        public Subscription CustomerType  { get; set; }
 
         [ForeignKey("FK_CustomerUser")]
         [DataType(DataType.Text)]

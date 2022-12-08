@@ -108,7 +108,7 @@ namespace WebAppIdentity.ServiceLayer
         {
             bool wasUpdated;
 
-            var uri = new Uri(string.Format(restUrl + customer.Id + "/" + customer.CustomerType));
+            var uri = new Uri(string.Format(restUrl + customer.Id + "/" + (int) customer.CustomerType));
 
             try
             {
