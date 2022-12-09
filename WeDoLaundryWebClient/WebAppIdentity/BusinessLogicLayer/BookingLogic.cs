@@ -69,9 +69,10 @@ namespace WebAppIdentity.BusinessLogicLayer
         public async Task<bool> DeleteBooking(int id)
         {
             bool wasDeleted;
+            Booking tempBooking = await Get(id);
             try
             {
-                wasDeleted = await _bookingServiceAccess.DeleteBooking(id);
+                wasDeleted = await _bookingServiceAccess.DeleteBooking(id, tempBooking.PickUpTimeId, tempBooking.ReturnTimeId);
             }
             catch
             {

@@ -72,7 +72,7 @@ namespace WebAppIdentity.ServiceLayer
         {
             Booking? returnBooking = null;
 
-            var uri = new Uri(string.Format(restUrl+"id"));
+            var uri = new Uri(string.Format(restUrl + id));
 
             try
             {
@@ -120,18 +120,23 @@ namespace WebAppIdentity.ServiceLayer
             return returnList;
         }
 
-        public async Task<bool> DeleteBooking(int id)
+        public async Task<bool> DeleteBooking(int id, int pickupId, int deliveryId)
         {
             bool wasDeleted;
             var uri = new Uri(string.Format(restUrl+id));
+            string restUrl2 = "https://localhost:7091/api/Timeslots/modify/";
+            var uriPickUp = new Uri(string.Format(restUrl2 + pickupId + "/" + true));
+            var uriDelivery = new Uri(string.Format(restUrl2 + deliveryId + "/" + true));
+
             try
             {
-
                 HttpResponseMessage response = await _client.DeleteAsync(uri);
 
                 if (response.IsSuccessStatusCode)
                 {
                     wasDeleted = true;
+                    _client.PutAsync(uriPickUp, null);
+                    _client.PutAsync(uriDelivery, null);
                 }
                 else
                 {

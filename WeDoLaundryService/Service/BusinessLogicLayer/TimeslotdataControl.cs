@@ -43,12 +43,12 @@ namespace Service.BusinessLogicLayer
             return wasDeleted;
         }
 
-        public bool DecreaseAvailability(int id)
+        public bool ModifyAvailability(int id, bool mode)
         {
             bool wasUpdated = false;
             try
             {
-                wasUpdated = _timeslotAccess.DecreaseAvailability(id);
+                wasUpdated = _timeslotAccess.ModifyAvailability(id, mode);
             }
             catch (SlotNotAvailable ex)
             {

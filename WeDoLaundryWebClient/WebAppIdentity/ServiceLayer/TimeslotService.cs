@@ -121,31 +121,5 @@ namespace WebAppIdentity.ServiceLayer
             }
             return returnList;
         }
-
-        public async Task<bool> Decrease(int id)
-        {
-            bool wasDecreased;
-
-            var uri = new Uri(string.Format(restUrl+"decrease/"+id));
-
-            try
-            {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    wasDecreased = JsonConvert.DeserializeObject<bool>(content);
-                }
-                else
-                {
-                    wasDecreased = false;
-                }
-            }
-            catch
-            {
-                wasDecreased = false;
-            }
-            return wasDecreased;
-        }
     }
 }

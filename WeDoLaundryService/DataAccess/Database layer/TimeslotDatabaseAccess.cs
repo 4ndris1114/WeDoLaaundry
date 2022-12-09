@@ -24,10 +24,20 @@ namespace DataAccess.Database_layer
             _connectionString = configuration.GetConnectionString("WeDoLaundry");
         }
 
-        public bool DecreaseAvailability(int id)
+        // true = increase
+        // false = decrease
+        public bool ModifyAvailability(int id, bool mode)
         {
             int numberOfRowsModified = 0;
-            string SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE id = @Id AND availability > 0";
+            string SQL_string;
+            if (mode) // increase
+            {
+                SQL_string = "UPDATE TimeSlots SET [availability] = [availability] + 1 WHERE id = @Id";
+            }
+            else // decrease
+            {
+                SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE id = @Id AND availability > 0";
+            }
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {

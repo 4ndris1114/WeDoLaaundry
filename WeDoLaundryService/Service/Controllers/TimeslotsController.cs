@@ -116,25 +116,25 @@ namespace Service.Controllers
             return returnList;
         }
 
-        [HttpPut, Route("/decrease/{id}")]
-        public ActionResult<bool>? Decrease(int id)
+        [HttpPut, Route("modify/{id}/{mode}")]
+        public ActionResult<bool>? Modify(int id, bool mode)
         {
             ActionResult<bool> retVal;
 
             bool wasUpdated;
 
             //TimeSlot? dbTimeslot = ModelConversion.TimeslotDtoConverter.ToTimeslot(timeslotDto);
-            wasUpdated = _timeslotDataControl.DecreaseAvailability(id);
+            wasUpdated = _timeslotDataControl.ModifyAvailability(id, mode);
             //evaluate & return status code
             if (wasUpdated)
             {
                 retVal = Ok(wasUpdated);
             } else {
-                retVal = new StatusCodeResult(204);
+                retVal = new StatusCodeResult(500);
             }
-
             return retVal;
         }
+
 
         [HttpDelete, Route("{id}")]
         public ActionResult Delete(int id)

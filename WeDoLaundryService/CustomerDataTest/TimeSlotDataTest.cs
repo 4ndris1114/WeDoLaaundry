@@ -56,14 +56,29 @@ namespace Tests
             int beforeDecrease = newSlot.Availability;
 
             //Act
-            bool wasUpdated = _timeSlotDataAccess.DecreaseAvailability(insertedId);
+            bool wasUpdated = _timeSlotDataAccess.ModifyAvailability(insertedId, false);
             int updatedAvailability = _timeSlotDataAccess.Get(insertedId).Availability;
             extraOutput.WriteLine("avail: " + updatedAvailability);
 
             //Assert
             Assert.True(wasUpdated);
             Assert.True(updatedAvailability == beforeDecrease-1);
+        }
 
+        [Fact]
+        public void TestIncreaseAvailability()
+        {
+            //Arrange
+            int beforeDecrease = newSlot.Availability;
+
+            //Act
+            bool wasUpdated = _timeSlotDataAccess.ModifyAvailability(insertedId, true);
+            int updatedAvailability = _timeSlotDataAccess.Get(insertedId).Availability;
+            extraOutput.WriteLine("avail: " + updatedAvailability);
+
+            //Assert
+            Assert.True(wasUpdated);
+            Assert.True(updatedAvailability == beforeDecrease + 1);
         }
 
         [Fact]
