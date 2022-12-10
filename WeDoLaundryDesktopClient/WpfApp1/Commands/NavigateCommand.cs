@@ -9,12 +9,11 @@ using WpfApp1.ViewModels;
 
 namespace WpfApp1.Commands
 {
-    public class NavigateCommand<TViewModel> : CommandBase
-        where TViewModel : ViewModelBase
+    public class NavigateCommand : CommandBase
     {
-        private readonly INavigationService<TViewModel> _navService;
+        private readonly INavigationService _navService;
 
-        public NavigateCommand(INavigationService<TViewModel> navService)
+        public NavigateCommand(INavigationService navService)
         {
             _navService = navService;
         }

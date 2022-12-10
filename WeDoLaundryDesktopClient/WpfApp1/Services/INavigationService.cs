@@ -2,7 +2,7 @@
 
 namespace WpfApp1.Services
 {
-    public interface INavigationService<TViewModel> where TViewModel : ViewModelBase
+    public interface INavigationService
     {
         void Navigate();
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,49 +18,61 @@ namespace WpfApp1
     /// </summary>
     public partial class App : Application
     {
-        private readonly NavigationStore _navStore;
-
+        private readonly IServiceProvider _serviceProvider;
 
         public App()
         {
-            _navStore = new();
+            //Dependency Injection
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<NavigationStore>();
+
+            services.AddSingleton<INavigationService>(s => CreateHomeNavigationService(s));
+
+            services.AddTransient<HomeViewModel>(s => new HomeViewModel(CreateCustomerNavigationService(s)));
+            services.AddTransient<CustomerViewModel>(s => new CustomerViewModel(CreateHomeNavigationService(s)));
+            services.AddSingleton<MainViewModel>();
+
+            services.AddSingleton<MainWindow>(s => new WpfApp1.MainWindow
+            {
+                DataContext = s.GetRequiredService<MainViewModel>()
+            });
+
+            _serviceProvider = services.BuildServiceProvider();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            INavigationService<HomeViewModel> homeNavigationService = CreateHomeNavigationService();
-            homeNavigationService.Navigate();
+            INavigationService initialNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
+            initialNavigationService.Navigate();
 
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_navStore)
-            };
+            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
             base.OnStartup(e);
         }
 
-        private INavigationService<HomeViewModel> CreateHomeNavigationService()
+        private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<HomeViewModel>(
-                _navStore, 
-                () => new HomeViewModel(CreateCustomerNavigationService()),
-                CreateNavigationBarViewModel);
+                serviceProvider.GetRequiredService<NavigationStore>(), 
+                () => serviceProvider.GetRequiredService<HomeViewModel>(),
+                () => CreateNavigationBarViewModel(serviceProvider));
         }
 
-        private INavigationService<CustomerViewModel> CreateCustomerNavigationService()
+        private INavigationService CreateCustomerNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<CustomerViewModel>(
-                _navStore, 
-                () => new CustomerViewModel(CreateHomeNavigationService()),
-                CreateNavigationBarViewModel);
+                serviceProvider.GetRequiredService<NavigationStore>(), 
+                () => serviceProvider.GetRequiredService<CustomerViewModel>(),
+                () => CreateNavigationBarViewModel(serviceProvider));
         }
 
-        private NavigationBarViewModel CreateNavigationBarViewModel()
+        private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
             return new NavigationBarViewModel(
-                CreateHomeNavigationService(),
-                CreateCustomerNavigationService());
+                CreateHomeNavigationService(serviceProvider),
+                CreateCustomerNavigationService(serviceProvider));
         }
     }
 }

@@ -8,7 +8,7 @@ using WpfApp1.ViewModels;
 
 namespace WpfApp1.Services
 {
-    public class LayoutNavigationService<TViewModel> : INavigationService<TViewModel> where TViewModel : ViewModelBase
+    public class LayoutNavigationService<TViewModel> : INavigationService where TViewModel : ViewModelBase
     {
         private readonly NavigationStore _navStore;
         private readonly Func<TViewModel> _createViewModel;
