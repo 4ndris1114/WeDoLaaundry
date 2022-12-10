@@ -12,9 +12,9 @@ namespace WpfApp1.Commands
     public class NavigateCommand<TViewModel> : CommandBase
         where TViewModel : ViewModelBase
     {
-        private readonly NavigationService<TViewModel> _navService;
+        private readonly INavigationService<TViewModel> _navService;
 
-        public NavigateCommand(NavigationService<TViewModel> navService)
+        public NavigateCommand(INavigationService<TViewModel> navService)
         {
             _navService = navService;
         }

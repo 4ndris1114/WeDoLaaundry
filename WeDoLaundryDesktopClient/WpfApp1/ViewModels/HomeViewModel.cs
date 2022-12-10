@@ -16,10 +16,9 @@ namespace WpfApp1.ViewModels
 
         public ICommand NavigateCustomersCommand { get; }
 
-        public HomeViewModel(NavigationStore navStore)
+        public HomeViewModel(INavigationService<CustomerViewModel> customersNavigationService)
         {
-            NavigateCustomersCommand = new NavigateCommand<CustomerViewModel>(new NavigationService<CustomerViewModel>(
-                navStore, () => new CustomerViewModel(navStore)));
+            NavigateCustomersCommand = new NavigateCommand<CustomerViewModel>(customersNavigationService);
         }
     }
 }

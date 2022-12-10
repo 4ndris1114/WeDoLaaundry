@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp1.Control
+namespace WpfApp1.Components
 {
     /// <summary>
-    /// Interaction logic for CustomerControl.xaml
+    /// Interaction logic for NavigationBar.xaml
     /// </summary>
-    public partial class CustomerControl : UserControl
+    public partial class NavigationBar : UserControl
     {
-        public CustomerControl()
+        public NavigationBar()
         {
             InitializeComponent();
         }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:WpfApp1.ViewModels"
         xmlns:views="clr-namespace:WpfApp1.Views"
-        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:local="clr-namespace:WpfApp1" 
+        xmlns:components="clr-namespace:WpfApp1.Components"
         mc:Ignorable="d"
         Title="WeDoLaundry - Management" Height="650" Width="916">
     <ContentControl Content="{Binding CurrentViewModel}">
@@ -15,6 +16,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:CustomerViewModel}">
                 <views:CustomerView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
+                <components:Layout />
             </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
