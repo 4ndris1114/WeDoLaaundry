@@ -36,9 +36,10 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid MaxWidth="1000" Margin="20 10">
+    <Grid MaxWidth="1400" Margin="20 10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
@@ -54,6 +55,12 @@
             Grid.Column="2" 
             Command="{Binding NavigateCustomersCommand}"
             Content="Customers"
+            Margin="10 0 0 0"/>
+
+        <Button 
+            Grid.Column="3" 
+            Command="{Binding NavigateBookingsCommand}"
+            Content="Bookings"
             Margin="10 0 0 0"/>
     </Grid>
 </UserControl>

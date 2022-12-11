@@ -30,10 +30,12 @@ namespace WpfApp1
             services.AddSingleton<INavigationService>(s => CreateHomeNavigationService(s));
 
             services.AddTransient<HomeViewModel>(s => new HomeViewModel(CreateCustomerNavigationService(s)));
-            services.AddTransient<CustomerViewModel>(s => new CustomerViewModel(CreateHomeNavigationService(s)));
+            services.AddTransient<CustomerListViewModel>(s => new CustomerListViewModel());
+            services.AddTransient<BookingListViewModel>(s => new BookingListViewModel());
+            services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
             services.AddSingleton<MainViewModel>();
 
-            services.AddSingleton<MainWindow>(s => new WpfApp1.MainWindow
+            services.AddSingleton<MainWindow>(s => new MainWindow()
             {
                 DataContext = s.GetRequiredService<MainViewModel>()
             });
@@ -57,22 +59,31 @@ namespace WpfApp1
             return new LayoutNavigationService<HomeViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(), 
                 () => serviceProvider.GetRequiredService<HomeViewModel>(),
-                () => CreateNavigationBarViewModel(serviceProvider));
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
 
         private INavigationService CreateCustomerNavigationService(IServiceProvider serviceProvider)
         {
-            return new LayoutNavigationService<CustomerViewModel>(
+            return new LayoutNavigationService<CustomerListViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(), 
-                () => serviceProvider.GetRequiredService<CustomerViewModel>(),
-                () => CreateNavigationBarViewModel(serviceProvider));
+                () => serviceProvider.GetRequiredService<CustomerListViewModel>()  ,
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+        
+        private INavigationService CreateBookingNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<BookingListViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<BookingListViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
 
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
             return new NavigationBarViewModel(
                 CreateHomeNavigationService(serviceProvider),
-                CreateCustomerNavigationService(serviceProvider));
+                CreateCustomerNavigationService(serviceProvider),
+                CreateBookingNavigationService(serviceProvider));
         }
     }
 }

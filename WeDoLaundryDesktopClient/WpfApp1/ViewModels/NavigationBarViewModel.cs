@@ -14,11 +14,13 @@ namespace WpfApp1.ViewModels
     {
         public ICommand NavigateHomeCommand { get; }
         public ICommand NavigateCustomersCommand { get; }
+        public ICommand NavigateBookingsCommand { get; }
 
-        public NavigationBarViewModel(INavigationService homeNavigationService, INavigationService customerNavigationService)
+        public NavigationBarViewModel(INavigationService homeNavigationService, INavigationService customerNavigationService, INavigationService bookingNavigationService)
         {
             NavigateHomeCommand = new NavigateCommand(homeNavigationService);
             NavigateCustomersCommand = new NavigateCommand(customerNavigationService);
+            NavigateBookingsCommand = new NavigateCommand(bookingNavigationService);
         }
     }
 }

@@ -16,7 +16,7 @@
 
         <ContentControl 
             Grid.Row="1"
-            MaxWidth="1000"
+            MaxWidth="1400"
             Margin="20"
             Content="{Binding ContentViewModel}" />
         

@@ -5,21 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:WpfApp1.ViewModels"
         xmlns:views="clr-namespace:WpfApp1.Views"
-        xmlns:local="clr-namespace:WpfApp1" 
-        xmlns:components="clr-namespace:WpfApp1.Components"
+        xmlns:components="clr-namespace:WpfApp1.Components" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="WeDoLaundry - Management" Height="650" Width="916">
-    <ContentControl Content="{Binding CurrentViewModel}">
-        <ContentControl.Resources>
+        Title="WeDoLaundry - Management" 
+        Height="850" 
+        Width="1400">
+    <Grid>
+        <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomeView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:CustomerViewModel}">
-                <views:CustomerView />
+            <DataTemplate DataType="{x:Type viewmodels:CustomerListViewModel}">
+                <views:CustomerListView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BookingListViewModel}">
+                <views:BookingListView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
                 <components:Layout />
             </DataTemplate>
-        </ContentControl.Resources>
-    </ContentControl>
+        </Grid.Resources>
+        <ContentControl Content="{Binding CurrentViewModel}" />
+    </Grid>
+
 </Window>

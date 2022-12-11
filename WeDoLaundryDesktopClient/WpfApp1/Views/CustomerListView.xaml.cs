@@ -18,9 +18,9 @@ namespace WpfApp1.Views
     /// <summary>
     /// Interaction logic for CustomerView.xaml
     /// </summary>
-    public partial class CustomerView : UserControl
+    public partial class CustomerListView : UserControl
     {
-        public CustomerView()
+        public CustomerListView()
         {
             InitializeComponent();
         }
