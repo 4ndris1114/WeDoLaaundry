@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.Views" xmlns:components="clr-namespace:WpfApp1.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" Width="1223">
 
-    <Grid>
+    <Grid Margin="52,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*" />
@@ -18,9 +18,23 @@
             Grid.Row="0"
             FontSize="26"
         />
-        <ListView BorderThickness="2" BorderBrush="Black" 
-                  HorizontalAlignment="Center" Grid.Row="1" 
-                  Margin="0 20 0 0" ItemsSource="{Binding Customers}">
+        <DataGrid Name="customersDataGrid" ItemsSource="{Binding Customers}" AlternatingRowBackground = "LightBlue" AlternationCount = "2" AutoGenerateColumns = "False" Margin="477,19,81,65" Grid.Row="1" SelectionChanged="customersDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Phone number" Binding="{Binding Phone}" />
+                <DataGridTextColumn Header="Email address" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Postal code" Binding="{Binding PostalCode}" />
+                <DataGridTextColumn Header="City" Binding="{Binding City}" />
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" />
+                <DataGridTextColumn Header="Subscription" Binding="{Binding CustomerType}" />
+                <DataGridTextColumn Header="Account" Binding="{Binding UserId}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<ListView BorderThickness="2" BorderBrush="Black" 
+                  HorizontalAlignment="Left" Grid.Row="1" 
+                  Margin="448,5,0,15" ItemsSource="{Binding Customers}" Width="702" SelectionChanged="ListView_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="BorderBrush" Value="LightGray" />
@@ -40,9 +54,28 @@
                     <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
                     <GridViewColumn Header="Subscription" DisplayMemberBinding="{Binding CustomerType}"/>
                     <GridViewColumn Header="Account" DisplayMemberBinding="{Binding UserId}"/>
-                    
+
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>-->
+        <Label Content="First name" HorizontalAlignment="Left" Margin="47,47,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Last name" HorizontalAlignment="Left" Margin="47,73,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Phone number" HorizontalAlignment="Left" Margin="47,99,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="47,125,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Postal code" HorizontalAlignment="Left" Margin="47,151,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="47,177,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Address" HorizontalAlignment="Left" Margin="47,203,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Subscription" HorizontalAlignment="Left" Margin="47,230,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="first_name_txt" HorizontalAlignment="Left" Margin="147,51,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="last_name_txt" HorizontalAlignment="Left" Margin="147,77,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="phone_number_txt" HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="email_txt" HorizontalAlignment="Left" Margin="147,129,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="postal_code_txt" HorizontalAlignment="Left" Margin="147,155,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="city_txt" HorizontalAlignment="Left" Margin="147,181,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="address_txt" HorizontalAlignment="Left" Margin="147,207,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="subscription_txt" HorizontalAlignment="Left" Margin="147,234,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <GroupBox Header="Customer Information" Margin="28,23,856,146" Grid.Row="1"/>
+        <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="91,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="update_btn_Click"/>
+        <Button x:Name="delete_btn" Content="Delete" HorizontalAlignment="Left" Margin="192,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="delete_btn_Click"/>
     </Grid>
 </UserControl>
