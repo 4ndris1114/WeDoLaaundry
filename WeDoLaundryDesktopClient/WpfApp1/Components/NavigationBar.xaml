@@ -62,5 +62,11 @@
             Command="{Binding NavigateBookingsCommand}"
             Content="Bookings"
             Margin="10 0 0 0"/>
+
+        <Button
+            Grid.Column="4"
+            Command="Binding NavigateDriversCommand"
+            Content="Drivers"
+            Margin="10 0 0 0"/>
     </Grid>
 </UserControl>
