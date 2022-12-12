@@ -1,4 +1,5 @@
 ﻿using Data.Model_layer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.BusinessLogicLayer;
@@ -24,6 +25,7 @@ namespace Service.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<List<CustomerReadDTO>> Get(){
 
             ActionResult<List<CustomerReadDTO>> returnList;

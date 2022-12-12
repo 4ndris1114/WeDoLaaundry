@@ -15,17 +15,18 @@ namespace WpfApp1.ServiceAccess
         static readonly string restUrl = "https://localhost:7091/api/customers";
         readonly HttpClient _httpClient;
         public HttpStatusCode CurrentHttpStatusCode { get; set; }
+        //static readonly string authenType = "Bearer";
 
         public CustomerServiceAccess()
         {
             _httpClient = new();
         }
 
-        public async Task<List<Customer>> GetCustomersAsync(int id = -1)
+        public async Task<List<Customer>> GetCustomersAsync(/*string tokenToUse, */int id = -1)
         {
             List<Customer> customerList = null;
 
-            // api/customer/{id}
+            // /api/customers/{id}
             string useRestUrl = restUrl;
             bool hasValidId = (id > 0);
             if (hasValidId)
@@ -33,6 +34,11 @@ namespace WpfApp1.ServiceAccess
                 useRestUrl += id;
             }
             var uri = new Uri(string.Format(useRestUrl));
+
+            //// Must add Bearer token to request header
+            //string bearerTokenValue = authenType + " " + tokenToUse;
+            //_httpClient.DefaultRequestHeaders.Remove("Authorization");          // To avoid more Authorization headers
+            //_httpClient.DefaultRequestHeaders.Add("Authorization", bearerTokenValue);
 
             // Perform and evaluate the request
             try

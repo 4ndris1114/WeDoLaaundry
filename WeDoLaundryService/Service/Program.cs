@@ -1,6 +1,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Service.Security;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,11 +49,11 @@ builder.Services.AddAuthentication(options => {
             // The SigningKey is defined in the TokenController class
             ValidateIssuerSigningKey = true,
             // IssuerSigningKey = new SecurityHelper(configuration).GetSecurityKey(),
-            IssuerSigningKey = new SecurityHelper(builder.Configuration).GetSecurityKey(),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidIssuer = "https://localhost:7091",
-            ValidAudience = "https://localhost:7091",
+            ValidIssuer = "localhost",
+            ValidAudience = "localhost",
             ValidateLifetime = true
         };
     });
@@ -71,6 +72,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
