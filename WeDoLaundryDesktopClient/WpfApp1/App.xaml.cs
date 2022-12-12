@@ -32,9 +32,10 @@ namespace WpfApp1
             services.AddTransient<HomeViewModel>(s => new HomeViewModel(CreateCustomerNavigationService(s)));
             services.AddTransient<CustomerListViewModel>(s => new CustomerListViewModel());
             services.AddTransient<BookingListViewModel>(s => new BookingListViewModel());
+            services.AddTransient<TimeslotListViewModel>(s => new TimeslotListViewModel());
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
-            services.AddSingleton<MainViewModel>();
 
+            services.AddSingleton<MainViewModel>();
             services.AddSingleton<MainWindow>(s => new MainWindow()
             {
                 DataContext = s.GetRequiredService<MainViewModel>()
@@ -78,12 +79,21 @@ namespace WpfApp1
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
 
+        private INavigationService CreateTimeslotNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<TimeslotListViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<TimeslotListViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
             return new NavigationBarViewModel(
                 CreateHomeNavigationService(serviceProvider),
                 CreateCustomerNavigationService(serviceProvider),
-                CreateBookingNavigationService(serviceProvider));
+                CreateBookingNavigationService(serviceProvider),
+                CreateTimeslotNavigationService(serviceProvider));
         }
     }
 }
