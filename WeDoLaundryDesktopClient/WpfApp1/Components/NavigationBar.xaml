@@ -42,6 +42,7 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="0" Foreground="White" FontSize="18" Text="Navigation test" />
@@ -56,9 +57,14 @@
             Command="{Binding NavigateCustomersCommand}"
             Content="Customers"
             Margin="10 0 0 0"/>
-
         <Button 
             Grid.Column="3" 
+            Command="{Binding NavigateTimeslotsCommand}"
+            Content="Timeslots"
+            Margin="10 0 0 0"/>
+
+        <Button 
+            Grid.Column="4" 
             Command="{Binding NavigateBookingsCommand}"
             Content="Bookings"
             Margin="10 0 0 0"/>

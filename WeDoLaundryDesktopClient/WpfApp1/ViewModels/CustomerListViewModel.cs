@@ -22,7 +22,7 @@ namespace WpfApp1.ViewModels
 
         public CustomerListViewModel()
         {
-            _controller = new CustomersController();
+            _controller = new();
             _customers = new ObservableCollection<CustomerViewModel>();
             PopulateList();
         }
