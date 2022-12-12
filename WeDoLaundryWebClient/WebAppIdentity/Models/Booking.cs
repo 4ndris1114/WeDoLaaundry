@@ -55,10 +55,6 @@ namespace WebAppIdentity.Models
         [DataType(DataType.Text)]
         public int AmountOfBags { get; set; }
 
-        [Required]
-        [DataType(DataType.Text)]
-        public int InvoiceId { get; set; } = 0;
-
         public Booking(int customerId, int pickUpTimeId, int returnTimeId, string pickUpAddress, string returnAddress, int status, int amountOfBags)
         {
             CustomerId = customerId;
