@@ -18,9 +18,18 @@
             Grid.Row="0"
             FontSize="26"
         />
-        <ListView Grid.Row="1" Margin="0 20 0 0" ItemsSource="{Binding Customers}">
+        <ListView BorderThickness="2" BorderBrush="Black" 
+                  HorizontalAlignment="Center" Grid.Row="1" 
+                  Margin="0 20 0 0" ItemsSource="{Binding Customers}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="BorderBrush" Value="LightGray" />
+                    <Setter Property="BorderThickness" Value="0,0,0,2" />
+                    <Setter Property="Padding" Value="10"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
-                <GridView >
+                <GridView>
                     <GridViewColumn Width="60" Header="ID" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Width="110" Header="First name" DisplayMemberBinding="{Binding FirstName}"/>
                     <GridViewColumn Width="110" Header="Last name" DisplayMemberBinding="{Binding LastName}"/>
@@ -30,7 +39,8 @@
                     <GridViewColumn Header="City" DisplayMemberBinding="{Binding City}"/>
                     <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
                     <GridViewColumn Header="Subscription" DisplayMemberBinding="{Binding CustomerType}"/>
-                    <GridViewColumn Header="Account " DisplayMemberBinding="{Binding UserId}"/>
+                    <GridViewColumn Header="Account" DisplayMemberBinding="{Binding UserId}"/>
+                    
                 </GridView>
             </ListView.View>
         </ListView>

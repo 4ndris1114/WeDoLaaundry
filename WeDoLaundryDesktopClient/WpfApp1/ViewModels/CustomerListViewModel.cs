@@ -31,9 +31,12 @@ namespace WpfApp1.ViewModels
         {
             List<Customer> customerList = await _controller.GetCustomersAsync();
 
-            foreach (var customer in customerList)
+            if (customerList != null)
             {
-                _customers.Add(new CustomerViewModel(customer));
+                foreach (var customer in customerList)
+                {
+                    _customers.Add(new CustomerViewModel(customer));
+                }
             }
         }
     }
