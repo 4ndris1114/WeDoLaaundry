@@ -62,8 +62,8 @@ namespace WpfApp1.Security {
             if (_tokenAdminValues.HasKeys()) {
                 foundData.Password = _tokenAdminValues.Get("Password");
                 foundData.GrantType = _tokenAdminValues.Get("GrantType");
+                foundData.Username = _tokenAdminValues.Get("Username");
             }
-            foundData.Username = GetApplicationAssemblyName();
 
             return foundData;
         }

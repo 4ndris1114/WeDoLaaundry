@@ -9,7 +9,6 @@ namespace WpfApp1.Servicelayer {
 
         readonly HttpClient _client;
         static readonly string restUrl = "https://localhost:7091";
-        
 
         public TokenServiceAccess() {
             _client = new HttpClient();

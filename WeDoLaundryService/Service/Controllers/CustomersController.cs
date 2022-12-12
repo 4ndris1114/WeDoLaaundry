@@ -25,7 +25,6 @@ namespace Service.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult<List<CustomerReadDTO>> Get(){
 
             ActionResult<List<CustomerReadDTO>> returnList;
