@@ -116,6 +116,31 @@ namespace Service.Controllers
             return returnList;
         }
 
+        [HttpGet, Route("GetAddresses/{id}")]
+        public ActionResult<List<string>>? GetAddresses(int id)
+        {
+            ActionResult<List<string>> retVal;
+
+            List<string> addressList;
+
+            addressList = _timeslotDataControl.GetAddresses(id);
+
+            //evaluate & return status code
+            if (addressList != null)
+            {
+                retVal = Ok(addressList);
+                if (addressList.Count == 0)
+                {
+                    retVal = new StatusCodeResult(204);
+                }
+            }
+            else
+            {
+                retVal = new StatusCodeResult(500);
+            }
+            return retVal;
+        }
+
         [HttpPut, Route("modify/{id}/{mode}")]
         public ActionResult<bool>? Modify(int id, bool mode)
         {

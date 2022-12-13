@@ -24,9 +24,15 @@ namespace WpfApp1.Controller_layer
 
             foundTimeslots = await _serviceAccess.GetTimeslotsAsync();
 
-
             return foundTimeslots;
+        }
 
+        public async Task<List<string>> GetTimeslotAddressesAsync(int id)
+        {
+            List<string> foundAddresses = null;
+            foundAddresses = await _serviceAccess.GetTimeslotAddressesAsync(id);
+
+            return foundAddresses;
         }
     }
 }

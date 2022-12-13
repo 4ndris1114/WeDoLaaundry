@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WpfApp1.Model;
 using WpfApp1.Model_layer;
+using System.Security.Policy;
 
 namespace WpfApp1.Service_layer
 {
@@ -75,5 +76,44 @@ namespace WpfApp1.Service_layer
             return timeslotList;
         }
 
+        public async Task<List<string>> GetTimeslotAddressesAsync(int id)
+        {
+            List<string> addressList = null;
+
+            string useRestUrl = restUrl;
+            if (id>0)
+            {
+                useRestUrl += "GetAddresses/"+ id;
+            }
+            var uri = new Uri(useRestUrl);
+
+            try
+            {
+                var response = await _httpClient.GetAsync(uri);
+                CurrentHttpStatusCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    addressList = JsonConvert.DeserializeObject<List<string>>(content);
+                }
+                else
+                {
+                    if (response.StatusCode == HttpStatusCode.NoContent)
+                    {
+                        addressList = new List<string>();
+                    }
+                    else
+                    {
+                        addressList = null;
+                    }
+                }
+            }
+            catch
+            {
+                addressList = null;
+            }
+            return addressList;
+        }
     }
 }

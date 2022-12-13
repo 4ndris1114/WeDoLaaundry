@@ -15,6 +15,6 @@ namespace DataAccess.Database_layer
         List<Booking> GetCustomersBookings(int customerId);
         int CreateBooking(Booking newBooking);
         bool DeleteBooking(int id);
-
+        List<string> GetAddressesByTimeslotId(int id);
     }
 }

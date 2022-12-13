@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Model;
+using WpfApp1.ViewModels;
 
 namespace WpfApp1.Views
 {
@@ -21,8 +23,11 @@ namespace WpfApp1.Views
     /// </summary>
     public partial class CustomerListView : UserControl
     {
+        public CustomerViewModel SelectedCustomer { get; set; }
+
         public CustomerListView()
         {
+            SelectedCustomer = null;
             InitializeComponent();
         }
 
@@ -39,19 +44,23 @@ namespace WpfApp1.Views
 
         private void customersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataGrid dg = (DataGrid)sender;
-            DataRowView dr = (DataRowView)dg.SelectedItem; 
 
-            if (dr != null)
+            CustomerViewModel c = customersDataGrid.SelectedItem as CustomerViewModel;
+            if (c != null)
             {
-                first_name_txt.Text = dr["FirstName"].ToString();
-                last_name_txt.Text = dr["LastName"].ToString();
-                phone_number_txt.Text = dr["Phone"].ToString();
-                email_txt.Text = dr["Email"].ToString();
-                postal_code_txt.Text = dr["PostalCode"].ToString();
-                city_txt.Text = dr["City"].ToString();
-                address_txt.Text = dr["Address"].ToString();
-                subscription_txt.Text = dr["CustomerType"].ToString();
+                SelectedCustomer = c;
+            }
+
+            if (SelectedCustomer != null)
+            {
+                first_name_txt.Text = SelectedCustomer.FirstName;
+                last_name_txt.Text = SelectedCustomer.LastName;
+                phone_number_txt.Text = SelectedCustomer.Phone;
+                email_txt.Text = SelectedCustomer.Email;
+                postal_code_txt.Text = SelectedCustomer.PostalCode.ToString();
+                city_txt.Text = SelectedCustomer.City;
+                address_txt.Text = SelectedCustomer.Address;
+                subscription_txt.Text = SelectedCustomer.CustomerType.ToString();
 
                 update_btn.IsEnabled = true;
                 delete_btn.IsEnabled = true;

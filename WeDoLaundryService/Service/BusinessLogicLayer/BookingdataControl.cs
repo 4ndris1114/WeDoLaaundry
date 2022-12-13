@@ -55,6 +55,20 @@ namespace Service.BusinessLogicLayer
             return foundBookings;
         }
 
+        public List<string>? GetAddressesByTimeslotId(int id)
+        {
+            List<string>? foundAddresses = null;
+            try
+            {
+                foundAddresses = _bookingDbAccess.GetAddressesByTimeslotId(id);
+            }
+            catch (Exception)
+            {
+                foundAddresses = null;
+            }
+            return foundAddresses;
+        }
+
         public Booking GetById(int id)
         {
             Booking? foundBooking;

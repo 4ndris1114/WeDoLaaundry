@@ -11,6 +11,6 @@ namespace Service.BusinessLogicLayer
         List<TimeSlot> GetAll();
         TimeSlot? GetByDateAndSlot(DateTime date, string slot);
         List<TimeSlot> GetByDate(DateTime date);
-
+        List<string> GetAddresses(int id);
     }
 }

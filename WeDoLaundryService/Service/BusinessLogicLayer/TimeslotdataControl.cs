@@ -10,10 +10,12 @@ namespace Service.BusinessLogicLayer
     {
 
         ITimeslotDatabaseAccess _timeslotAccess;
+        IBookingdataControl _bookingdataControl;
 
         public TimeslotdataControl(IConfiguration config)
         {
             _timeslotAccess = new TimeslotDatabaseAccess(config);
+            _bookingdataControl = new BookingdataControl(config);
         }
 
         public int Add(TimeSlot timeslot)
@@ -112,6 +114,20 @@ namespace Service.BusinessLogicLayer
                 foundTimeslots = null;
             }
             return foundTimeslots;
+        }
+
+        public List<string> GetAddresses(int id)
+        {
+            List<string> foundAddresses = null;
+            try
+            {
+                foundAddresses = _bookingdataControl.GetAddressesByTimeslotId(id);
+            }
+            catch
+            {
+                foundAddresses = null;
+            }
+            return foundAddresses;
         }
     }
 }

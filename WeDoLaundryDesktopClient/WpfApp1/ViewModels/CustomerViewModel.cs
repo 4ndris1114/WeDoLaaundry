@@ -14,7 +14,7 @@ namespace WpfApp1.ViewModels
         PREMIUM_SUBSCRIPTION = 2
     }
 
-    public class CustomerViewModel
+    public class CustomerViewModel : ViewModelBase
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

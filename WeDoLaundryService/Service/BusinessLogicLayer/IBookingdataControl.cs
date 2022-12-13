@@ -12,5 +12,6 @@ namespace Service.BusinessLogicLayer
         List<Booking> GetCustomersBookings(int customerId);
         //bool Update(Booking customer);
         bool Delete(int id);
+        List<string> GetAddressesByTimeslotId(int id);
     }
 }

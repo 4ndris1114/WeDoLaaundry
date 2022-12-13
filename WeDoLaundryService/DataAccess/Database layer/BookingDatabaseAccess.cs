@@ -173,6 +173,44 @@ namespace DataAccess.Database_layer
             return (numberOfRowsDeleted > 0);
         }
 
+        public List<string> GetAddressesByTimeslotId(int id)
+        {
+            List<string> addressList = new();
+            string SQL_string1 = "SELECT pickUpAddress FROM Bookings WHERE pickUpTimeId = @PickUpTimeId";
+            string SQL_string2 = "SELECT returnAddress FROM Bookings WHERE returnTimeId = @ReturnTimeId";
+            using (SqlConnection con = new(_connectionString))
+            {
+                con.Open();
+                SqlDataReader reader;
+                using (SqlCommand command = new(SQL_string1, con))
+                {
+                    SqlParameter idParam = new("@PickUpTimeId", id);
+                    command.Parameters.Add(idParam);
+
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        addressList.Add(reader.GetString(reader.GetOrdinal("pickUpAddress")));
+                    }
+
+                    reader.Close();
+                }
+                using (SqlCommand command = new(SQL_string2, con))
+                {
+                    SqlParameter idParam = new("@ReturnTimeId", id);
+                    command.Parameters.Add(idParam);
+
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        addressList.Add(reader.GetString(reader.GetOrdinal("returnAddress")));
+                    }
+                }
+                con.Close();
+            }
+            return addressList;
+        }
+
         private Booking GetBookingReader(SqlDataReader reader)
         {
             Booking returnBooking;
@@ -203,5 +241,6 @@ namespace DataAccess.Database_layer
 
             return returnBooking;
         }
+
     }
 }
