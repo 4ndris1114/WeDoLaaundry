@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using WpfApp1.Controller_layer;
+using WpfApp1.Model;
 
 namespace WpfApp1.ViewModels
 {
@@ -14,7 +15,22 @@ namespace WpfApp1.ViewModels
 
         public BookingListViewModel()
         {
+            _controller = new();
             _bookings = new ObservableCollection<BookingViewModel>();
+            PopulateList();
+        }
+
+        private async void PopulateList()
+        {
+            List<Booking> bookingList = await _controller.GetBookingsAsync();
+
+            if (bookingList != null)
+            {
+                foreach (var booking in bookingList)
+                {
+                    _bookings.Add(new BookingViewModel(booking));
+                }
+            }
         }
     }
 }

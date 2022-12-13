@@ -18,14 +18,9 @@ namespace WpfApp1.Controller_layer
             _serviceAccess = new BookingServiceAccess();
         }
 
-        public Task<List<Booking>> GetBookingsAsync()
+        public async Task<List<Booking>> GetBookingsAsync()
         {
-            return GetBookingsAsync(_serviceAccess);
-        }
-
-        public async Task<List<Booking>> GetBookingsAsync(BookingServiceAccess _serviceAccess)
-        {
-            List<Booking> foundBookings = null;
+            List<Booking> foundBookings;
 
             foundBookings = await _serviceAccess.GetAll();
 
@@ -33,14 +28,14 @@ namespace WpfApp1.Controller_layer
 
         }
 
-        public async Task<List<Booking>> GetCustomersBookingsAsync(int customerId)
-        {
-            List<Booking> foundBookings = null;
+        //public async Task<List<Booking>> GetCustomersBookingsAsync(int customerId)
+        //{
+        //    List<Booking> foundBookings = null;
 
-            foundBookings = await _serviceAccess.GetCustomersBookingsAsync(customerId);
+        //    foundBookings = await _serviceAccess.GetCustomersBookingsAsync(customerId);
 
-            return foundBookings;
+        //    return foundBookings;
 
-        }
+        //}
     }
 }

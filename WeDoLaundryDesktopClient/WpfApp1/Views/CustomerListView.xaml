@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.Views" xmlns:components="clr-namespace:WpfApp1.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" Width="1223">
+             d:DesignHeight="450" d:DesignWidth="1223">
 
     <Grid Margin="52,0,0,0">
         <Grid.RowDefinitions>
@@ -18,7 +18,9 @@
             Grid.Row="0"
             FontSize="26"
         />
-        <DataGrid Name="customersDataGrid" ItemsSource="{Binding Customers}" AlternatingRowBackground = "LightBlue" AlternationCount = "2" AutoGenerateColumns = "False" Margin="477,19,81,65" Grid.Row="1" SelectionChanged="customersDataGrid_SelectionChanged">
+        <DataGrid Name="customersDataGrid" ItemsSource="{Binding Customers}" AlternatingRowBackground = "LightBlue" AlternationCount = "2"
+                  AutoGenerateColumns = "False" Margin="477,19,81,65" Grid.Row="1" SelectionChanged="customersDataGrid_SelectionChanged"
+                  SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" />

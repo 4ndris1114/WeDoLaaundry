@@ -23,7 +23,7 @@ namespace WpfApp1.ServiceAccess
         }
         public async Task<List<Booking>?> GetAll()
         {
-            List<Booking>? returnList = null;
+            List<Booking>? returnList;
 
             var uri = new Uri(string.Format(restUrl));
 
@@ -47,31 +47,31 @@ namespace WpfApp1.ServiceAccess
             return returnList;
         }
 
-        public async Task<List<Booking>> GetCustomersBookingsAsync(int customerId)
-        {
-            List<Booking> returnList;
+        //public async Task<List<Booking>> GetCustomersBookingsAsync(int customerId)
+        //{
+        //    List<Booking> returnList;
 
-            var uri = new Uri(string.Format(restUrl + "customerBookings/" + customerId));
+        //    var uri = new Uri(string.Format(restUrl + "customerBookings/" + customerId));
 
-            try
-            {
-                var response = await _httpClient.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    returnList = JsonConvert.DeserializeObject<List<Booking>>(content);
-                }
-                else
-                {
-                    returnList = new();
-                }
-            }
-            catch
-            {
-                returnList = null;
-            }
-            return returnList;
-        }
+        //    try
+        //    {
+        //        var response = await _httpClient.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            returnList = JsonConvert.DeserializeObject<List<Booking>>(content);
+        //        }
+        //        else
+        //        {
+        //            returnList = new();
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        returnList = null;
+        //    }
+        //    return returnList;
+        //}
 
     }
 }

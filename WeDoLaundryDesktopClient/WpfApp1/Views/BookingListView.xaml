@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfApp1.Views"
+             xmlns:local="clr-namespace:WpfApp1.Views" xmlns:components="clr-namespace:WpfApp1.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="1223">
+    
+    <Grid Margin="52,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*" />
@@ -17,14 +18,38 @@
             Grid.Row="0"
             FontSize="26"
         />
-
-        <ListView Grid.Row="1" Margin="0 20 0 0" ItemsSource="{Binding Bookings}">
+        <DataGrid Name="bookingsDataGrid" ItemsSource="{Binding Bookings}" AlternatingRowBackground = "LightBlue" AlternationCount = "2" 
+                  AutoGenerateColumns = "False" Margin="477,19,81,65" Grid.Row="1" SelectionChanged="bookingsDataGrid_SelectionChanged"
+                  SelectionMode="Single" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerId}" />
+                <DataGridTextColumn Header="Driver ID" Binding="{Binding DriverId}" />
+                <DataGridTextColumn Header="Pick-up time slot" Binding="{Binding PickUpTimeId}" />
+                <DataGridTextColumn Header="Return time slot" Binding="{Binding ReturnTimeId}" />
+                <DataGridTextColumn Header="Pick-up address" Binding="{Binding PickUpAddress}" />
+                <DataGridTextColumn Header="Return address" Binding="{Binding ReturnAddress}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                <DataGridTextColumn Header="Amount of bags" Binding="{Binding AmountOfBags}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<ListView Grid.Row="1" Margin="0 20 0 0" ItemsSource="{Binding Bookings}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
                 </GridView>
             </ListView.View>
-        </ListView>
-
+        </ListView>-->
+        <Label Content="Pick-up address" HorizontalAlignment="Left" Margin="47,47,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Return address" HorizontalAlignment="Left" Margin="47,73,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="47,99,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Amount of bags" HorizontalAlignment="Left" Margin="47,125,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="pick_up_address_txt" HorizontalAlignment="Left" Margin="147,51,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="return_address_txt" HorizontalAlignment="Left" Margin="147,77,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="status_txt" HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="amount_of_bags_txt" HorizontalAlignment="Left" Margin="147,129,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <GroupBox Header="Booking Information" Margin="28,23,856,146" Grid.Row="1"/>
+        <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="91,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="update_btn_Click"/>
+        <Button x:Name="delete_btn" Content="Delete" HorizontalAlignment="Left" Margin="192,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="delete_btn_Click"/>
     </Grid>
 </UserControl>
