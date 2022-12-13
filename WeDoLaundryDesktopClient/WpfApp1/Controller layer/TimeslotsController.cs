@@ -34,5 +34,19 @@ namespace WpfApp1.Controller_layer
 
             return foundAddresses;
         }
+
+        public async Task<TimeSlot> GetById(int id)
+        {
+            TimeSlot returnSlot;
+            try
+            {
+                returnSlot = await _serviceAccess.GetById(id);
+            }
+            catch
+            {
+                returnSlot = null;
+            }
+            return returnSlot;
+        }
     }
 }

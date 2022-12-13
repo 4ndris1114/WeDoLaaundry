@@ -25,8 +25,8 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerId}" />
                 <DataGridTextColumn Header="Driver ID" Binding="{Binding DriverId}" />
-                <DataGridTextColumn Header="Pick-up time slot" Binding="{Binding PickUpTimeId}" />
-                <DataGridTextColumn Header="Return time slot" Binding="{Binding ReturnTimeId}" />
+                <DataGridTextColumn Header="Pick-up timeslot" Binding="{Binding PickUpSlot}" />
+                <DataGridTextColumn Header="Return timeslot" Binding="{Binding ReturnSlot}" />
                 <DataGridTextColumn Header="Pick-up address" Binding="{Binding PickUpAddress}" />
                 <DataGridTextColumn Header="Return address" Binding="{Binding ReturnAddress}" />
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" />

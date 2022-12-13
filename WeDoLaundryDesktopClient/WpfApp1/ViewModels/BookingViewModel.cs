@@ -18,20 +18,20 @@ namespace WpfApp1.ViewModels
         public int Id { get; }
         public int CustomerId { get; set; }
         public int DriverId { get; set; }
-        public int PickUpTimeId { get; set; }
-        public int ReturnTimeId { get; set; }
+        public string PickUpSlot { get; set; }
+        public string ReturnSlot { get; set; }
         public string PickUpAddress { get; set; }
         public string ReturnAddress { get; set; }
         public BookingStatus Status { get; set; }
         public int AmountOfBags { get; set; }
 
-        public BookingViewModel(Booking booking)
+        public BookingViewModel(Booking booking, string pickUpSlot, string returnSlot)
         {
             Id = booking.Id;
             CustomerId = booking.CustomerId;
             //DriverId = driverId;
-            PickUpTimeId = booking.PickUpTimeId;
-            ReturnTimeId = booking.ReturnTimeId;
+            PickUpSlot = pickUpSlot;
+            ReturnSlot = returnSlot;
             PickUpAddress = booking.PickUpAddress;
             ReturnAddress = booking.ReturnAddress;
             Status = (BookingStatus)booking.Status;

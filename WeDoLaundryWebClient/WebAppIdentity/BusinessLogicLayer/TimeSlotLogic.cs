@@ -26,7 +26,7 @@ namespace WebAppIdentity.BusinessLogicLayer
             return returnList;
         }
 
-              public async Task<TimeSlot> GetById(int id)
+        public async Task<TimeSlot> GetById(int id)
         {
             TimeSlot returnSlot;
             try
