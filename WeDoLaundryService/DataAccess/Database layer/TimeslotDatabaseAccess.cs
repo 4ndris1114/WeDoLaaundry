@@ -26,23 +26,25 @@ namespace DataAccess.Database_layer
 
         // true = increase
         // false = decrease
-        public bool ModifyAvailability(int id, bool mode)
+        public bool ModifyAvailability(int id, bool mode, int value)
         {
             int numberOfRowsModified = 0;
             string SQL_string;
             if (mode) // increase
             {
-                SQL_string = "UPDATE TimeSlots SET [availability] = [availability] + 1 WHERE id = @Id";
+                SQL_string = "UPDATE TimeSlots SET [availability] = [availability] + @value WHERE id = @Id";
             }
             else // decrease
             {
-                SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - 1 WHERE id = @Id AND availability > 0";
+                SQL_string = "UPDATE TimeSlots SET [availability] = [availability] - @value WHERE id = @Id AND availability > 0";
             }
             using (SqlConnection con = new(_connectionString))
             using (SqlCommand command = new(SQL_string, con))
             {
                 SqlParameter slotParam = new("@Id", id);
                 command.Parameters.Add(slotParam);
+                SqlParameter valueParam = new("@value", value);
+                command.Parameters.Add(valueParam);
 
                 con.Open();
 

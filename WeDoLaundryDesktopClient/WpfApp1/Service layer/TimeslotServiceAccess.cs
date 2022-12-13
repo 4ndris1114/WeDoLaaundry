@@ -14,7 +14,7 @@ namespace WpfApp1.Service_layer
 {
     public class TimeslotServiceAccess
     {
-        static readonly string restUrl = "https://localhost:7091/api/Timeslots";
+        static readonly string restUrl = "https://localhost:7091/api/Timeslots/";
         readonly HttpClient _httpClient;
         public HttpStatusCode CurrentHttpStatusCode { get; set; }
 
@@ -134,14 +134,43 @@ namespace WpfApp1.Service_layer
                 {
                     returnSlot = new();
                 }
-            }
-            catch
+            } catch
             {
                 returnSlot = null;
             }
             return returnSlot;
         }
 
+        public async Task<bool> Modify(int id, bool mode, int value)
+        {
+            bool wasModified = false;
 
+            string useUrl = restUrl;
+
+            useUrl += "modify/" + id + "/" + mode + "/" + value;
+
+            var uri = new Uri(useUrl);
+
+            try
+            {
+                var response = await _httpClient.PutAsync(uri, null);
+                CurrentHttpStatusCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    wasModified = JsonConvert.DeserializeObject<bool>(content);
+                }
+                else
+                {
+                    wasModified = false;
+                }
+            }
+            catch
+            {
+                wasModified = false;
+            }
+            return wasModified;
+        }
     }
 }

@@ -67,8 +67,8 @@ namespace DataAccess.Database_layer
                     if (_timeslotAccess.Get(newBooking.PickUpTime.Id).Availability > 0 &&
                         _timeslotAccess.Get(newBooking.ReturnTime.Id).Availability > 0)
                     {
-                        _timeslotAccess.ModifyAvailability(newBooking.PickUpTime.Id, false);
-                        _timeslotAccess.ModifyAvailability(newBooking.ReturnTime.Id, false);
+                        _timeslotAccess.ModifyAvailability(newBooking.PickUpTime.Id, false, 1);
+                        _timeslotAccess.ModifyAvailability(newBooking.ReturnTime.Id, false, 1);
                     } else
                     {
                         throw new SlotNotAvailable("The slot availability is 0.");

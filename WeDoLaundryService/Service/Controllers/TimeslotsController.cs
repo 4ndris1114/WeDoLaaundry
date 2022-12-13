@@ -141,15 +141,15 @@ namespace Service.Controllers
             return retVal;
         }
 
-        [HttpPut, Route("modify/{id}/{mode}")]
-        public ActionResult<bool>? Modify(int id, bool mode)
+        [HttpPut, Route("modify/{id}/{mode}/{value}")]
+        public ActionResult<bool>? Modify(int id, bool mode, int value)
         {
             ActionResult<bool> retVal;
 
-            bool wasUpdated;
+            bool wasUpdated = false;
 
             //TimeSlot? dbTimeslot = ModelConversion.TimeslotDtoConverter.ToTimeslot(timeslotDto);
-            wasUpdated = _timeslotDataControl.ModifyAvailability(id, mode);
+            wasUpdated = _timeslotDataControl.ModifyAvailability(id, mode, value);
             //evaluate & return status code
             if (wasUpdated)
             {

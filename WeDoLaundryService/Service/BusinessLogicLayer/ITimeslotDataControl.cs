@@ -4,7 +4,7 @@ namespace Service.BusinessLogicLayer
 {
     public interface ITimeslotDataControl
     {
-        bool ModifyAvailability(int id, bool mode);
+        bool ModifyAvailability(int id, bool mode, int value);
         TimeSlot Get(int id);
         bool Delete(int id);
         int Add(TimeSlot timeslot);

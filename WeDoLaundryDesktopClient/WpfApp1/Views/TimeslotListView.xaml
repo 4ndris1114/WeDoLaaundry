@@ -17,7 +17,17 @@
             Grid.Row="0"
             FontSize="26"
         />
-        <ListView BorderThickness="2" BorderBrush="Black" 
+
+        <DataGrid Name="timeslotDataGrid" ItemsSource="{Binding Timeslots}" AlternatingRowBackground = "LightBlue" AlternationCount = "2" AutoGenerateColumns = "False" Margin="477,19,81,65" Grid.Row="1" SelectionChanged="timeslotDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Time slot" Binding="{Binding Slot}" />
+                <DataGridTextColumn Header="Availability" Binding="{Binding Availability}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--<ListView Name="timeslotDatagrid" BorderThickness="2" BorderBrush="Black" 
                   HorizontalAlignment="Center" Grid.Row="1" 
                   Margin="0 20 0 0" ItemsSource="{Binding Timeslots}">
             <ListView.ItemContainerStyle>
@@ -35,6 +45,18 @@
                     <GridViewColumn Header="Availability" DisplayMemberBinding="{Binding Availability}"/>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>-->
+
+        <Label Content="SlotId" HorizontalAlignment="Left" Margin="47,47,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Date" HorizontalAlignment="Left" Margin="47,73,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Time slot" HorizontalAlignment="Left" Margin="47,99,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Availability" HorizontalAlignment="Left" Margin="47,125,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="id_txt" IsEnabled="False" HorizontalAlignment="Left" Margin="147,51,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="date_txt" IsEnabled="False" HorizontalAlignment="Left" Margin="147,77,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="timeSlot_txt" IsEnabled="False" HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="availability_txt" HorizontalAlignment="Left" Margin="147,129,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <GroupBox Header="Timeslot Information" Margin="28,23,856,146" Grid.Row="1"/>
+        <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="91,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="update_btn_Click"/>
+        <Button x:Name="delete_btn" Content="Delete" HorizontalAlignment="Left" Margin="192,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="delete_btn_Click"/>
     </Grid>
 </UserControl>

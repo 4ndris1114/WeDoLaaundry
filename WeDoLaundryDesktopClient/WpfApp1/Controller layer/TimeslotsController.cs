@@ -30,6 +30,7 @@ namespace WpfApp1.Controller_layer
         public async Task<List<string>> GetTimeslotAddressesAsync(int id)
         {
             List<string> foundAddresses = null;
+
             foundAddresses = await _serviceAccess.GetTimeslotAddressesAsync(id);
 
             return foundAddresses;
@@ -47,6 +48,15 @@ namespace WpfApp1.Controller_layer
                 returnSlot = null;
             }
             return returnSlot;
+        }
+
+        public async Task<bool> Modify(int id, bool mode, int value)
+        {
+            bool wasModified = false;
+
+            wasModified = await _serviceAccess.Modify(id, mode, value);
+
+            return wasModified;
         }
     }
 }
