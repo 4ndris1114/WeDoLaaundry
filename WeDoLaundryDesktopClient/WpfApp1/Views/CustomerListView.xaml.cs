@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Controller_layer;
 using WpfApp1.Model;
 using WpfApp1.ViewModels;
 
@@ -24,22 +25,26 @@ namespace WpfApp1.Views
     public partial class CustomerListView : UserControl
     {
         public CustomerViewModel SelectedCustomer { get; set; }
+        public CustomersController customersController;
 
         public CustomerListView()
         {
             SelectedCustomer = null;
+            customersController = new CustomersController();
             InitializeComponent();
         }
 
         private void update_btn_Click(object sender, RoutedEventArgs e)
         {
-            // missing a logic for update
+            var customerId = SelectedCustomer.Id;
+            
         }
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            // missing a logic for delete
+            var customerId = SelectedCustomer.Id;
 
+            customersController.DeleteCustomerAsync(customerId).Wait();
         }
 
         private void customersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

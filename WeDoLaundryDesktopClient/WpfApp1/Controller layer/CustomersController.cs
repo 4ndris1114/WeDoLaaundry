@@ -28,5 +28,19 @@ namespace WpfApp1.Controller_layer
             return foundCustomers;
 
         }
+
+        public async Task<bool> UpdateCustomerAsync(int id, Customer customer)
+        {
+            bool wasUpdated = await _serviceAccess.UpdateCustomerAsync(id, customer);
+            
+            return wasUpdated;
+        }
+
+        public async Task<bool> DeleteCustomerAsync(int id)
+        {
+            bool wasDeleted = await _serviceAccess.DeleteCustomerAsync(id);
+
+            return wasDeleted;
+        }
     }
 }

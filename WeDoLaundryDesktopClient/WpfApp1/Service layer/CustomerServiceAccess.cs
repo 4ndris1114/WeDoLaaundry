@@ -79,5 +79,68 @@ namespace WpfApp1.ServiceAccess
             }
             return customerList;
         }
+
+        public async Task<bool> UpdateCustomerAsync(int id, Customer customer)
+        {
+            bool wasUpdated;
+
+            string useRestUrl = restUrl;
+            bool hasValidId = (id > 0);
+            if (hasValidId)
+            {
+                useRestUrl = useRestUrl + "/" + id;
+            }
+            var uri = new Uri(string.Format(useRestUrl));
+
+            try
+            {
+                var response = await _httpClient.PutAsync(uri, content); // finish the shit
+                if (response.IsSuccessStatusCode)
+                {
+                    wasUpdated = true;
+                }
+                else
+                {
+                    wasUpdated = false;
+                }
+            }
+            catch
+            {
+                wasUpdated = false;
+            }
+
+            return wasUpdated;
+        }
+
+        public async Task<bool> DeleteCustomerAsync(int id)
+        {
+            bool wasDeleted;
+
+            string useRestUrl = restUrl;
+            bool hasValidId = (id > 0);
+            if (hasValidId)
+            {
+                useRestUrl = useRestUrl + "/" + id;
+            }
+            var uri = new Uri(string.Format(useRestUrl));
+
+            try
+            {
+                var response = await _httpClient.DeleteAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    wasDeleted = true;
+                }
+                else
+                {
+                    wasDeleted = false;
+                }
+            }
+            catch
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
+        }
     }
 }
