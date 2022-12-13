@@ -27,5 +27,12 @@ namespace WpfApp1.Controller_layer
 
             return foundDrivers;
         }
+
+        public async Task<bool> DeleteDriverAsync(int id)
+        {
+            bool wasDeleted = await _serviceAccess.DeleteDriverAsync(id);
+
+            return wasDeleted;
+        }
     }
 }

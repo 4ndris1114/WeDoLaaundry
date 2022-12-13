@@ -74,6 +74,37 @@ namespace WpfApp1.ServiceAccess
             return driverList;
         }
 
+        public async Task<bool> DeleteDriverAsync(int id)
+        {
+            bool wasDeleted;
+
+            string useRestUrl = restUrl;
+            bool hasValidId = (id > 0);
+            if (hasValidId)
+            {
+                useRestUrl = useRestUrl + "/" + id;
+            }
+            var uri = new Uri(string.Format(useRestUrl));
+
+            try
+            {
+                var response = await _httpClient.DeleteAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    wasDeleted = true;
+                }
+                else
+                {
+                    wasDeleted = false;
+                }
+            }
+            catch
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
+        }
+
     }
 }
 
