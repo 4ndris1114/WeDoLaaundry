@@ -40,11 +40,11 @@ namespace WpfApp1.Views
             
         }
 
-        private void delete_btn_Click(object sender, RoutedEventArgs e)
+        private async void delete_btn_Click(object sender, RoutedEventArgs e)
         {
             var customerId = SelectedCustomer.Id;
 
-            customersController.DeleteCustomerAsync(customerId).Wait();
+            await customersController.DeleteCustomerAsync(customerId);
         }
 
         private void customersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
