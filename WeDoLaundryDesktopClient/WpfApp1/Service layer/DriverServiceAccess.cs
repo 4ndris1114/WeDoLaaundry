@@ -7,9 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Model;
-using WpfApp1.Model_layer;
 
-namespace WpfApp1.Service_layer
+namespace WpfApp1.ServiceAccess
 {
     public class DriverServiceAccess
     {
@@ -22,30 +21,57 @@ namespace WpfApp1.Service_layer
             _httpClient = new();
         }
 
-        public async Task<List<Driver>?> GetAll()
+        public async Task<List<Driver>?> GetDriversAsync(int id = -1)
         {
-            List<Driver>? returnList = null;
+            List<Driver> driverList = null;
 
-            var uri = new Uri(string.Format(restUrl));
+            // /api/drivers/{id}
+            string useRestUrl = restUrl;
+            bool hasValidId = (id > 0);
+            if (hasValidId)
+            {
+                useRestUrl += id;
+            }
+            var uri = new Uri(string.Format(useRestUrl));
 
+            // Perform and evaluate the request
             try
             {
                 var response = await _httpClient.GetAsync(uri);
+                CurrentHttpStatusCode = response.StatusCode;
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    returnList = JsonConvert.DeserializeObject<List<Driver>>(content);
+                    if (hasValidId)
+                    {
+                        Driver foundDriver = JsonConvert.DeserializeObject<Driver>(content);
+                        if (foundDriver != null)
+                        {
+                            driverList = new List<Driver>() { foundDriver };
+                        }
+                    }
+                    else
+                    {
+                        driverList = JsonConvert.DeserializeObject<List<Driver>>(content);
+                    }
                 }
                 else
                 {
-                    returnList = new();
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        driverList = new List<Driver>();
+                    }
+                    else
+                    {
+                        driverList = null;
+                    }
                 }
             }
             catch
             {
-                returnList = new();
+                driverList = null;
             }
-            return returnList;
+            return driverList;
         }
 
     }
