@@ -9,13 +9,6 @@ namespace WpfApp1.Model_layer
     public class Driver
     {
 
-        public enum DriverStatus
-        {
-            FREE = 0,
-            BUSY = 1,
-            WORKING = 2
-        }
-
         public int Id { get; set; }
         public int OrderId { get; set; }
 
