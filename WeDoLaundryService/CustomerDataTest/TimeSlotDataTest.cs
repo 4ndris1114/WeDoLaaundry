@@ -56,7 +56,7 @@ namespace Tests
             int beforeDecrease = newSlot.Availability;
 
             //Act
-            bool wasUpdated = _timeSlotDataAccess.ModifyAvailability(insertedId, false);
+            bool wasUpdated = _timeSlotDataAccess.ModifyAvailability(insertedId, false, 1);
             int updatedAvailability = _timeSlotDataAccess.Get(insertedId).Availability;
             extraOutput.WriteLine("avail: " + updatedAvailability);
 
@@ -72,7 +72,7 @@ namespace Tests
             int beforeDecrease = newSlot.Availability;
 
             //Act
-            bool wasUpdated = _timeSlotDataAccess.ModifyAvailability(insertedId, true);
+            bool wasUpdated = _timeSlotDataAccess.ModifyAvailability(insertedId, true, 1);
             int updatedAvailability = _timeSlotDataAccess.Get(insertedId).Availability;
             extraOutput.WriteLine("avail: " + updatedAvailability);
 

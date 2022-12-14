@@ -25,7 +25,7 @@ namespace CustomerDataTest
             _customerAccess = new CustomerDatabaseAccess(config);
 
             newCustomer = new Customer("Test", "Test", "12345678", "test@test.test", 1234, "TestCity",
-                "Test street test", CustomerType.NO_SUBSCRIPTION, "242eb3f7-644d-4f97-babc-a748c25b2d88");
+                "Test street test", CustomerType.NO_SUBSCRIPTION, "211cde29-50dc-4a50-9113-21a940efd59a");
             insertId = _customerAccess.CreateCustomer(newCustomer);
             newCustomer.Id = insertId;
         }
