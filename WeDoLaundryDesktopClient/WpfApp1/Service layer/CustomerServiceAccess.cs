@@ -94,7 +94,10 @@ namespace WpfApp1.ServiceAccess
 
             try
             {
-                var response = await _httpClient.PutAsync(uri, content); // finish the shit
+                var json = JsonConvert.SerializeObject(customer);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+             
+                var response = await _httpClient.PutAsync(uri, content);
                 if (response.IsSuccessStatusCode)
                 {
                     wasUpdated = true;

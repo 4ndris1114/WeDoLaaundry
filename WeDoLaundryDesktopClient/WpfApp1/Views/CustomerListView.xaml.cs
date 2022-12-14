@@ -34,10 +34,24 @@ namespace WpfApp1.Views
             InitializeComponent();
         }
 
-        private void update_btn_Click(object sender, RoutedEventArgs e)
+        private async void update_btn_Click(object sender, RoutedEventArgs e)
         {
             var customerId = SelectedCustomer.Id;
-            
+
+            Customer updateCustomer = new Customer();
+
+            updateCustomer.Id = customerId;
+            updateCustomer.FirstName = first_name_txt.Text;
+            updateCustomer.LastName = last_name_txt.Text;
+            updateCustomer.Phone = phone_number_txt.Text;
+            updateCustomer.Email = email_txt.Text;
+            updateCustomer.PostalCode = Int32.Parse(postal_code_txt.Text);
+            updateCustomer.City = city_txt.Text;
+            updateCustomer.Address = address_txt.Text;
+            updateCustomer.CustomerType = (Customer.Subscription)SelectedCustomer.CustomerType;
+            updateCustomer.UserId = SelectedCustomer.UserId;
+
+            await customersController.UpdateCustomerAsync(customerId, updateCustomer);
         }
 
         private async void delete_btn_Click(object sender, RoutedEventArgs e)
@@ -65,7 +79,6 @@ namespace WpfApp1.Views
                 postal_code_txt.Text = SelectedCustomer.PostalCode.ToString();
                 city_txt.Text = SelectedCustomer.City;
                 address_txt.Text = SelectedCustomer.Address;
-                subscription_txt.Text = SelectedCustomer.CustomerType.ToString();
 
                 update_btn.IsEnabled = true;
                 delete_btn.IsEnabled = true;
