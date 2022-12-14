@@ -33,7 +33,7 @@ namespace WpfApp1.Controller_layer
         {
             bool wasUpdated = await _serviceAccess.UpdateCustomerAsync(id, customer);
             
-            return false;
+            return wasUpdated;
         }
 
         public async Task<bool> DeleteCustomerAsync(int id)

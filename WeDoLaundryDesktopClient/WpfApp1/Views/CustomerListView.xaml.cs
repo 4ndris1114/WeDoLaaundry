@@ -58,6 +58,18 @@ namespace WpfApp1.Views
 
         }
 
+        private void CleanUpSelection()
+        {
+            first_name_txt.Text = "";
+            last_name_txt.Text = "";
+            phone_number_txt.Text = "";
+            email_txt.Text = "";
+            postal_code_txt.Text = "";
+            city_txt.Text = "";
+            address_txt.Text = "";
+            SelectedCustomer = null;
+        }
+
         private async void update_btn_Click(object sender, RoutedEventArgs e)
         {
             var customerId = SelectedCustomer.Id;
@@ -74,28 +86,44 @@ namespace WpfApp1.Views
             updateCustomer.Address = address_txt.Text;
             updateCustomer.CustomerType = (Customer.Subscription)SelectedCustomer.CustomerType;
             updateCustomer.UserId = SelectedCustomer.UserId;
-
-            if(validateFields(updateCustomer))
+            if (first_name_txt.Text != "" && last_name_txt.Text != "" && phone_number_txt.Text != "" &&
+                email_txt.Text != "" && postal_code_txt.Text != "" && city_txt.Text != "" && address_txt.Text != "")
             {
-                await customersController.UpdateCustomerAsync(customerId, updateCustomer);
+                if (validateFields(updateCustomer))
+                {
+                    bool wasModifiedInDb = await customersController.UpdateCustomerAsync(customerId, updateCustomer);
+                    if (wasModifiedInDb)
+                    {
+                        SelectedCustomer.FirstName = first_name_txt.Text;
+                        SelectedCustomer.LastName = last_name_txt.Text;
+                        SelectedCustomer.Phone = phone_number_txt.Text;
+                        SelectedCustomer.Email = email_txt.Text;
+                        SelectedCustomer.PostalCode = Convert.ToInt32(postal_code_txt.Text);
+                        SelectedCustomer.City = city_txt.Text;
+                        SelectedCustomer.Address = address_txt.Text;
+                        CleanUpSelection();
+                        CollectionViewSource.GetDefaultView(this.customersDataGrid.ItemsSource).Refresh();
+                    }
+                }
             }
         }
 
         private async void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            var customerId = SelectedCustomer.Id;
-
-            await customersController.DeleteCustomerAsync(customerId);
+            if (SelectedCustomer != null)
+            {
+                bool wasDeleted = await customersController.DeleteCustomerAsync(SelectedCustomer.Id);
+                if (wasDeleted)
+                {
+                    CleanUpSelection();
+                    CollectionViewSource.GetDefaultView(this.customersDataGrid.ItemsSource).Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Can not delete this time slot!");
+                }
+            }
         }
-        //private void CleanUpSelection()
-        //{
-        //    id_txt.Text = "";
-        //    date_txt.Text = "";
-        //    timeSlot_txt.Text = "";
-        //    availability_txt.Text = "";
-        //    addresses_txt.Text = "";
-        //    SelectedTimeslot = null;
-        //}
 
         private void customersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
