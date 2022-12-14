@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Controller_layer;
+using WpfApp1.Services;
 using WpfApp1.ViewModels;
 
 namespace WpfApp1.Views
@@ -38,21 +39,30 @@ namespace WpfApp1.Views
             bool mode = new();
             int value = 0;
 
-            if (SelectedTimeslot.Availability < Convert.ToInt32(availability_txt.Text))
+            if (SelectedTimeslot != null)
             {
-                mode = true;
-                value = Convert.ToInt32(availability_txt.Text) - SelectedTimeslot.Availability;
-            } else if (SelectedTimeslot.Availability > Convert.ToInt32(availability_txt.Text)) {
-                mode = false;
-                value = SelectedTimeslot.Availability - Convert.ToInt32(availability_txt.Text);
-            } else {
-                MessageBox.Show("Availability must change in order to update!");
-            }
+                if (SelectedTimeslot.Availability < Convert.ToInt32(availability_txt.Text))
+                {
+                    mode = true;
+                    value = Convert.ToInt32(availability_txt.Text) - SelectedTimeslot.Availability;
+                }
+                else if (SelectedTimeslot.Availability > Convert.ToInt32(availability_txt.Text))
+                {
+                    mode = false;
+                    value = SelectedTimeslot.Availability - Convert.ToInt32(availability_txt.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Availability must change in order to update!");
+                }
 
-            if (SelectedTimeslot != null && value != 0)
-            {
-                _controller.Modify(SelectedTimeslot.Id, mode, value);
-                CleanUpSelection();
+                if (SelectedTimeslot != null && value != 0)
+                {
+                    _controller.Modify(SelectedTimeslot.Id, mode, value);
+                    SelectedTimeslot.Availability = Convert.ToInt32(availability_txt.Text);
+                    CleanUpSelection();
+                    CollectionViewSource.GetDefaultView(this.timeslotDataGrid.ItemsSource).Refresh();
+                }
             }
         }
 
