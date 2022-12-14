@@ -34,13 +34,14 @@ namespace WpfApp1.Views
             InitializeComponent();
         }
 
-        private void update_btn_Click(object sender, RoutedEventArgs e)
+        private async void update_btn_Click(object sender, RoutedEventArgs e)
         {
             bool mode = new();
             int value = 0;
 
             if (SelectedTimeslot != null)
             {
+                //Check if availability changed:
                 if (SelectedTimeslot.Availability < Convert.ToInt32(availability_txt.Text))
                 {
                     mode = true;
@@ -58,10 +59,16 @@ namespace WpfApp1.Views
 
                 if (SelectedTimeslot != null && value != 0)
                 {
-                    _controller.Modify(SelectedTimeslot.Id, mode, value);
-                    SelectedTimeslot.Availability = Convert.ToInt32(availability_txt.Text);
-                    CleanUpSelection();
-                    CollectionViewSource.GetDefaultView(this.timeslotDataGrid.ItemsSource).Refresh();
+                    bool wasModifiedInDb = await _controller.Modify(SelectedTimeslot.Id, mode, value);
+                    if (wasModifiedInDb)
+                    {
+                        SelectedTimeslot.Availability = Convert.ToInt32(availability_txt.Text); //Modify viewmodel => raise PropertyChanged event
+                        CleanUpSelection();
+                        CollectionViewSource.GetDefaultView(this.timeslotDataGrid.ItemsSource).Refresh();
+                    } else
+                    {
+                        MessageBox.Show("Modification was not successful");
+                    }
                 }
             }
         }
@@ -72,6 +79,7 @@ namespace WpfApp1.Views
             date_txt.Text = "";
             timeSlot_txt.Text = "";
             availability_txt.Text = "";
+            addresses_txt.Text = "";
             SelectedTimeslot = null;
         }
 
@@ -81,9 +89,9 @@ namespace WpfApp1.Views
 
         }
 
-        private void timeslotDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void timeslotDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            CleanUpSelection();
             TimeslotViewModel t = timeslotDataGrid.SelectedItem as TimeslotViewModel;
             if (t != null)
             {
@@ -92,6 +100,7 @@ namespace WpfApp1.Views
 
             if (SelectedTimeslot != null)
             {
+                //Update panel
                 id_txt.Text = SelectedTimeslot.Id.ToString();
                 date_txt.Text = SelectedTimeslot.Date;
                 timeSlot_txt.Text = SelectedTimeslot.Slot;
@@ -99,6 +108,19 @@ namespace WpfApp1.Views
 
                 update_btn.IsEnabled = true;
                 delete_btn.IsEnabled = true;
+
+                //Addresses panel
+                List<string> addressList = await _controller.GetTimeslotAddressesAsync(SelectedTimeslot.Id);
+                if (addressList != null)
+                {
+                    foreach (var item in addressList)
+                    {
+                        addresses_txt.Text += item + "\n";
+                    }
+                } else
+                {
+                    addresses_txt.Text = "No addresses";
+                }
             }
         }
     }

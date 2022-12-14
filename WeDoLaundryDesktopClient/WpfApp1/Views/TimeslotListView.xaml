@@ -10,25 +10,32 @@
     <Grid Margin="52,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock
             Text="List of timeslots"
             Grid.Row="0"
+            HorizontalAlignment="Center"
+            Margin="0 0 350 0"
             FontSize="26"
         />
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Margin="10 0 0 0" 
-                    Content="Add Timeslot"
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Margin="992 8 0 0" 
+                    Width="250"
+                    Content="Create new time slot"
+                    Background="DarkSeaGreen"
                     Padding="10 5"
                     VerticalAlignment="Center"
                     Command="{Binding AddTimeslotCommand}"></Button>
         </StackPanel>
 
-        <DataGrid Name="timeslotDataGrid" ItemsSource="{Binding Timeslots}" AlternatingRowBackground = "LightBlue" AlternationCount = "1" AutoGenerateColumns = "False" Margin="477,19,81,65" Grid.Row="2" SelectionChanged="timeslotDataGrid_SelectionChanged">
+        <DataGrid Name="timeslotDataGrid" FontSize="16" ItemsSource="{Binding Timeslots}" 
+                  AlternatingRowBackground = "LightBlue" AlternationCount = "1" 
+                  AutoGenerateColumns = "False" Margin="380,19,50,0" Grid.Row="1" 
+                  SelectionChanged="timeslotDataGrid_SelectionChanged"
+                  SelectionMode="Single" IsReadOnly="true">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
@@ -56,17 +63,46 @@
                 </GridView>
             </ListView.View>
         </ListView>-->
+        <GroupBox Header="Timeslot Information" Margin="0,9,930,0" Grid.Row="1"/>
+        <Grid Grid.Row="1" Margin="30,50,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="SlotId" FontSize="20" Margin="-5 -20 -5 5" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Top"/>
+            <TextBox x:Name="id_txt" FontSize="16" Padding="20 7" IsEnabled="False" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
+            <Label Content="Date" FontSize="20" Margin="-5 5" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top"/>
+            <TextBox x:Name="date_txt" FontSize="16" Padding="20 7" IsEnabled="False" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
+            <Label Content="Time slot" FontSize="20" Margin="-5 5" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top"/>
+            <TextBox x:Name="timeSlot_txt" FontSize="16" Padding="20 7" IsEnabled="False" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
+            <Label Content="Availability" FontSize="20" Margin="-5 5" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"/>
+            <TextBox x:Name="availability_txt" FontSize="16" Padding="20 7" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
 
-        <Label Content="SlotId" HorizontalAlignment="Left" Margin="47,47,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Date" HorizontalAlignment="Left" Margin="47,73,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Time slot" HorizontalAlignment="Left" Margin="47,99,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Availability" HorizontalAlignment="Left" Margin="47,125,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <TextBox x:Name="id_txt" IsEnabled="False" HorizontalAlignment="Left" Margin="147,51,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="date_txt" IsEnabled="False" HorizontalAlignment="Left" Margin="147,77,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="timeSlot_txt" IsEnabled="False" HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="availability_txt" HorizontalAlignment="Left" Margin="147,129,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <GroupBox Header="Timeslot Information" Margin="28,23,856,146" Grid.Row="2"/>
-        <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="91,314,0,0" Padding="10 5" Grid.Row="2" VerticalAlignment="Top" Click="update_btn_Click"/>
-        <Button x:Name="delete_btn" Content="Delete" HorizontalAlignment="Left" Margin="192,314,0,0" Padding="10 5" Grid.Row="2" VerticalAlignment="Top" Click="delete_btn_Click"/>
+            <Button x:Name="update_btn" Background="DarkSeaGreen" Margin="0 30 0 0" Content="Update" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Padding="20 7" VerticalAlignment="Top" Click="update_btn_Click"/>
+            <Button x:Name="delete_btn" Background="IndianRed" Margin="-76 30 0 0" Content="Delete" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Padding="20 7" VerticalAlignment="Top" Click="delete_btn_Click"/>
+
+            <Label Grid.Row="9" Content="List of addresses" Margin="-5 10 10 0"></Label>
+            <TextBox
+             x:Name="addresses_txt"
+             Grid.Row="9"
+             Height="220"
+             Margin="0 35 0 0"
+             TextWrapping="Wrap"
+             AcceptsReturn="True"
+             VerticalScrollBarVisibility="Visible">
+            </TextBox>
+        </Grid>
     </Grid>
 </UserControl>

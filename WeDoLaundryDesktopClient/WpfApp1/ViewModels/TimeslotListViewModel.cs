@@ -23,9 +23,11 @@ namespace WpfApp1.ViewModels
         private readonly TimeslotStore _timeslotStore;
 
         private readonly ObservableCollection<TimeslotViewModel> _timeslots;
+        private readonly ObservableCollection<TimeslotViewModel> _addresses;
         private readonly TimeslotsController _controller;
 
         public IEnumerable<TimeslotViewModel> Timeslots => _timeslots;
+        public IEnumerable<TimeslotViewModel> Addresses => _addresses;
 
         public ICommand AddTimeslotCommand { get; }
 
