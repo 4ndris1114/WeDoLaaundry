@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,6 +35,29 @@ namespace WpfApp1.Views
             InitializeComponent();
         }
 
+        private bool validateFields(Customer toBeChecked)
+        {
+            bool firstNameValid = Regex.IsMatch(toBeChecked.FirstName, @"^[a-zA-Z]+$");
+            bool lastNameValid = Regex.IsMatch(toBeChecked.LastName, @"^[a-zA-Z]+$");
+            bool phoneValid = Regex.IsMatch(toBeChecked.Phone, @"^\+[1-9]{1}[0-9]{3,14}$");
+            bool emailValid = Regex.IsMatch(toBeChecked.Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            bool postalValid = toBeChecked.PostalCode.GetType() == typeof(int);
+            bool cityValid = Regex.IsMatch(toBeChecked.City, @"^[a-zA-Z]+$");
+            bool addressValid = Regex.IsMatch(toBeChecked.Address, @"^[A-Za-z0-9]+(?:\s[A-Za-z0-9'_-]+)+$");
+
+
+            if (firstNameValid && lastNameValid && phoneValid && emailValid && postalValid && cityValid && addressValid)
+            {
+                MessageBox.Show("Updated successfully!");
+                return true;
+            } else
+            {
+                MessageBox.Show("Couldn't be updated!");
+                return false;
+            }
+
+        }
+
         private async void update_btn_Click(object sender, RoutedEventArgs e)
         {
             var customerId = SelectedCustomer.Id;
@@ -51,7 +75,10 @@ namespace WpfApp1.Views
             updateCustomer.CustomerType = (Customer.Subscription)SelectedCustomer.CustomerType;
             updateCustomer.UserId = SelectedCustomer.UserId;
 
-            await customersController.UpdateCustomerAsync(customerId, updateCustomer);
+            if(validateFields(updateCustomer))
+            {
+                await customersController.UpdateCustomerAsync(customerId, updateCustomer);
+            }
         }
 
         private async void delete_btn_Click(object sender, RoutedEventArgs e)
