@@ -125,8 +125,8 @@ namespace WebAppIdentity.ServiceLayer
             bool wasDeleted;
             var uri = new Uri(string.Format(restUrl+id));
             string restUrl2 = "https://localhost:7091/api/Timeslots/modify/";
-            var uriPickUp = new Uri(string.Format(restUrl2 + pickupId + "/" + true));
-            var uriDelivery = new Uri(string.Format(restUrl2 + deliveryId + "/" + true));
+            var uriPickUp = new Uri(string.Format(restUrl2 + pickupId + "/" + true + "/1"));
+            var uriDelivery = new Uri(string.Format(restUrl2 + deliveryId + "/" + true + "/1"));
 
             try
             {
@@ -135,8 +135,8 @@ namespace WebAppIdentity.ServiceLayer
                 if (response.IsSuccessStatusCode)
                 {
                     wasDeleted = true;
-                    _client.PutAsync(uriPickUp, null);
-                    _client.PutAsync(uriDelivery, null);
+                    await _client.PutAsync(uriPickUp, null);
+                    await _client.PutAsync(uriDelivery, null);
                 }
                 else
                 {
