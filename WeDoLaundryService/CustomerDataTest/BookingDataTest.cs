@@ -44,7 +44,7 @@ namespace Tests
         public void testCreateBooking()
         {
             //Arrange
-            Booking newBooking = new(_customerAccess.GetById(1010), 12, _timeslotDatabaseAccess.Get(1001), _timeslotDatabaseAccess.Get(1002), "pickupaddress", "returnaddress", Booking.Status.BOOKED, 2, 12);
+            Booking newBooking = new(_customerAccess.GetById(1000), 12, _timeslotDatabaseAccess.Get(1001), _timeslotDatabaseAccess.Get(1002), "pickupaddress", "returnaddress", Booking.Status.BOOKED, 2, 12);
 
             //Act
             int insertedId = _bookingDatabaseAccess.CreateBooking(newBooking);
@@ -96,7 +96,7 @@ namespace Tests
         public void testGetBookingById()
         {
             //Arrange
-            Booking newBooking = new(_customerAccess.GetById(1010), 12, _timeslotDatabaseAccess.Get(1001), _timeslotDatabaseAccess.Get(1002), "pickupaddress", "returnaddress", Booking.Status.BOOKED, 2, 12);
+            Booking newBooking = new(_customerAccess.GetById(1000), 12, _timeslotDatabaseAccess.Get(1001), _timeslotDatabaseAccess.Get(1002), "pickupaddress", "returnaddress", Booking.Status.BOOKED, 2, 12);
             string pickupAddress = newBooking.PickUpAddress;
 
             //Act
