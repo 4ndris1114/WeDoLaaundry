@@ -17,6 +17,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
 using WpfApp1.Model;
 using WpfApp1.ViewModels;
+using WpfApp1.Controller_layer;
 
 namespace WpfApp1.Views
 {
@@ -26,20 +27,42 @@ namespace WpfApp1.Views
     public partial class BookingListView : UserControl
     {
         public BookingViewModel SelectedBooking { get; set; }
+        private BookingsController bController;
         public BookingListView()
         {
             SelectedBooking = null;
+            bController = new BookingsController();
             InitializeComponent();
         }
 
-        private void update_btn_Click(object sender, RoutedEventArgs e)
+        private async void update_btn_Click(object sender, RoutedEventArgs e)
         {
-            // missing a logic for update
+            if (status_txt.Text == "BOOKED" || status_txt.Text == "IN_PROGRESS" || status_txt.Text == "RETURNED") // Check other stuff too
+            {
+                Booking newBooking = new Booking();
+
+                newBooking.Id = SelectedBooking.Id;
+                newBooking.CustomerId = SelectedBooking.CustomerId;
+                newBooking.DriverId = SelectedBooking.DriverId;
+                newBooking.PickUpTimeId = SelectedBooking.PickUpTimeId;
+                newBooking.ReturnTimeId = SelectedBooking.ReturnTimeId;
+                newBooking.PickUpAddress = pick_up_address_txt.Text;
+                newBooking.ReturnAddress = return_address_txt.Text;
+                newBooking.Status = (Booking.BookingStatus)Enum.Parse(typeof(Booking.BookingStatus), status_txt.Text);
+                newBooking.AmountOfBags = Int16.Parse(amount_of_bags_txt.Text);
+
+                //await bController.UpdateBookingAsync(SelectedBooking.Id, newBooking);
+            }
+            else
+            {
+                //Display error message??
+            }
         }
 
-        private void delete_btn_Click(object sender, RoutedEventArgs e)
+        private async void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            // missing a logic for delete
+            var bookingId = SelectedBooking.Id;
+            //await bController.DeleteBookingAsync(SelectedBooking);
 
         }
         private void bookingsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

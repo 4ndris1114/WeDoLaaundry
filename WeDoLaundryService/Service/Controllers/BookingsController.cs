@@ -146,6 +146,30 @@ namespace Service.Controllers
             return retVal;
         }
 
+        [HttpPut, Route("{id}")]
+        public ActionResult Update(BookingReadDTO bookingReadDto)
+        {
+            ActionResult retVal;
+            if (bookingReadDto != null)
+            {
+                Booking? booking = Convert.ToModel(bookingReadDto);
+                bool wasOk = _bookingdataControl.Update(booking);
+                if (wasOk)
+                {
+                    retVal = Ok();
+                }
+                else
+                {
+                    retVal = new StatusCodeResult(500);
+                }
+            }
+            else
+            {
+                retVal = new StatusCodeResult(500);
+            }
+            return retVal;
+        }
+
         [HttpDelete, Route("{id}")]
         public ActionResult Delete(int id)
         {

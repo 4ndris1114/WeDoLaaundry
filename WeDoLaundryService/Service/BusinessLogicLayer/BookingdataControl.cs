@@ -1,4 +1,5 @@
 ﻿using Data.Database_layer;
+using Data.Model_layer;
 using DataAccess.Database_layer;
 using Model.Model_layer;
 
@@ -95,6 +96,20 @@ namespace Service.BusinessLogicLayer
                 foundBookings = null;
             }
             return foundBookings;
+        }
+
+        public bool Update(Booking Booking)
+        {
+            bool wasUpdated;
+            try
+            {
+                wasUpdated = _bookingDbAccess.UpdateBooking(Booking);
+            }
+            catch
+            {
+                wasUpdated = false;
+            }
+            return wasUpdated;
         }
     }
 }

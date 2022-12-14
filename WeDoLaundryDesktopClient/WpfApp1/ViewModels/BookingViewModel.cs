@@ -19,7 +19,9 @@ namespace WpfApp1.ViewModels
         public int CustomerId { get; set; }
         public int DriverId { get; set; }
         public string PickUpSlot { get; set; }
+        public int PickUpTimeId { get; set; }
         public string ReturnSlot { get; set; }
+        public int ReturnTimeId { get; set; }
         public string PickUpAddress { get; set; }
         public string ReturnAddress { get; set; }
         public BookingStatus Status { get; set; }
@@ -31,6 +33,8 @@ namespace WpfApp1.ViewModels
             CustomerId = booking.CustomerId;
             //DriverId = driverId;
             PickUpSlot = pickUpSlot;
+            PickUpTimeId = booking.PickUpTimeId;
+            ReturnTimeId = booking.ReturnTimeId;
             ReturnSlot = returnSlot;
             PickUpAddress = booking.PickUpAddress;
             ReturnAddress = booking.ReturnAddress;

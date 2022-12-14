@@ -28,14 +28,12 @@ namespace WpfApp1.Controller_layer
 
         }
 
-        //public async Task<List<Booking>> GetCustomersBookingsAsync(int customerId)
-        //{
-        //    List<Booking> foundBookings = null;
+        public async Task<bool> UpdateBookingAsync(int id, Booking booking)
+        {
+            bool wasUpdated = await _serviceAccess.UpdateBookingAsync(id, booking);
 
-        //    foundBookings = await _serviceAccess.GetCustomersBookingsAsync(customerId);
+            return wasUpdated;
 
-        //    return foundBookings;
-
-        //}
+        }
     }
 }

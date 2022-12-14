@@ -47,31 +47,39 @@ namespace WpfApp1.ServiceAccess
             return returnList;
         }
 
-        //public async Task<List<Booking>> GetCustomersBookingsAsync(int customerId)
-        //{
-        //    List<Booking> returnList;
+        public async Task<bool> UpdateBookingAsync(int id, Booking booking)
+        {
+            bool wasUpdated;
 
-        //    var uri = new Uri(string.Format(restUrl + "customerBookings/" + customerId));
+            string useRestUrl = restUrl;
+            bool hasValidId = (id > 1000);
+            if (hasValidId)
+            {
+                useRestUrl = useRestUrl + "/" + id;
+            }
+            var uri = new Uri(string.Format(useRestUrl));
 
-        //    try
-        //    {
-        //        var response = await _httpClient.GetAsync(uri);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var content = await response.Content.ReadAsStringAsync();
-        //            returnList = JsonConvert.DeserializeObject<List<Booking>>(content);
-        //        }
-        //        else
-        //        {
-        //            returnList = new();
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        returnList = null;
-        //    }
-        //    return returnList;
-        //}
+            try
+            {
+                var json = JsonConvert.SerializeObject(booking);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+                var response = await _httpClient.PutAsync(uri, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    wasUpdated = true;
+                }
+                else
+                {
+                    wasUpdated = false;
+                }
+            }
+            catch
+            {
+                wasUpdated = false;
+            }
+
+            return wasUpdated;
+        }
     }
 }

@@ -2,10 +2,12 @@
 using Data.Model_layer;
 using DataAccess.Exceptions;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 using Model.Model_layer;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -152,6 +154,30 @@ namespace DataAccess.Database_layer
             return returnList;
         }
 
+        public bool UpdateBooking(Booking newBooking)
+        {
+            int numberOfRowsModified = 0;
+
+            string queryString = "UPDATE Bookings SET pickUpAddress=@PickUpAddress, returnAddress=@ReturnAddress, [status]=@Status, noOfBags=@NoOfBags WHERE id=@Id";
+
+            using (SqlConnection con = new(_connectionString))
+            using (SqlCommand command = new(queryString, con))
+            {
+                if (con != null)
+                {
+                    command.Parameters.AddWithValue("@PickUpAddress", newBooking.PickUpAddress);
+                    command.Parameters.AddWithValue("@ReturnAddress", newBooking.ReturnAddress);
+                    command.Parameters.AddWithValue("@Status", newBooking.BookingStatus);
+                    command.Parameters.AddWithValue("@NoOfBags", newBooking.AmountOfBags);
+                    command.Parameters.AddWithValue("@Id", newBooking.Id);
+
+                    con.Open();
+                    numberOfRowsModified = command.ExecuteNonQuery();
+                }
+            }
+            return (numberOfRowsModified > 0);
+        }
+
         public bool DeleteBooking(int id)
         {
             int numberOfRowsDeleted = 0;
@@ -241,6 +267,5 @@ namespace DataAccess.Database_layer
 
             return returnBooking;
         }
-
     }
 }
