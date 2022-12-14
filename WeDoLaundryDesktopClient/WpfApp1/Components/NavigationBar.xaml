@@ -46,34 +46,34 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Foreground="White" FontSize="18" Text="Navigation test" />
+        <TextBlock Grid.Column="0" Foreground="White" FontSize="18" Text="WeDoLaundry" />
 
         <Button 
             Grid.Column="1" 
             Command="{Binding NavigateHomeCommand}"
             Content="Home"
-            Margin="10 0 0 0"/>
+            Margin="10 3 0 0"/>
         <Button 
             Grid.Column="2" 
             Command="{Binding NavigateCustomersCommand}"
             Content="Customers"
-            Margin="10 0 0 0"/>
+            Margin="10 3 0 0"/>
         <Button 
             Grid.Column="3" 
             Command="{Binding NavigateTimeslotsCommand}"
             Content="Timeslots"
-            Margin="10 0 0 0"/>
+            Margin="10 3 0 0"/>
 
         <Button 
             Grid.Column="4" 
             Command="{Binding NavigateBookingsCommand}"
             Content="Bookings"
-            Margin="10 0 0 0"/>
+            Margin="10 3 0 0"/>
 
         <Button 
             Grid.Column="5"
             Command="{Binding NavigateDriversCommand}"
             Content="Drivers"
-            Margin="10 0 0 0"/>
+            Margin="10 3 0 0"/>
     </Grid>
 </UserControl>
