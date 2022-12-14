@@ -172,5 +172,38 @@ namespace WpfApp1.Service_layer
             }
             return wasModified;
         }
+
+        public async Task<int> Post(TimeSlot timeslot)
+        {
+            int insertedId = -1;
+
+            string useUrl = restUrl;
+
+            var uri = new Uri(useUrl);
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(timeslot);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync(uri, content);
+                CurrentHttpStatusCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    insertedId = JsonConvert.DeserializeObject<int>(responseContent);
+                }
+                else
+                {
+                    insertedId = -1;
+                }
+            }
+            catch
+            {
+                insertedId = -1;
+            }
+            return insertedId;
+        }
     }
 }

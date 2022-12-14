@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:WpfApp1.ViewModels"
         xmlns:views="clr-namespace:WpfApp1.Views"
-        xmlns:components="clr-namespace:WpfApp1.Components" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+        xmlns:components="clr-namespace:WpfApp1.Components" 
+        xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
         mc:Ignorable="d"
         Title="WeDoLaundry - Management" 
         Height="850" 
         Width="1400">
     <Grid>
+
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomeView />
@@ -24,10 +26,18 @@
             <DataTemplate DataType="{x:Type viewmodels:BookingListViewModel}">
                 <views:BookingListView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddTimeslotViewModel}">
+                <views:AddTimeslotView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
                 <components:Layout />
             </DataTemplate>
         </Grid.Resources>
+
+        <custom:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
+            <ContentControl Content="{Binding CurrentModalViewModel}" />
+        </custom:Modal>
+        
         <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
 

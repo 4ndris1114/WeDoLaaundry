@@ -58,5 +58,24 @@ namespace WpfApp1.Controller_layer
 
             return wasModified;
         }
+
+        public async Task<int> Add(TimeSlot timeslot)
+        {
+            int insertedId = -1;
+
+            if (timeslot != null)
+            {
+                try
+                {
+                    insertedId = await _serviceAccess.Post(timeslot);
+                }
+                catch (Exception)
+                {
+                    insertedId = -1;
+                }
+            }
+
+            return insertedId;
+        }
     }
 }

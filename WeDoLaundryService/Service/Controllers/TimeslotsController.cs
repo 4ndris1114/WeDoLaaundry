@@ -150,7 +150,7 @@ namespace Service.Controllers
 
             //TimeSlot? dbTimeslot = ModelConversion.TimeslotDtoConverter.ToTimeslot(timeslotDto);
             wasUpdated = _timeslotDataControl.ModifyAvailability(id, mode, value);
-            //evaluate & return status code
+            //evaluate & return status code 
             if (wasUpdated)
             {
                 retVal = Ok(wasUpdated);

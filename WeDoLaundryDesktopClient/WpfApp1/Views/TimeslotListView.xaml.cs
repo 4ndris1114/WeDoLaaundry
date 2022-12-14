@@ -46,13 +46,23 @@ namespace WpfApp1.Views
                 mode = false;
                 value = SelectedTimeslot.Availability - Convert.ToInt32(availability_txt.Text);
             } else {
-                MessageBox.Show("Availability must change to update!");
+                MessageBox.Show("Availability must change in order to update!");
             }
 
             if (SelectedTimeslot != null && value != 0)
             {
                 _controller.Modify(SelectedTimeslot.Id, mode, value);
+                CleanUpSelection();
             }
+        }
+
+        private void CleanUpSelection()
+        {
+            id_txt.Text = "";
+            date_txt.Text = "";
+            timeSlot_txt.Text = "";
+            availability_txt.Text = "";
+            SelectedTimeslot = null;
         }
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)

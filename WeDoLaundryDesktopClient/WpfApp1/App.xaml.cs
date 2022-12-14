@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
@@ -26,13 +27,17 @@ namespace WpfApp1
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<NavigationStore>();
+            services.AddSingleton<TimeslotStore>();
+            services.AddSingleton<ModalNavigationStore>();
+            services.AddSingleton<CloseModalNavigationService>();
 
             services.AddSingleton<INavigationService>(s => CreateHomeNavigationService(s));
 
             services.AddTransient<HomeViewModel>(s => new HomeViewModel(CreateCustomerNavigationService(s)));
             services.AddTransient<CustomerListViewModel>(s => new CustomerListViewModel());
             services.AddTransient<BookingListViewModel>(s => new BookingListViewModel());
-            services.AddTransient<TimeslotListViewModel>(s => new TimeslotListViewModel());
+            services.AddTransient<TimeslotListViewModel>(s => new TimeslotListViewModel(s.GetRequiredService<TimeslotStore>(), CreateAddTimeslotNavigationService(s)));
+            services.AddTransient<AddTimeslotViewModel>(s => new AddTimeslotViewModel(s.GetRequiredService<TimeslotStore>(), s.GetRequiredService<CloseModalNavigationService>()));
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
 
             services.AddSingleton<MainViewModel>();
@@ -85,6 +90,13 @@ namespace WpfApp1
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<TimeslotListViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
+        private INavigationService CreateAddTimeslotNavigationService(IServiceProvider serviceProvider)
+        {
+            return new ModalNavigationService<AddTimeslotViewModel>(
+                serviceProvider.GetRequiredService<ModalNavigationStore>(),
+                () => serviceProvider.GetRequiredService<AddTimeslotViewModel>());
         }
 
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
