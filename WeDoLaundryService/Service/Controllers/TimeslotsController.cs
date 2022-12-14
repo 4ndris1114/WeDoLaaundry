@@ -169,7 +169,7 @@ namespace Service.Controllers
 
             if (wasOk)
             {
-                retVal = Ok();
+                retVal = Ok(wasOk);
             }
             else
             {
