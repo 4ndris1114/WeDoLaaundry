@@ -73,6 +73,22 @@ namespace WpfApp1.Views
             }
         }
 
+        private async void delete_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedTimeslot != null)
+            {
+                bool wasDeleted = await _controller.Delete(SelectedTimeslot.Id);
+                if (wasDeleted)
+                {
+                    CleanUpSelection();
+                    CollectionViewSource.GetDefaultView(this.timeslotDataGrid.ItemsSource).Refresh();
+                } else
+                {
+                    MessageBox.Show("Can not delete this time slot!");
+                }
+            }
+        }
+
         private void CleanUpSelection()
         {
             id_txt.Text = "";
@@ -81,12 +97,6 @@ namespace WpfApp1.Views
             availability_txt.Text = "";
             addresses_txt.Text = "";
             SelectedTimeslot = null;
-        }
-
-        private void delete_btn_Click(object sender, RoutedEventArgs e)
-        {
-            // missing a logic for delete
-
         }
 
         private async void timeslotDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

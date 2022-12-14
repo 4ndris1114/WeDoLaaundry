@@ -36,7 +36,7 @@ namespace WpfApp1.Commands
             int availability = _addTimeslotViewModel.Availability;
 
             TimeSlot toBeAdded = new(-1, date,slot,availability);
-            if (date > DateTime.Now && availability > 0)
+            if (/*date > DateTime.Now &&*/ availability > 0)
             {
                 toBeAdded.Id = await _controller.Add(toBeAdded);
                 if (toBeAdded.Id > 0)

@@ -77,5 +77,14 @@ namespace WpfApp1.Controller_layer
 
             return insertedId;
         }
+
+        public async Task<bool> Delete(int id)
+        {
+            bool wasDeleted = false;
+
+            wasDeleted = await _serviceAccess.Delete(id);
+
+            return wasDeleted;
+        }
     }
 }

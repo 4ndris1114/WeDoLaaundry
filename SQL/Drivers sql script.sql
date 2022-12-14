@@ -12,5 +12,4 @@ city varchar(100) NOT NULL,
 [address] varchar(100) NOT NULL,
 email nvarchar(256) NOT NULL,
 salary int NOT NULL,
-
 )

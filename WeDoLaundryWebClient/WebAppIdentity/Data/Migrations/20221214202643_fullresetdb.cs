@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAppIdentity.Data.Migrations
 {
-    public partial class resetDb : Migration
+    public partial class fullresetdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

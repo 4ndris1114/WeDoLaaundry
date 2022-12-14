@@ -162,7 +162,7 @@ namespace Service.Controllers
 
 
         [HttpDelete, Route("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult<bool> Delete(int id)
         {
             ActionResult retVal;
             bool wasOk = _timeslotDataControl.Delete(id);

@@ -120,7 +120,7 @@ namespace WpfApp1.Service_layer
         {
             TimeSlot returnSlot;
 
-            var uri = new Uri(string.Format(restUrl + "/" +id));
+            var uri = new Uri(string.Format(restUrl + id));
 
             try
             {
@@ -204,6 +204,38 @@ namespace WpfApp1.Service_layer
                 insertedId = -1;
             }
             return insertedId;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            bool wasDeleted = false;
+
+            string useUrl = restUrl;
+
+            useUrl += "delete/"+id;
+
+            var uri = new Uri(useUrl);
+
+            try
+            {
+                var response = await _httpClient.DeleteAsync(uri);
+                CurrentHttpStatusCode = response.StatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    wasDeleted = JsonConvert.DeserializeObject<bool>(content);
+                }
+                else
+                {
+                    wasDeleted = false;
+                }
+            }
+            catch
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
         }
     }
 }

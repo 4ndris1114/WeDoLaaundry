@@ -22,5 +22,5 @@ CONSTRAINT Fk_BookingPickUpTime
 FOREIGN KEY (pickUpTimeId) REFERENCES TimeSlots(id) on delete set null,
 
 CONSTRAINT Fk_BookingReturnTime
-FOREIGN KEY (returnTimeId) REFERENCES TimeSlots(id)
+FOREIGN KEY (returnTimeId) REFERENCES TimeSlots(id) on delete set null
 )
