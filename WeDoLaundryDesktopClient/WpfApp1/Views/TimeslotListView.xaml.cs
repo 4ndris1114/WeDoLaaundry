@@ -39,7 +39,7 @@ namespace WpfApp1.Views
             bool mode = new();
             int value = 0;
 
-            if (SelectedTimeslot != null)
+            if (SelectedTimeslot != null && availability_txt.Text != "")
             {
                 //Check if availability changed:
                 if (SelectedTimeslot.Availability < Convert.ToInt32(availability_txt.Text))
@@ -70,6 +70,9 @@ namespace WpfApp1.Views
                         MessageBox.Show("Modification was not successful");
                     }
                 }
+            } else
+            {
+                MessageBox.Show("Invalid value for availability!");
             }
         }
 

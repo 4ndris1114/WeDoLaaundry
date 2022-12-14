@@ -87,6 +87,15 @@ namespace WpfApp1.Views
 
             await customersController.DeleteCustomerAsync(customerId);
         }
+        //private void CleanUpSelection()
+        //{
+        //    id_txt.Text = "";
+        //    date_txt.Text = "";
+        //    timeSlot_txt.Text = "";
+        //    availability_txt.Text = "";
+        //    addresses_txt.Text = "";
+        //    SelectedTimeslot = null;
+        //}
 
         private void customersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -81,5 +81,35 @@ namespace WpfApp1.ServiceAccess
 
             return wasUpdated;
         }
+
+        public async Task<bool> DeleteBookingAsync(int id, int pickupId, int deliveryId)
+        {
+            bool wasDeleted;
+            var uri = new Uri(string.Format(restUrl + "/" + id));
+            string restUrl2 = "https://localhost:7091/api/Timeslots/modify/";
+            var uriPickUp = new Uri(string.Format(restUrl2 + pickupId + "/" + true + "/1"));
+            var uriDelivery = new Uri(string.Format(restUrl2 + deliveryId + "/" + true + "/1"));
+
+            try
+            {
+                HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    wasDeleted = true;
+                    await _httpClient.PutAsync(uriPickUp, null);
+                    await _httpClient.PutAsync(uriDelivery, null);
+                }
+                else
+                {
+                    wasDeleted = false;
+                }
+            }
+            catch
+            {
+                wasDeleted = false;
+            }
+            return wasDeleted;
+        }
     }
 }

@@ -37,34 +37,73 @@ namespace WpfApp1.Views
 
         private async void update_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (status_txt.Text == "BOOKED" || status_txt.Text == "IN_PROGRESS" || status_txt.Text == "RETURNED") // Check other stuff too
-            {
-                Booking newBooking = new Booking();
+            if (SelectedBooking != null && pick_up_address_txt.Text != "" && return_address_txt.Text != ""
+                && status_txt.Text != "" && amount_of_bags_txt.Text != "") {
+                if ((status_txt.Text == "BOOKED" || status_txt.Text == "IN_PROGRESS" || status_txt.Text == "RETURNED")
+                    && 0 < Int16.Parse(amount_of_bags_txt.Text)) // Check other stuff too
+                {
+                    Booking newBooking = new Booking();
 
-                newBooking.Id = SelectedBooking.Id;
-                newBooking.CustomerId = SelectedBooking.CustomerId;
-                newBooking.DriverId = SelectedBooking.DriverId;
-                newBooking.PickUpTimeId = SelectedBooking.PickUpTimeId;
-                newBooking.ReturnTimeId = SelectedBooking.ReturnTimeId;
-                newBooking.PickUpAddress = pick_up_address_txt.Text;
-                newBooking.ReturnAddress = return_address_txt.Text;
-                newBooking.Status = (Booking.BookingStatus)Enum.Parse(typeof(Booking.BookingStatus), status_txt.Text);
-                newBooking.AmountOfBags = Int16.Parse(amount_of_bags_txt.Text);
+                    newBooking.Id = SelectedBooking.Id;
+                    newBooking.CustomerId = SelectedBooking.CustomerId;
+                    newBooking.DriverId = SelectedBooking.DriverId;
+                    newBooking.PickUpTimeId = SelectedBooking.PickUpTimeId;
+                    newBooking.ReturnTimeId = SelectedBooking.ReturnTimeId;
+                    newBooking.PickUpAddress = pick_up_address_txt.Text;
+                    newBooking.ReturnAddress = return_address_txt.Text;
+                    newBooking.Status = (Booking.BookingStatus)Enum.Parse(typeof(Booking.BookingStatus), status_txt.Text);
+                    newBooking.AmountOfBags = Int16.Parse(amount_of_bags_txt.Text);
 
-                //await bController.UpdateBookingAsync(SelectedBooking.Id, newBooking);
+                    var wasModifiedInDb = await bController.UpdateBookingAsync(SelectedBooking.Id, newBooking);
+
+                    if (wasModifiedInDb)
+                    {
+                        SelectedBooking.PickUpAddress = pick_up_address_txt.Text;
+                        SelectedBooking.ReturnAddress = return_address_txt.Text;
+                        SelectedBooking.Status = (BookingStatus)Enum.Parse(typeof(BookingStatus), status_txt.Text);
+                        SelectedBooking.AmountOfBags = Convert.ToInt32(amount_of_bags_txt.Text);
+                        CleanUpSelection();
+                        CollectionViewSource.GetDefaultView(this.bookingsDataGrid.ItemsSource).Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can not delete this time slot!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Can not update with a incorrect input value");
+                }
             }
             else
             {
-                //Display error message??
+                MessageBox.Show("Can not update without a value");
             }
+        }
+
+        private void CleanUpSelection()
+        {
+            pick_up_address_txt.Text = "";
+            return_address_txt.Text = "";
+            status_txt.Text = "";
+            amount_of_bags_txt.Text = "";
+            SelectedBooking = null;
         }
 
         private async void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            var bookingId = SelectedBooking.Id;
-            //await bController.DeleteBookingAsync(SelectedBooking);
-
+            var wasDeleted =  await bController.DeleteBookingAsync(SelectedBooking.Id, SelectedBooking.PickUpTimeId, SelectedBooking.ReturnTimeId);
+            if (wasDeleted)
+            {
+                CleanUpSelection();
+                CollectionViewSource.GetDefaultView(this.bookingsDataGrid.ItemsSource).Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Can not delete this booking!");
+            }
         }
+
         private void bookingsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BookingViewModel b = bookingsDataGrid.SelectedItem as BookingViewModel;

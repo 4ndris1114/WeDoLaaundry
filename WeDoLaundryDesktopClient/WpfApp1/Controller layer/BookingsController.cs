@@ -35,5 +35,12 @@ namespace WpfApp1.Controller_layer
             return wasUpdated;
 
         }
+
+        public async Task<bool> DeleteBookingAsync(int id, int pickupId, int returnId)
+        {
+            bool wasDeleted = await _serviceAccess.DeleteBookingAsync(id, pickupId, returnId);
+
+            return wasDeleted;
+        }
     }
 }
