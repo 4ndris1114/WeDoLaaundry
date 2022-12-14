@@ -67,13 +67,13 @@
         <Label Content="Postal code" HorizontalAlignment="Left" Margin="47,151,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="City" HorizontalAlignment="Left" Margin="47,177,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="Address" HorizontalAlignment="Left" Margin="47,203,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox x:Name="first_name_txt" HorizontalAlignment="Left" Margin="147,51,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="last_name_txt" HorizontalAlignment="Left" Margin="147,77,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="phone_number_txt" HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="email_txt" HorizontalAlignment="Left" Margin="147,129,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="postal_code_txt" HorizontalAlignment="Left" Margin="147,155,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="city_txt" HorizontalAlignment="Left" Margin="147,181,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="address_txt" HorizontalAlignment="Left" Margin="147,207,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="first_name_txt" HorizontalAlignment="Left" Margin="147,51,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="last_name_txt" HorizontalAlignment="Left" Margin="147,77,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="phone_number_txt" HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="email_txt" HorizontalAlignment="Left" Margin="147,129,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="postal_code_txt" HorizontalAlignment="Left" Margin="147,155,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="city_txt" HorizontalAlignment="Left" Margin="147,181,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="address_txt" HorizontalAlignment="Left" Margin="147,207,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
         <GroupBox Header="Customer Information" Margin="28,23,856,146" Grid.Row="1"/>
         <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="91,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="update_btn_Click"/>
         <Button x:Name="delete_btn" Content="Delete" HorizontalAlignment="Left" Margin="192,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="delete_btn_Click"/>

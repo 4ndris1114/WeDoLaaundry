@@ -44,12 +44,12 @@
         <Label Content="Return address" HorizontalAlignment="Left" Margin="47,73,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="Status" HorizontalAlignment="Left" Margin="47,99,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="Amount of bags" HorizontalAlignment="Left" Margin="47,125,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox x:Name="pick_up_address_txt" HorizontalAlignment="Left" Margin="147,51,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="return_address_txt" HorizontalAlignment="Left" Margin="147,77,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="status_txt" HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="amount_of_bags_txt" HorizontalAlignment="Left" Margin="147,129,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="pick_up_address_txt" HorizontalAlignment="Left" Margin="147,51,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="return_address_txt" HorizontalAlignment="Left" Margin="147,77,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="status_txt" HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
+        <TextBox x:Name="amount_of_bags_txt" HorizontalAlignment="Left" Margin="147,129,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" MaxHeight="20"/>
         <GroupBox Header="Booking Information" Margin="28,23,856,146" Grid.Row="1"/>
-        <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="91,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="update_btn_Click"/>
-        <Button x:Name="delete_btn" Content="Delete" HorizontalAlignment="Left" Margin="192,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="delete_btn_Click"/>
+        <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="91,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="update_btn_Click" MaxHeight="20"/>
+        <Button x:Name="delete_btn" Content="Delete" HorizontalAlignment="Left" Margin="192,314,0,0" Padding="10 5" Grid.Row="1" VerticalAlignment="Top" Click="delete_btn_Click" MaxHeight="20"/>
     </Grid>
 </UserControl>
