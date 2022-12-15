@@ -36,6 +36,7 @@ namespace WpfApp1
             services.AddTransient<HomeViewModel>(s => new HomeViewModel(CreateCustomerNavigationService(s)));
             services.AddTransient<CustomerListViewModel>(s => new CustomerListViewModel());
             services.AddTransient<BookingListViewModel>(s => new BookingListViewModel());
+            services.AddTransient<DriverListViewModel>(s => new DriverListViewModel());
             services.AddTransient<TimeslotListViewModel>(s => new TimeslotListViewModel(s.GetRequiredService<TimeslotStore>(), CreateAddTimeslotNavigationService(s)));
             services.AddTransient<AddTimeslotViewModel>(s => new AddTimeslotViewModel(s.GetRequiredService<TimeslotStore>(), s.GetRequiredService<CloseModalNavigationService>()));
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
@@ -92,6 +93,14 @@ namespace WpfApp1
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
 
+        private INavigationService CreateDriverNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<DriverListViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<DriverListViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+
         private INavigationService CreateAddTimeslotNavigationService(IServiceProvider serviceProvider)
         {
             return new ModalNavigationService<AddTimeslotViewModel>(
@@ -105,6 +114,7 @@ namespace WpfApp1
                 CreateHomeNavigationService(serviceProvider),
                 CreateCustomerNavigationService(serviceProvider),
                 CreateBookingNavigationService(serviceProvider),
+                CreateDriverNavigationService(serviceProvider),
                 CreateTimeslotNavigationService(serviceProvider));
         }
     }

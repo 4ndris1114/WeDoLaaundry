@@ -26,6 +26,9 @@
             <DataTemplate DataType="{x:Type viewmodels:BookingListViewModel}">
                 <views:BookingListView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DriverViewModel}">
+                <views:DriverListView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:AddTimeslotViewModel}">
                 <views:AddTimeslotView />
             </DataTemplate>

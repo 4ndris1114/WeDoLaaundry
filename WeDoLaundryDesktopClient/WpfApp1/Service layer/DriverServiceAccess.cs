@@ -74,6 +74,41 @@ namespace WpfApp1.ServiceAccess
             return driverList;
         }
 
+        public async Task<bool> UpdateDriverAsync(int id, Driver driver)
+        {
+            bool wasUpdated;
+
+            string useRestUrl = restUrl;
+            bool hasValidId = (id > 0);
+            if (hasValidId)
+            {
+                useRestUrl = useRestUrl + "/" + id;
+            }
+            var uri = new Uri(string.Format(useRestUrl));
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(driver);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PutAsync(uri, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    wasUpdated = true;
+                }
+                else
+                {
+                    wasUpdated = false;
+                }
+            }
+            catch
+            {
+                wasUpdated = false;
+            }
+
+            return wasUpdated;
+        }
+
         public async Task<bool> DeleteDriverAsync(int id)
         {
             bool wasDeleted;
