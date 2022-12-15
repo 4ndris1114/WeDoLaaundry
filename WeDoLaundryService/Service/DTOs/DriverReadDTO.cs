@@ -20,12 +20,17 @@ namespace Service.DTOs
         {
         }
 
-        public DriverReadDTO(int id, string firstName, string lastName)
+        public DriverReadDTO(int id, string firstName, string lastName, string phone, int postalCode, string city, string address, string email, int salary)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
-          
+            Phone = phone;
+            PostalCode = postalCode;
+            City = city;
+            Address = address;
+            Email = email;
+            Salary = salary;
         }
     }
 }

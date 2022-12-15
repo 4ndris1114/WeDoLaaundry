@@ -80,7 +80,11 @@ namespace WpfApp1.Views
         {
             if (SelectedTimeslot != null)
             {
-                bool wasDeleted = await _controller.Delete(SelectedTimeslot.Id);
+                bool wasDeleted = false;
+                if (MessageBox.Show("Are you sure you want to delete this time slot?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    wasDeleted = await _controller.Delete(SelectedTimeslot.Id);
+                }
                 if (wasDeleted)
                 {
                     CleanUpSelection();

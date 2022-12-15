@@ -112,7 +112,11 @@ namespace WpfApp1.Views
         {
             if (SelectedCustomer != null)
             {
-                bool wasDeleted = await customersController.DeleteCustomerAsync(SelectedCustomer.Id);
+                bool wasDeleted = false;
+                if (MessageBox.Show("Are you sure you want to delete this customer?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    wasDeleted = await customersController.DeleteCustomerAsync(SelectedCustomer.Id);
+                }
                 if (wasDeleted)
                 {
                     CleanUpSelection();

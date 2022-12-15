@@ -92,15 +92,22 @@ namespace WpfApp1.Views
 
         private async void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            var wasDeleted =  await bController.DeleteBookingAsync(SelectedBooking.Id, SelectedBooking.PickUpTimeId, SelectedBooking.ReturnTimeId);
-            if (wasDeleted)
+            if (SelectedBooking != null)
             {
-                CleanUpSelection();
-                CollectionViewSource.GetDefaultView(this.bookingsDataGrid.ItemsSource).Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Can not delete this booking!");
+                bool wasDeleted = false;
+                if (MessageBox.Show("Are you sure you want to delete this booking?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    wasDeleted = await bController.DeleteBookingAsync(SelectedBooking.Id, SelectedBooking.PickUpTimeId, SelectedBooking.ReturnTimeId);
+                }
+                if (wasDeleted)
+                {
+                    CleanUpSelection();
+                    CollectionViewSource.GetDefaultView(this.bookingsDataGrid.ItemsSource).Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Booking was not deleted!");
+                }
             }
         }
 

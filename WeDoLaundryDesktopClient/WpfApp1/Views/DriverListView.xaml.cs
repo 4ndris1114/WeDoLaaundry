@@ -82,7 +82,11 @@ namespace WpfApp1.Views
         {
             if (SelectedDriver != null)
             {
-                bool wasDeleted = await driversController.DeleteDriverAsync(SelectedDriver.Id);
+                bool wasDeleted = false;
+                if (MessageBox.Show("Are you sure you want to delete this driver?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    wasDeleted = await driversController.DeleteDriverAsync(SelectedDriver.Id);
+                }
                 if (wasDeleted)
                 {
                     CleanUpSelection();
@@ -130,6 +134,7 @@ namespace WpfApp1.Views
             city_txt.Text = "";
             address_txt.Text = "";
             salary_txt.Text = "";
+            SelectedDriver = null;
         }
     }
 }

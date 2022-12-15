@@ -28,7 +28,7 @@ namespace Service.ModelConversion
 
             if (driver != null)
             {
-                returnDriverDto = new DriverReadDTO(driver.Id, driver.FirstName, driver.LastName);
+                returnDriverDto = new DriverReadDTO(driver.Id, driver.FirstName, driver.LastName, driver.Phone, driver.PostalCode, driver.City, driver.Address, driver.Email, driver.Salary);
             }
 
             return returnDriverDto;

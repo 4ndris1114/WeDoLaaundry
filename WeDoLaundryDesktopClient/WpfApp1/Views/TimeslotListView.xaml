@@ -88,13 +88,14 @@
             <Label Content="Time slot" FontSize="20" Margin="-5 5" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top"/>
             <TextBox x:Name="timeSlot_txt" FontSize="16" Padding="20 7" IsEnabled="False" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
             <Label Content="Availability" FontSize="20" Margin="-5 5" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top"/>
-            <TextBox x:Name="availability_txt" FontSize="16" Padding="20 7" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
+            <TextBox x:Name="availability_txt" FontSize="16" Padding="20 7" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" MaxLength="2"/>
 
             <Button x:Name="update_btn" Background="DarkSeaGreen" Margin="0 30 0 0" Content="Update" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Padding="20 7" VerticalAlignment="Top" Click="update_btn_Click"/>
             <Button x:Name="delete_btn" Background="IndianRed" Margin="-76 30 0 0" Content="Delete" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Padding="20 7" VerticalAlignment="Top" Click="delete_btn_Click"/>
 
             <Label Grid.Row="9" Content="List of addresses" Margin="-5 10 10 0"></Label>
             <TextBox
+             IsReadOnly="true"
              x:Name="addresses_txt"
              Grid.Row="9"
              Height="220"
