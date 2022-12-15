@@ -64,6 +64,7 @@ namespace WebAppIdentity.BusinessLogicLayer
             TimeSlot n2 = await GetById(id2);
             DateTime d2 = n2.Date;
             int i2 = Convert.ToInt16(n2.Slot.Split('-')[0]); // Start of slot 2
+
             if (d1.CompareTo(d2) < 0) {
                 return true;
             }

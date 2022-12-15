@@ -32,7 +32,7 @@ namespace DriverDataTest
         private IConfiguration InitConfiguration()
         {
             var config = new ConfigurationBuilder()
-               .AddJsonFile("appsettings.test.json")
+                .AddJsonFile("appsettings.test.json")
                 .Build();
             return config;
         }
@@ -67,7 +67,7 @@ namespace DriverDataTest
             extraOutput.WriteLine("Found driver: " + foundDriver.Id);
 
             //Assert
-            Assert.True(foundDriver != null);
+            Assert.True(foundDriver.Phone == "4555222232");
         }
 
         [Fact]
