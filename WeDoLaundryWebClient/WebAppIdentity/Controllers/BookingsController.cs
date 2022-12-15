@@ -132,7 +132,7 @@ namespace WebAppIdentity.Controllers
                 else
                 {
                     ViewBag.message = "Error while booking";
-                    return RedirectToAction("Create", "Bookings");
+                    return RedirectToAction("Create", "Bookings", new { message = "Booking falied. Collection time should be earlier than return time" });
                 }
             }
             return RedirectToAction("Create", "Bookings");
