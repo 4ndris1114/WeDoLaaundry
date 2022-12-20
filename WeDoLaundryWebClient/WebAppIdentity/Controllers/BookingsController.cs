@@ -119,8 +119,7 @@ namespace WebAppIdentity.Controllers
                         }
                         else
                         {
-                            ViewBag.message = "Bad request";
-                            return RedirectToAction("Create", "Bookings", new {message = "Slot taken"});
+                            return RedirectToAction("Create", "Bookings", new {message = "The slot you have tried to book was already taken by someone else!"});
                         }
                     }
                     catch (NullReferenceException)
